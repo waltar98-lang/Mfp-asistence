@@ -1,0 +1,33 @@
+[build]
+  publish = "."
+
+# El service worker nunca se cachea, así las actualizaciones llegan siempre
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Permite GPS, cámara y biometría (WebAuthn) para el módulo de asistencia
+    Permissions-Policy = "geolocation=(self), camera=(self), publickey-credentials-get=(self), publickey-credentials-create=(self)"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
