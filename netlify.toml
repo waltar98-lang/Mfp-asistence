@@ -15,7 +15,7 @@
     Cache-Control = "no-cache"
 
 [[headers]]
-  for = "/icons/*"
+  for = "/*.png"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
@@ -26,8 +26,3 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     # Permite GPS, cámara y biometría (WebAuthn) para el módulo de asistencia
     Permissions-Policy = "geolocation=(self), camera=(self), publickey-credentials-get=(self), publickey-credentials-create=(self)"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

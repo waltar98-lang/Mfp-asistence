@@ -1,13 +1,13 @@
 /* MFP · Service Worker
    Sube VERSION cada vez que publiques cambios para que los usuarios reciban la actualización. */
-const VERSION = 'mfp-v1.0.2';
+const VERSION = 'mfp-v1.0.3';
 const SHELL = `shell-${VERSION}`;
 const RUNTIME = `runtime-${VERSION}`;
 
 const PRECACHE = [
   '/', '/index.html', '/manifest.webmanifest',
-  '/icons/icon-192.png', '/icons/icon-512.png', '/icons/icon-maskable-512.png',
-  '/icons/apple-touch-icon.png', '/icons/favicon-32.png'
+  '/icon-192.png', '/icon-512.png', '/icon-maskable-512.png',
+  '/apple-touch-icon.png', '/favicon-32.png'
 ];
 
 // Librerías de CDN que se guardan al primer uso (stale-while-revalidate)
