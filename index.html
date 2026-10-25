@@ -3,23 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="MFP · Mis Finanzas Personales: turnos, nómina, gastos e inversiones.">
 <meta name="theme-color" content="#2563EB">
 <meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MFP">
+<meta name="description" content="MFP · Mis Finanzas Personales: turnos, nómina, gastos e inversiones.">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="MFP">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>MFP · Nómina Colombia</title>
 <style>
-  /* PWA: respeta notch / barra de gestos y evita rebote al hacer scroll */
   html { -webkit-text-size-adjust: 100%; }
-  body { overscroll-behavior-y: none; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
-  .app { padding-top: calc(16px + env(safe-area-inset-top)); padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
-  button, .dock-btn, .cal-day, .mini-day { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+  body { overscroll-behavior-y: none; }
+  button { touch-action: manipulation; }
   #pwaToast { position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:9000;
     background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:12px; padding:10px 14px;
     box-shadow:var(--shadow-md); display:none; align-items:center; gap:10px; font-size:13px; max-width:92vw; }
@@ -187,12 +185,12 @@
   .cal-day.sunday .cal-day-num { color: var(--danger); }
   .cal-day.holiday .cal-day-num { color: var(--danger); }
   .cal-day-badge { font-size: 10px; font-weight: 700; padding: 2px 5px; border-radius: 4px; line-height: 1.3; }
-  .badge-D  { background: #FEE2E2; color: #B91C1C; }
-  .badge-T  { background: #FEF3C7; color: #92400E; }
-  .badge-N  { background: #EDE9FE; color: #5B21B6; }
-  .badge-12 { background: #DCFCE7; color: #15803D; }
-  .badge-8  { background: #DBEAFE; color: #1D4ED8; }
-  .badge-desc { background: #BBF7D0; color: #15803D; border: 1px solid #86EFAC; }
+  .badge-D  { background: var(--danger-soft); color: var(--danger-strong); }
+  .badge-T  { background: var(--warning-soft); color: var(--warning-strong); }
+  .badge-N  { background: var(--purple-soft); color: var(--purple-strong); }
+  .badge-12 { background: var(--success-soft); color: var(--success-strong); }
+  .badge-8  { background: var(--accent-light); color: var(--accent-strong); }
+  .badge-desc { background: var(--success-border); color: var(--success-strong); border: 1px solid var(--success-border); }
   .cal-dot  { width: 5px; height: 5px; border-radius: 50%; }
 
   /* TURN PICKER */
@@ -215,12 +213,12 @@
   tr:hover td { background: var(--surface2); }
   .num { text-align: right; font-variant-numeric: tabular-nums; }
   .tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; }
-  .tag-D    { background: #FEE2E2; color: #B91C1C; }
-  .tag-T    { background: #FEF3C7; color: #92400E; }
-  .tag-N    { background: #EDE9FE; color: #5B21B6; }
-  .tag-12   { background: #DCFCE7; color: #15803D; }
-  .tag-8    { background: #DBEAFE; color: #1D4ED8; }
-  .tag-desc { background: #BBF7D0; color: #15803D; border: 1px solid #86EFAC; }
+  .tag-D    { background: var(--danger-soft); color: var(--danger-strong); }
+  .tag-T    { background: var(--warning-soft); color: var(--warning-strong); }
+  .tag-N    { background: var(--purple-soft); color: var(--purple-strong); }
+  .tag-12   { background: var(--success-soft); color: var(--success-strong); }
+  .tag-8    { background: var(--accent-light); color: var(--accent-strong); }
+  .tag-desc { background: var(--success-border); color: var(--success-strong); border: 1px solid var(--success-border); }
   .tot-row td { font-weight: 600; background: var(--surface2); border-top: 2px solid var(--border); }
   .concept-chip { display: inline-block; padding: 1px 5px; border-radius: 3px; font-size: 10px; margin: 1px; background: var(--surface2); color: var(--text2); border: 1px solid var(--border); }
 
@@ -265,7 +263,7 @@
   /* BTN */
   .btn { padding: 7px 14px; border-radius: var(--radius); border: none; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; font-family: inherit; }
   .btn-primary { background: var(--accent); color: white; }
-  .btn-primary:hover { background: #1D4ED8; }
+  .btn-primary:hover { background: var(--accent-strong); }
   .btn-sm { padding: 5px 10px; font-size: 12px; }
   .btn-outline { background: none; border: 1px solid var(--border); color: var(--text2); }
   .btn-outline:hover { background: var(--surface2); }
@@ -308,8 +306,8 @@
   .mini-day.clickable:active { transform:scale(.96); }
   .asis-dots { display:flex; gap:2px; justify-content:center; margin-top:1px; }
   .asis-dot { width:5px; height:5px; border-radius:50%; }
-  .asis-dot.ing { background:#16A34A; }
-  .asis-dot.sal { background:#DC2626; }
+  .asis-dot.ing { background:var(--success); }
+  .asis-dot.sal { background:var(--danger); }
 
   .mini-badge { font-size:7px; font-weight:700; padding:1px 3px; border-radius:2px; line-height:1.2; }
   .home-dock { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-around; }
@@ -325,8 +323,8 @@
   .rate-name { font-size:12px; font-weight:600; color:var(--text); }
   .rate-val { font-size:13px; font-weight:700; color:var(--accent); font-variant-numeric:tabular-nums; }
   .rate-change { font-size:10px; padding:1px 5px; border-radius:4px; font-weight:600; }
-  .rate-up { background:#DCFCE7; color:#15803D; }
-  .rate-dn { background:#FEE2E2; color:#B91C1C; }
+  .rate-up { background:var(--success-soft); color:var(--success-strong); }
+  .rate-dn { background:var(--danger-soft); color:var(--danger-strong); }
   @keyframes slideUp   { from { transform:translateY(60px);  opacity:0; } to { transform:translateY(0);  opacity:1; } }
   @keyframes slideDown { from { transform:translateY(-16px); opacity:0; } to { transform:translateY(0);  opacity:1; } }
   @keyframes fadeIn    { from { opacity:0; } to { opacity:1; } }
@@ -363,12 +361,12 @@
   .scard-sub   { font-size:10px;color:var(--text3);line-height:1.3; }
   .sc-idle     .scard-icon { background:var(--surface2); }
   .sc-idle     .scard-icon svg { stroke:var(--text3); }
-  .sc-ok       .scard-icon { background:#DCFCE7; }
-  .sc-ok       .scard-icon svg { stroke:#16A34A; }
-  .sc-warn     .scard-icon { background:#FEF9C3; }
-  .sc-warn     .scard-icon svg { stroke:#D97706; }
-  .sc-err      .scard-icon { background:#FEE2E2; }
-  .sc-err      .scard-icon svg { stroke:#DC2626; }
+  .sc-ok       .scard-icon { background:var(--success-soft); }
+  .sc-ok       .scard-icon svg { stroke:var(--success); }
+  .sc-warn     .scard-icon { background:var(--warning-soft); }
+  .sc-warn     .scard-icon svg { stroke:var(--warning); }
+  .sc-err      .scard-icon { background:var(--danger-soft); }
+  .sc-err      .scard-icon svg { stroke:var(--danger); }
 
   /* Botones de marcación */
   .marcacion-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
@@ -396,13 +394,13 @@
   .sede-card-name{font-size:14px;font-weight:700;color:var(--text);}
   .sede-card-dist{font-size:11px;color:var(--text3);margin-top:2px;}
   .zona-badge{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap;}
-  .zona-ok{background:var(--success-bg);color:var(--success);border:1px solid #86EFAC;}
-  .zona-err{background:var(--danger-bg);color:var(--danger);border:1px solid #FECACA;}
+  .zona-ok{background:var(--success-bg);color:var(--success);border:1px solid var(--success-border);}
+  .zona-err{background:var(--danger-bg);color:var(--danger);border:1px solid var(--danger-border);}
   .marcacion-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .btn-marc{padding:18px 8px;border-radius:var(--radius-lg);border:none;cursor:pointer;font-size:13px;font-weight:700;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:7px;transition:all .2s;box-shadow:var(--shadow-md);}
   .btn-marc svg{width:26px;height:26px;}
-  .btn-ing{background:linear-gradient(135deg,#16A34A,#15803D);color:white;}
-  .btn-sal{background:linear-gradient(135deg,#DC2626,#B91C1C);color:white;}
+  .btn-ing{background:linear-gradient(135deg,var(--success),var(--success-strong));color:white;}
+  .btn-sal{background:linear-gradient(135deg,var(--danger),var(--danger-strong));color:white;}
   .btn-marc:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.2);}
   .btn-marc:active{transform:scale(.95);}
   .btn-marc:disabled{opacity:.38;cursor:not-allowed;transform:none;box-shadow:none;}
@@ -414,8 +412,8 @@
   .log-info{flex:1;min-width:0;}
   .log-place{font-size:11px;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .mchip{font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;}
-  .mchip.wa{background:#EDE9FE;color:#5B21B6;}
-  .mchip.fa{background:#DBEAFE;color:#1D4ED8;}
+  .mchip.wa{background:var(--purple-soft);color:var(--purple-strong);}
+  .mchip.fa{background:var(--accent-light);color:var(--accent-strong);}
   .mchip.gps{background:var(--success-bg);color:var(--success);}
   /* Cámara */
   .cam-wrap{position:relative;width:100%;aspect-ratio:4/3;background:#000;border-radius:var(--radius-lg);overflow:hidden;}
@@ -442,6 +440,249 @@
   .bio-ss{font-size:11px;color:var(--text3);margin-top:1px;}
   /* Sede admin */
   .sede-row{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:5px;}
+
+
+  /* ═══════════════════════════════════════════════════════════════
+     CAPA DE DISEÑO UNIFICADA (MFP UI v2)
+     Una sola gramática visual de Home → Nómina → Gastos → Inversiones → Asistencia.
+     Escala 4/8 px · tipografía mínima 11 px · objetivos táctiles ≥ 44 px
+     ═══════════════════════════════════════════════════════════════ */
+  :root {
+    /* Espaciado */
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px;
+    /* Radios */
+    --radius-sm: 6px; --radius-xl: 20px;
+    /* Tipografía */
+    --fs-xs: 11px; --fs-sm: 12px; --fs-md: 13px; --fs-base: 14px; --fs-lg: 17px; --fs-xl: 22px;
+    /* Táctil + safe areas */
+    --tap: 44px; --tabbar-h: 62px;
+    --safe-t: env(safe-area-inset-top, 0px);
+    --safe-b: env(safe-area-inset-bottom, 0px);
+    /* Marca */
+    --brand-1: #2563EB; --brand-2: #1E40AF;
+    --gradient-brand: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 100%);
+    /* Semánticos (suaves / fuertes / borde) */
+    --accent-strong:  #1D4ED8;
+    --success-strong: #15803D; --success-soft: #DCFCE7; --success-border: #BBF7D0;
+    --warning-strong: #B45309; --warning-soft: #FEF3C7; --warning-border: #FDE68A;
+    --danger-strong:  #B91C1C; --danger-soft:  #FEE2E2; --danger-border:  #FECACA;
+    --purple-strong:  #5B21B6; --purple-soft:  #EDE9FE; --purple-border:  #DDD6FE;
+    --overlay: rgba(10, 14, 28, .5);
+  }
+  [data-theme="dark"] {
+    --brand-1: #2F5FD0; --brand-2: #1E3A8A;
+    --accent-strong:  #93C5FD;
+    --success-strong: #4ADE80; --success-soft: #0F3320; --success-border: #166534;
+    --warning-strong: #FBBF24; --warning-soft: #3A2C08; --warning-border: #78530F;
+    --danger-strong:  #FCA5A5; --danger-soft:  #3A1515; --danger-border:  #7F1D1D;
+    --purple-strong:  #C4B5FD; --purple-soft:  #2B1B5E; --purple-border:  #4C3A91;
+    --overlay: rgba(0, 0, 0, .62);
+  }
+
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-size: var(--fs-base);
+    -webkit-tap-highlight-color: transparent;
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+  .app { padding: var(--sp-4); padding-top: calc(var(--sp-4) + var(--safe-t)); gap: var(--sp-4); }
+  body.has-tabbar .app { padding-bottom: calc(var(--tabbar-h) + var(--safe-b) + var(--sp-5)); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ── Tonos reutilizables (dock, tabbar, tarjetas) ──────────── */
+  .tone-accent  { --tone: var(--accent);  --tone-bg: var(--accent-bg);  --tone-border: var(--accent-light); }
+  .tone-success { --tone: var(--success); --tone-bg: var(--success-bg); --tone-border: var(--success-border); }
+  .tone-warning { --tone: var(--warning); --tone-bg: var(--warning-bg); --tone-border: var(--warning-border); }
+  .tone-neutral { --tone: var(--text2);   --tone-bg: var(--surface2);    --tone-border: var(--border); }
+
+  /* ── Barra de app (idéntica en todas las pantallas) ────────── */
+  #miniHeader.header {
+    background: var(--gradient-brand); border: none; color: #fff;
+    padding: 10px 12px 10px 14px; min-height: 60px; border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+  #miniHeader .header-title { gap: 10px; min-width: 0; }
+  #miniHeader .appbar-mark {
+    width: 38px; height: 38px; border-radius: 11px; flex-shrink: 0;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  #miniHeader .appbar-brand { font-size: var(--fs-base); font-weight: 800; letter-spacing: 3px; color: #fff; line-height: 1.1; }
+  #miniHeader .subtitle { font-size: var(--fs-sm); color: rgba(255,255,255,.82); margin-top: 1px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  #miniHeader .hamburger-btn {
+    width: var(--tap); height: var(--tap); border-radius: 12px;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
+  }
+  #miniHeader .hamburger-btn:hover { background: rgba(255,255,255,.28); }
+  #miniHeader .hamburger-btn span { background: #fff; }
+  .modo-asistencia-header { padding-top: calc(10px + var(--safe-t)) !important; }
+
+  /* Hero de Home = misma barra, versión expandida */
+  .home-hero {
+    position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 12px 16px; background: var(--gradient-brand); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  }
+  .dots-btn { width: 40px; height: 40px; }
+
+  /* ── Barra inferior (solo pantallas internas con sesión) ───── */
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 250; display: none;
+    background: var(--surface); border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 16px rgba(0,0,0,.06);
+    padding: 6px 8px calc(6px + var(--safe-b)); gap: 4px; justify-content: space-around;
+  }
+  body.has-tabbar .tabbar { display: flex; }
+  .tab-item {
+    flex: 1; max-width: 96px; min-height: 50px; border: none; background: none; cursor: pointer;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    border-radius: 12px; color: var(--text3); font-size: var(--fs-xs); font-weight: 600; transition: background .12s, color .12s;
+  }
+  .tab-item svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .tab-item:active { transform: scale(.94); }
+  .tab-item.active { color: var(--tone, var(--accent)); background: var(--tone-bg, var(--accent-bg)); }
+
+  /* Dock de Home con tonos del tema (antes: colores fijos que no soportaban modo oscuro) */
+  .home-dock { padding: 14px 8px; gap: 4px; }
+  .dock-btn { flex: 1; min-width: 0; padding: 8px 4px; }
+  .dock-icon { background: var(--tone-bg); border: 1px solid var(--tone-border); }
+  .dock-icon svg { stroke: var(--tone); }
+  .dock-btn.is-locked { opacity: .45; cursor: not-allowed; }
+  .dock-label { font-size: var(--fs-sm); }
+
+  /* ── Tipografía y jerarquía ─────────────────────────────── */
+  .panel-header { padding: 14px var(--sp-4); min-height: 52px; gap: var(--sp-2); flex-wrap: wrap; }
+  .panel-title { font-size: var(--fs-base); font-weight: 700; }
+  .panel-body { padding: var(--sp-4); }
+  .home-card-label, .section-label, .drawer-section { font-size: var(--fs-xs); letter-spacing: .6px; }
+  .stat-label { font-size: var(--fs-xs); }
+  th { font-size: var(--fs-xs); }
+  td { font-size: var(--fs-sm); }
+  .legend-item { font-size: var(--fs-xs); }
+  .scard-lbl, .mchip, .dock-badge { font-size: 10px; }
+  .scard-val { font-size: var(--fs-sm); }
+  .scard-sub, .log-place { font-size: var(--fs-xs); }
+  .mini-badge { font-size: 9px; }
+  .rate-change { font-size: 11px; }
+
+  /* ── Botones ───────────────────────────────────────────── */
+  .btn { min-height: 40px; padding: 8px 16px; border-radius: 10px; font-size: var(--fs-md); font-weight: 600;
+         display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+  .btn-sm { min-height: 34px; padding: 6px 12px; font-size: var(--fs-sm); }
+  .btn-primary:hover { filter: brightness(.92); background: var(--accent); }
+  .btn-outline { border: 1px solid var(--border2); color: var(--text); }
+  .cal-nav button, .home-cal-header button { width: 36px !important; height: 36px !important; border-radius: 10px !important; }
+  .drawer-close { width: 36px; height: 36px; border-radius: 10px; }
+  .picker-btn { min-height: 40px; font-size: var(--fs-md); }
+  .btn-marc { min-height: 84px; }
+
+  /* ── Formularios ───────────────────────────────────────── */
+  input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]), select, textarea {
+    font-family: inherit; color: var(--text); background: var(--surface);
+    border: 1.5px solid var(--border); border-radius: 10px;
+    min-height: 42px; padding: 8px 12px; font-size: 16px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-bg); }
+  table input:not([type=checkbox]):not([type=radio]), table select { min-height: 36px; font-size: var(--fs-md); padding: 5px 8px; border-radius: 8px; }
+  .param-input { min-height: 36px; font-size: var(--fs-md); width: 104px; }
+  @media (min-width: 700px) {
+    input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]), select, textarea { font-size: var(--fs-md); }
+  }
+
+  /* ── Modales: misma estructura en toda la app ─────────────
+     Móvil = hoja inferior · ≥600px = tarjeta centrada          */
+  div[style*="position:fixed"][style*="inset:0"]:not(#overlay):not(#camaraModal):not([style*="flex-start"]) {
+    background: var(--overlay) !important;
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+    align-items: flex-end !important; justify-content: center !important;
+  }
+  div[style*="position:fixed"][style*="inset:0"]:not(#overlay):not(#camaraModal):not([style*="flex-start"]) > div:first-child {
+    width: 100% !important; max-width: 520px !important;
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important;
+    max-height: 92vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding-bottom: calc(24px + var(--safe-b)) !important;
+    background: var(--surface) !important;
+    box-shadow: 0 -8px 40px rgba(0,0,0,.22) !important;
+    animation: slideUp .25s ease;
+  }
+  div[style*="position:fixed"][style*="inset:0"]:not(#overlay):not(#camaraModal):not([style*="flex-start"]) > div:first-child::before {
+    content: ""; display: block; width: 40px; height: 4px; border-radius: 4px; background: var(--border2); margin: -8px auto 14px;
+  }
+  @media (min-width: 600px) {
+    div[style*="position:fixed"][style*="inset:0"]:not(#overlay):not(#camaraModal):not([style*="flex-start"]) { align-items: center !important; }
+    div[style*="position:fixed"][style*="inset:0"]:not(#overlay):not(#camaraModal):not([style*="flex-start"]) > div:first-child {
+      border-radius: var(--radius-xl) !important; padding-bottom: 24px !important; max-width: 480px !important;
+    }
+    div[style*="position:fixed"][style*="inset:0"]:not(#overlay):not(#camaraModal):not([style*="flex-start"]) > div:first-child::before { display: none; }
+  }
+  div[style*="position:fixed"][style*="inset:0"] button { min-height: 40px; }
+  div[style*="position:fixed"][style*="inset:0"] button[onclick*="cerrar"],
+  div[style*="position:fixed"][style*="inset:0"] button[onclick*="close"] { min-width: 40px; border-radius: 10px !important; }
+
+  /* ── Menú de 3 puntos y drawer ─────────────────────────── */
+  .dots-item { min-height: var(--tap); font-size: var(--fs-md); }
+  .drawer { width: 288px; right: -300px; padding-bottom: var(--safe-b); }
+  .drawer-item { min-height: var(--tap); font-size: var(--fs-base); }
+  .drawer-head { padding-top: calc(20px + var(--safe-t)); }
+
+  /* ── Estados vacíos ────────────────────────────────────── */
+  .empty-state { text-align: center; padding: var(--sp-5) var(--sp-4); color: var(--text3); font-size: var(--fs-md); }
+
+  /* Hover solo en dispositivos con puntero (evita saltos en táctil) */
+  .panel:hover { box-shadow: var(--shadow); }
+  @media (hover: hover) { .panel:hover { box-shadow: 0 6px 20px rgba(0,0,0,.1); } }
+  .stat-card:hover { transform: none; box-shadow: none; }
+  @media (hover: hover) { .stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.1); } }
+
+
+  .params-grid { display: grid; grid-template-columns: 1fr; gap: 0 40px; }
+  @media (min-width: 760px) { .params-grid { grid-template-columns: 1fr 1fr; } }
+  .param-label { font-size: var(--fs-md); }
+  .param-input { width: 128px; }
+  .cal-nav .month-label, #gastosMonthLabel { min-width: 120px; font-size: var(--fs-base); font-weight: 700; }
+  #gastosNavBar { top: 72px !important; }
+  td[colspan] { white-space: normal; }
+  .modo-asistencia-view { padding-bottom: calc(var(--tabbar-h) + var(--safe-b) + 16px); }
+  .home-cal-header .cal-nav { gap: 8px; }
+  #home-legend { grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)) !important; }
+
+  @media (max-width: 759px) { .params-grid > div + div { margin-top: var(--sp-4); } }
+  /* Botones sólidos con texto blanco: tonos más profundos en modo oscuro para mantener contraste AA */
+  [data-theme="dark"] .btn-primary,
+  [data-theme="dark"] [style*="background:var(--accent)"][style*="color:white"],
+  [data-theme="dark"] .mini-day.today,
+  [data-theme="dark"] .nomina-total { background: var(--brand-1) !important; color: #fff !important; }
+  [data-theme="dark"] [style*="background:var(--success)"][style*="color:white"],
+  [data-theme="dark"] [style*="background:var(--success)"][style*="color:#fff"] { background: #15803D !important; }
+  [data-theme="dark"] [style*="background:var(--danger)"][style*="color:white"],
+  [data-theme="dark"] [style*="background:var(--danger)"][style*="color:#fff"] { background: #B91C1C !important; }
+  [data-theme="dark"] [style*="background:var(--warning-strong)"][style*="color:white"],
+  [data-theme="dark"] [style*="background:var(--warning)"][style*="color:white"] { background: #B45309 !important; }
+
+  /* Tarifas vigentes (única, bajo el título de Liquidación) */
+  .tarifas-wrap { padding: 12px var(--sp-4) 0; }
+  .tarifas-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; }
+  .tarifas-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; margin-bottom: 8px; }
+  .tarifas-title { font-size: var(--fs-xs); font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; }
+  .tarifas-base { font-size: var(--fs-xs); color: var(--text3); }
+  .tarifas-base b { color: var(--accent); }
+  .tarifas-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  @media (min-width: 640px) { .tarifas-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .tarifa-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .tarifa-label { font-size: var(--fs-xs); color: var(--text3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tarifa-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .tarifa-factor { font-size: var(--fs-xs); font-weight: 700; }
+  .tarifa-val { font-size: var(--fs-md); font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
+  #horasResumen.is-collapsed { display: none; }
+  .quincena-body { overflow-x: auto; }
+  @media (max-width: 420px) {
+    .app { padding: 12px; padding-top: calc(12px + var(--safe-t)); gap: 12px; }
+    .panel-body { padding: 14px; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 
 </style>
 </head>
@@ -523,6 +764,19 @@
         <span class="di-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
         Asistencia
       </button>
+      <div class="drawer-section">Cuenta y ajustes</div>
+      <button class="drawer-item" onclick="closeDrawer();abrirUsuarioModal()">
+        <span class="di-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        Usuario
+      </button>
+      <button class="drawer-item" onclick="closeDrawer();toggleModoVista()">
+        <span class="di-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></span>
+        <span id="drawerModoLabel">Modo oscuro</span>
+      </button>
+      <button class="drawer-item" onclick="closeDrawer();abrirSincModal()">
+        <span class="di-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0114.8-3.4L23 10M1 14l4.7 4.4A9 9 0 0020.5 15"/></svg></span>
+        Sincronización
+      </button>
     </nav>
     <div class="drawer-foot">MFP · Mis Finanzas Personales</div>
   </div>
@@ -530,9 +784,16 @@
   <!-- MINI-HEADER: visible solo fuera del Home -->
   <div id="miniHeader" class="header" style="display:none;">
     <div class="header-title">
-      <div style="width:8px;height:32px;background:var(--accent);border-radius:3px;flex-shrink:0;"></div>
-      <div>
-        <div style="font-size:16px;font-weight:800;letter-spacing:2px;color:var(--text);">MFP</div>
+      <div class="appbar-mark">
+        <svg viewBox="0 0 200 200" width="28" height="28" role="img" aria-hidden="true">
+          <path d="M100 18 A82 82 0 1 1 51 37" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="100" cy="88" r="18" fill="none" stroke="white" stroke-width="9"/>
+          <path d="M68 142 Q68 114 100 114 Q132 114 132 142" fill="none" stroke="white" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="100" cy="18" r="17" fill="rgba(255,255,255,0.25)" stroke="white" stroke-width="4"/>
+        </svg>
+      </div>
+      <div style="min-width:0;">
+        <div class="appbar-brand">MFP</div>
         <div class="subtitle" id="currentViewLabel">Calendario</div>
       </div>
     </div>
@@ -546,7 +807,7 @@
     <div class="home-wrap">
 
       <!-- HERO: Ícono MFP centrado — sticky, compacto (2/3) -->
-      <div style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px;background:linear-gradient(135deg,var(--accent) 0%,#1e40af 100%);border-radius:var(--radius-lg);box-shadow:var(--shadow-md);">
+      <div class="home-hero">
 
         <!-- Menú tres puntos -->
         <div class="dots-menu" id="dotsMenu" style="position:absolute;right:10px;top:8px;">
@@ -589,7 +850,7 @@
         </svg>
         <div>
           <div style="font-size:21px;font-weight:900;letter-spacing:5px;color:white;text-shadow:0 2px 6px rgba(0,0,0,0.2);line-height:1.1;">MFP</div>
-          <div style="font-size:10px;color:rgba(255,255,255,0.8);letter-spacing:1px;">Mis Finanzas Personales</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.8);letter-spacing:1px;">Mis Finanzas Personales</div>
         </div>
       </div>
 
@@ -611,14 +872,14 @@
           <div class="home-card-half">
             <div class="home-card-label">
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.5 19H9a7 7 0 110-14 7 7 0 017 7h1.5a3.5 3.5 0 010 7z"/></svg>
-              <span id="home-ciudad" style="font-size:9px;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">detectando…</span>
+              <span id="home-ciudad" style="font-size:10px;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">detectando…</span>
               <button onclick="loadClima()" title="Actualizar" style="margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;padding:0;">↻</button>
             </div>
             <div class="home-card-value" id="home-temp" style="font-size:clamp(18px,4vw,24px);">--°C</div>
             <div class="home-card-sub" id="home-clima-desc" style="font-size:11px;margin-top:3px;"></div>
             <div style="margin-top:6px;display:flex;gap:8px;">
-              <span style="font-size:10px;color:var(--text3);">💧<span id="home-humedad">--%</span></span>
-              <span style="font-size:10px;color:var(--text3);">💨<span id="home-viento">--</span></span>
+              <span style="font-size:11px;color:var(--text3);">💧<span id="home-humedad">--%</span></span>
+              <span style="font-size:11px;color:var(--text3);">💨<span id="home-viento">--</span></span>
             </div>
           </div>
         </div>
@@ -646,9 +907,9 @@
             <div class="home-cal-title" id="home-cal-title"></div>
             <div class="home-cal-sub" id="home-cal-sub"></div>
           </div>
-          <div style="display:flex;gap:6px;">
-            <button onclick="homeChangeMonth(-1)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text2);font-size:14px;">&#8249;</button>
-            <button onclick="homeChangeMonth(1)"  style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text2);font-size:14px;">&#8250;</button>
+          <div class="cal-nav">
+            <button onclick="homeChangeMonth(-1)" aria-label="Mes anterior">&#8249;</button>
+            <button onclick="homeChangeMonth(1)" aria-label="Mes siguiente">&#8250;</button>
           </div>
         </div>
         <div class="mini-grid" id="homeMiniDayNames"></div>
@@ -661,33 +922,33 @@
       <div class="home-dock">
 
         <!-- Candado: siempre activo -->
-        <button class="dock-btn" id="dock-lock" onclick="showLoginModal()">
-          <div class="dock-icon" style="background:#F0F2F6;border:1px solid var(--border);">
-            <svg id="lock-icon" viewBox="0 0 24 24" fill="none" stroke="#5A6070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        <button class="dock-btn tone-neutral" id="dock-lock" onclick="showLoginModal()">
+          <div class="dock-icon">
+            <svg id="lock-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
           </div>
           <span class="dock-label" id="lock-label">Ingresar</span>
         </button>
 
         <!-- Nómina: bloqueado hasta login -->
-        <button class="dock-btn" id="dock-nomina" onclick="requireLogin('calendario')" style="opacity:.35;cursor:not-allowed;">
-          <div class="dock-icon" style="background:var(--accent-bg);border:1px solid var(--accent-light);">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        <button class="dock-btn tone-accent is-locked" id="dock-nomina" onclick="requireLogin('calendario')">
+          <div class="dock-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
           </div>
           <span class="dock-label">Nómina</span>
         </button>
 
         <!-- Gastos: bloqueado hasta login -->
-        <button class="dock-btn" id="dock-gastos" onclick="requireLogin('gastos')" style="opacity:.35;cursor:not-allowed;">
-          <div class="dock-icon" style="background:#F0FDF4;border:1px solid #BBF7D0;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3A1 1 0 006 17h12M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
+        <button class="dock-btn tone-success is-locked" id="dock-gastos" onclick="requireLogin('gastos')">
+          <div class="dock-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3A1 1 0 006 17h12M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
           </div>
           <span class="dock-label">Gastos</span>
         </button>
 
         <!-- Inversiones: bloqueado hasta login -->
-        <button class="dock-btn" id="dock-inversiones" onclick="requireLogin('inversiones')" style="opacity:.35;cursor:not-allowed;">
-          <div class="dock-icon" style="background:#FEF9C3;border:1px solid #FDE68A;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#B45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        <button class="dock-btn tone-warning is-locked" id="dock-inversiones" onclick="requireLogin('inversiones')">
+          <div class="dock-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
           </div>
           <span class="dock-label">Inversiones</span>
         </button>
@@ -803,14 +1064,13 @@
                 <th rowspan="2" class="num">H. ext. dom./fest.</th>
                 <th rowspan="2" class="num">H. ext. dom./fest. noct.</th>
                 <th colspan="3" style="text-align:center;background:var(--success-bg);color:var(--success);border-bottom:1px solid var(--border);">Pacto Colectivo</th>
-                <th rowspan="2" class="num">Valor ($)</th>
               <th rowspan="2">Conceptos</th>
                 <th rowspan="2" class="num" style="background:var(--accent-bg);color:var(--accent);border-left:2px solid var(--accent-light);white-space:nowrap;">Devengado ($)</th>
               </tr>
               <tr>
-                <th class="num" style="background:var(--success-bg);color:var(--success);font-size:10px;" id="th-cena">Aux. cena</th>
-                <th class="num" style="background:var(--success-bg);color:var(--success);font-size:10px;" id="th-almuerzo">Aux. almuerzo</th>
-                <th class="num" style="background:var(--success-bg);color:var(--success);font-size:10px;" id="th-transporte">Aux. ext. transp.</th>
+                <th class="num" style="background:var(--success-bg);color:var(--success);font-size:11px;" id="th-cena">Aux. cena</th>
+                <th class="num" style="background:var(--success-bg);color:var(--success);font-size:11px;" id="th-almuerzo">Aux. almuerzo</th>
+                <th class="num" style="background:var(--success-bg);color:var(--success);font-size:11px;" id="th-transporte">Aux. ext. transp.</th>
               </tr>
             </thead>
             <tbody id="turnosBody">
@@ -839,12 +1099,16 @@
             </button>
           </div>
         </div>
+        <div id="tarifasVigentes" class="tarifas-wrap"></div>
         <div class="panel-body" id="nominaBody">
           <div class="empty-state"><p>Ingresa turnos en el calendario para calcular la liquidación</p></div>
         </div>
       </div>
       <div class="panel" id="horasResumenPanel" style="display:none;">
-        <div class="panel-header"><div class="panel-title">Resumen de horas del mes</div></div>
+        <div class="panel-header">
+          <div class="panel-title">Resumen de horas del mes</div>
+          <button class="btn btn-sm btn-outline" id="btnResumenToggle" onclick="toggleResumenMes()" aria-expanded="true">Ocultar</button>
+        </div>
         <div class="panel-body" id="horasResumen"></div>
       </div>
     </div>
@@ -870,8 +1134,8 @@
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;">
             <div class="stat-card"><div class="stat-label">Meses registrados</div><div class="stat-value accent" id="hist-meses">0</div></div>
             <div class="stat-card" style="background:var(--success-bg);"><div class="stat-label" style="color:var(--success);">Bruto acumulado</div><div class="stat-value" style="color:var(--success);" id="hist-bruto-total">$0</div></div>
-            <div class="stat-card" style="background:#EFF4FF;"><div class="stat-label" style="color:var(--accent);">Neto acumulado</div><div class="stat-value" style="color:var(--accent);" id="hist-neto-total">$0</div></div>
-            <div class="stat-card" style="background:#FFFBEB;"><div class="stat-label" style="color:#B45309;">Pacto acumulado</div><div class="stat-value" style="color:#B45309;" id="hist-pacto-total">$0</div></div>
+            <div class="stat-card" style="background:var(--accent-bg);"><div class="stat-label" style="color:var(--accent);">Neto acumulado</div><div class="stat-value" style="color:var(--accent);" id="hist-neto-total">$0</div></div>
+            <div class="stat-card" style="background:var(--warning-bg);"><div class="stat-label" style="color:var(--warning-strong);">Pacto acumulado</div><div class="stat-value" style="color:var(--warning-strong);" id="hist-pacto-total">$0</div></div>
           </div>
         </div>
       </div>
@@ -889,22 +1153,22 @@
           <table style="width:100%;border-collapse:collapse;min-width:720px;">
             <thead>
               <tr style="background:var(--surface2);">
-                <th rowspan="2" style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:8px 14px;border-bottom:2px solid var(--border);">Mes</th>
-                <th colspan="3" style="font-size:10px;font-weight:600;color:var(--success);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);">Primera quincena</th>
-                <th colspan="3" style="font-size:10px;font-weight:600;color:var(--accent);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);">Segunda quincena</th>
-                <th colspan="3" style="font-size:10px;font-weight:600;color:#B45309;text-align:center;padding:6px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);">Total mes</th>
+                <th rowspan="2" style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:8px 14px;border-bottom:2px solid var(--border);">Mes</th>
+                <th colspan="3" style="font-size:11px;font-weight:600;color:var(--success);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);">Primera quincena</th>
+                <th colspan="3" style="font-size:11px;font-weight:600;color:var(--accent);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);">Segunda quincena</th>
+                <th colspan="3" style="font-size:11px;font-weight:600;color:var(--warning-strong);text-align:center;padding:6px 8px;border-bottom:1px solid var(--border);border-left:1px solid var(--border);">Total mes</th>
                 <th rowspan="2" style="width:32px;border-bottom:2px solid var(--border);border-left:1px solid var(--border);"></th>
               </tr>
               <tr style="background:var(--surface2);">
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);border-left:1px solid var(--border);text-align:right;">Bruto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Neto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Pacto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);border-left:1px solid var(--border);text-align:right;">Bruto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Neto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Pacto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);border-left:1px solid var(--border);text-align:right;font-weight:700;">Bruto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;font-weight:700;">Neto</th>
-                <th style="font-size:9px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;font-weight:700;">Pacto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);border-left:1px solid var(--border);text-align:right;">Bruto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Neto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Pacto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);border-left:1px solid var(--border);text-align:right;">Bruto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Neto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;">Pacto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);border-left:1px solid var(--border);text-align:right;font-weight:700;">Bruto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;font-weight:700;">Neto</th>
+                <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:2px solid var(--border);text-align:right;font-weight:700;">Pacto</th>
               </tr>
             </thead>
             <tbody id="histBody"></tbody>
@@ -926,10 +1190,10 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3A1 1 0 006 17h12M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z"/></svg>
           Control de Gastos
         </div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <button onclick="gastosChangeMonth(-1)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;color:var(--text2);font-size:16px;line-height:1;">&#8249;</button>
-          <span style="font-size:13px;font-weight:700;min-width:120px;text-align:center;color:var(--text);" id="gastosMonthLabel"></span>
-          <button onclick="gastosChangeMonth(1)"  style="width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;color:var(--text2);font-size:16px;line-height:1;">&#8250;</button>
+        <div class="cal-nav">
+          <button onclick="gastosChangeMonth(-1)" aria-label="Mes anterior">&#8249;</button>
+          <span class="month-label" id="gastosMonthLabel"></span>
+          <button onclick="gastosChangeMonth(1)" aria-label="Mes siguiente">&#8250;</button>
         </div>
       </div>
 
@@ -960,10 +1224,10 @@
           <div style="padding:0;overflow-x:auto;">
             <table style="width:100%;border-collapse:collapse;min-width:380px;">
               <thead><tr>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Fecha</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);">Concepto</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:70px;">Tipo</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Valor ($)</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Fecha</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);">Concepto</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:70px;">Tipo</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Valor ($)</th>
                 <th style="width:28px;border-bottom:2px solid var(--border);background:var(--surface2);"></th>
               </tr></thead>
               <tbody id="ingresosBody"></tbody>
@@ -981,11 +1245,11 @@
           <div style="padding:0;overflow-x:auto;">
             <table style="width:100%;border-collapse:collapse;min-width:480px;">
               <thead><tr>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Fecha</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);">Concepto</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:80px;">Categoría</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:80px;">Medio</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Valor ($)</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Fecha</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);">Concepto</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:80px;">Categoría</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:80px;">Medio</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Valor ($)</th>
                 <th style="width:28px;border-bottom:2px solid var(--border);background:var(--surface2);"></th>
               </tr></thead>
               <tbody id="egresosBody"></tbody>
@@ -1017,28 +1281,28 @@
         <div class="panel-body" style="padding-bottom:10px;">
           <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px;">
 
-            <div class="stat-card" style="background:var(--purple-bg);border:1px solid #DDD6FE;">
+            <div class="stat-card" style="background:var(--purple-bg);border:1px solid var(--purple-border);">
               <div class="stat-label" style="color:var(--purple);">💳 Cupo total</div>
               <div style="font-size:clamp(11px,3.8vw,17px);font-weight:800;color:var(--purple);font-variant-numeric:tabular-nums;overflow-wrap:break-word;" id="tc-cupo-total">$0</div>
-              <div style="font-size:10px;color:var(--text3);margin-top:2px;">Límite configurado</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;">Límite configurado</div>
             </div>
 
-            <div class="stat-card" style="background:#FEF2F2;border:1px solid #FECACA;">
+            <div class="stat-card" style="background:var(--danger-bg);border:1px solid var(--danger-border);">
               <div class="stat-label" style="color:var(--danger);">📊 Saldo</div>
               <div style="font-size:clamp(11px,3.8vw,17px);font-weight:800;color:var(--danger);font-variant-numeric:tabular-nums;overflow-wrap:break-word;" id="tc-utilizado">$0</div>
-              <div style="font-size:10px;color:var(--text3);margin-top:2px;" id="tc-saldo-detalle">Inicial + compras</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;" id="tc-saldo-detalle">Inicial + compras</div>
             </div>
 
-            <div class="stat-card" style="background:#F0FDF4;border:1px solid #BBF7D0;">
+            <div class="stat-card" style="background:var(--success-bg);border:1px solid var(--success-border);">
               <div class="stat-label" style="color:var(--success);">✅ Cupo disponible</div>
               <div style="font-size:clamp(11px,3.8vw,17px);font-weight:800;color:var(--success);font-variant-numeric:tabular-nums;overflow-wrap:break-word;" id="tc-disponible">$0</div>
-              <div style="font-size:10px;color:var(--text3);margin-top:2px;">Cupo total − Saldo</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;">Cupo total − Saldo</div>
             </div>
 
-            <div class="stat-card" style="background:#F5F3FF;border:1px solid #DDD6FE;">
+            <div class="stat-card" style="background:var(--purple-bg);border:1px solid var(--purple-border);">
               <div class="stat-label" style="color:#6D28D9;">💸 Abonos</div>
               <div style="font-size:clamp(11px,3.8vw,17px);font-weight:800;color:#6D28D9;font-variant-numeric:tabular-nums;overflow-wrap:break-word;" id="tc-abonos">$0</div>
-              <div style="font-size:10px;color:var(--text3);margin-top:2px;">Total abonado al saldo</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;">Total abonado al saldo</div>
             </div>
 
           </div>
@@ -1050,7 +1314,7 @@
             </div>
             <span style="font-size:12px;font-weight:700;color:var(--purple);min-width:48px;text-align:right;" id="tc-pct-uso">0%</span>
           </div>
-          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text3);">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);">
             <span>Saldo $0</span><span id="tc-barra-label">del cupo utilizado</span><span>Cupo $0</span>
           </div>
         </div>
@@ -1063,10 +1327,10 @@
           <div style="overflow-x:auto;">
           <table style="width:100%;border-collapse:collapse;min-width:380px;">
             <thead><tr>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Descripción</th>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Fecha</th>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Tipo</th>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);width:120px;">Valor ($)</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Descripción</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Fecha</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Tipo</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);width:120px;">Valor ($)</th>
             </tr></thead>
             <tbody id="tcBody"></tbody>
             <tfoot id="tcFoot"></tfoot>
@@ -1103,18 +1367,18 @@
             <div class="stat-card" style="background:var(--accent-bg);border:1px solid var(--accent-light);cursor:pointer;" onclick="mostrarTrazabilidadTD()">
               <div class="stat-label" style="color:var(--accent);">💰 Saldo disponible</div>
               <div style="font-size:clamp(12px,4vw,19px);font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;overflow-wrap:break-word;" id="td-saldo">$0</div>
-              <div style="font-size:10px;color:var(--text3);margin-top:2px;" id="td-saldo-det">Ingresos − compras débito</div>
-              <div style="font-size:10px;color:var(--accent);margin-top:4px;font-weight:600;">🔍 Ver trazabilidad</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;" id="td-saldo-det">Ingresos − compras débito</div>
+              <div style="font-size:11px;color:var(--accent);margin-top:4px;font-weight:600;">🔍 Ver trazabilidad</div>
             </div>
-            <div class="stat-card" style="background:#F0FDF4;border:1px solid #BBF7D0;">
+            <div class="stat-card" style="background:var(--success-bg);border:1px solid var(--success-border);">
               <div class="stat-label" style="color:var(--success);">📥 Ingresos nómina</div>
               <div style="font-size:clamp(11px,3.8vw,17px);font-weight:800;color:var(--success);font-variant-numeric:tabular-nums;overflow-wrap:break-word;" id="td-ingresos">$0</div>
-              <div style="font-size:10px;color:var(--text3);margin-top:2px;">Nómina mes actual</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;">Nómina mes actual</div>
             </div>
-            <div class="stat-card" style="background:#FEF2F2;border:1px solid #FECACA;">
+            <div class="stat-card" style="background:var(--danger-bg);border:1px solid var(--danger-border);">
               <div class="stat-label" style="color:var(--danger);">💳 Compras débito</div>
               <div style="font-size:clamp(11px,3.8vw,17px);font-weight:800;color:var(--danger);font-variant-numeric:tabular-nums;overflow-wrap:break-word;" id="td-compras">$0</div>
-              <div style="font-size:10px;color:var(--text3);margin-top:2px;">Egresos con tarjeta débito</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px;">Egresos con tarjeta débito</div>
             </div>
           </div>
           <!-- Barra -->
@@ -1124,7 +1388,7 @@
             </div>
             <span style="font-size:12px;font-weight:700;color:var(--accent);min-width:46px;text-align:right;" id="td-pct">0%</span>
           </div>
-          <div style="font-size:10px;color:var(--text3);text-align:center;" id="td-barra-lbl">del ingreso disponible</div>
+          <div style="font-size:11px;color:var(--text3);text-align:center;" id="td-barra-lbl">del ingreso disponible</div>
         </div>
 
         <!-- Tabla movimientos -->
@@ -1132,10 +1396,10 @@
           <div style="overflow-x:auto;">
           <table style="width:100%;border-collapse:collapse;min-width:380px;">
             <thead><tr>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Descripción</th>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Fecha</th>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Tipo</th>
-              <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);width:120px;">Valor ($)</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Descripción</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Fecha</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Tipo</th>
+              <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);width:120px;">Valor ($)</th>
             </tr></thead>
             <tbody id="tdBody"></tbody>
             <tfoot id="tdFoot"></tfoot>
@@ -1172,29 +1436,29 @@
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title">💰 Resumen portafolio</div>
-            <button class="btn btn-sm" style="background:#B45309;color:white;font-size:11px;" onclick="abrirFormInversion()">+ Nueva inversión</button>
+            <button class="btn btn-sm" style="background:var(--warning-strong);color:white;font-size:11px;" onclick="abrirFormInversion()">+ Nueva inversión</button>
           </div>
           <div class="panel-body">
             <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-              <div class="stat-card" style="background:#FFFBEB;border:1px solid #FDE68A;">
-                <div class="stat-label" style="color:#B45309;">💰 Capital total</div>
-                <div style="font-size:20px;font-weight:800;color:#B45309;" id="inv-total">$0</div>
-                <div style="font-size:10px;color:var(--text3);">Monto invertido</div>
+              <div class="stat-card" style="background:var(--warning-bg);border:1px solid var(--warning-border);">
+                <div class="stat-label" style="color:var(--warning-strong);">💰 Capital total</div>
+                <div style="font-size:20px;font-weight:800;color:var(--warning-strong);" id="inv-total">$0</div>
+                <div style="font-size:11px;color:var(--text3);">Monto invertido</div>
               </div>
-              <div class="stat-card" style="background:#F0FDF4;border:1px solid #BBF7D0;">
+              <div class="stat-card" style="background:var(--success-bg);border:1px solid var(--success-border);">
                 <div class="stat-label" style="color:var(--success);">📈 Dividendos brutos</div>
                 <div style="font-size:20px;font-weight:800;color:var(--success);" id="inv-dividendos">$0</div>
-                <div style="font-size:10px;color:var(--text3);">Rendimientos generados</div>
+                <div style="font-size:11px;color:var(--text3);">Rendimientos generados</div>
               </div>
-              <div class="stat-card" style="background:#FEF2F2;border:1px solid #FECACA;">
+              <div class="stat-card" style="background:var(--danger-bg);border:1px solid var(--danger-border);">
                 <div class="stat-label" style="color:var(--danger);">🏛 Retenciones (4%)</div>
                 <div style="font-size:20px;font-weight:800;color:var(--danger);" id="inv-retenciones">$0</div>
-                <div style="font-size:10px;color:var(--text3);">Retención en la fuente</div>
+                <div style="font-size:11px;color:var(--text3);">Retención en la fuente</div>
               </div>
-              <div class="stat-card" style="background:#EFF4FF;border:1px solid #DBEAFE;">
+              <div class="stat-card" style="background:var(--accent-bg);border:1px solid var(--accent-light);">
                 <div class="stat-label" style="color:var(--accent);">✅ Dividendos netos</div>
                 <div style="font-size:20px;font-weight:800;color:var(--accent);" id="inv-neto">$0</div>
-                <div style="font-size:10px;color:var(--text3);">Después de retención</div>
+                <div style="font-size:11px;color:var(--text3);">Después de retención</div>
               </div>
             </div>
           </div>
@@ -1212,15 +1476,15 @@
           <div style="padding:0;overflow-x:auto;">
             <table style="width:100%;border-collapse:collapse;min-width:700px;">
               <thead><tr>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:8px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Inversión</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Entidad</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:8px 12px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Valor ($)</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:60px;">Tasa</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Dividendos</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Retención</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Apertura</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Vencimiento</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:80px;">Alerta</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:8px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Inversión</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Entidad</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:8px 12px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Valor ($)</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);background:var(--surface2);width:60px;">Tasa</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Dividendos</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:8px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Retención</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Apertura</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:88px;">Vencimiento</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:8px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:80px;">Alerta</th>
                 <th style="width:28px;border-bottom:2px solid var(--border);background:var(--surface2);"></th>
               </tr></thead>
               <tbody id="invBody"></tbody>
@@ -1258,20 +1522,20 @@
               </div>
             </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;">
-              <div class="stat-card" style="background:#FFFBEB;border:1px solid #FDE68A;">
-                <div class="stat-label" style="color:#B45309;font-size:10px;">Rend. bruto</div>
-                <div style="font-size:15px;font-weight:800;color:#B45309;" id="sim-bruto">$0</div>
+              <div class="stat-card" style="background:var(--warning-bg);border:1px solid var(--warning-border);">
+                <div class="stat-label" style="color:var(--warning-strong);font-size:11px;">Rend. bruto</div>
+                <div style="font-size:15px;font-weight:800;color:var(--warning-strong);" id="sim-bruto">$0</div>
               </div>
-              <div class="stat-card" style="background:#FEF2F2;border:1px solid #FECACA;">
-                <div class="stat-label" style="color:var(--danger);font-size:10px;">Retención 4%</div>
+              <div class="stat-card" style="background:var(--danger-bg);border:1px solid var(--danger-border);">
+                <div class="stat-label" style="color:var(--danger);font-size:11px;">Retención 4%</div>
                 <div style="font-size:15px;font-weight:800;color:var(--danger);" id="sim-ret">$0</div>
               </div>
-              <div class="stat-card" style="background:#F0FDF4;border:1px solid #BBF7D0;">
-                <div class="stat-label" style="color:var(--success);font-size:10px;">Rend. neto</div>
+              <div class="stat-card" style="background:var(--success-bg);border:1px solid var(--success-border);">
+                <div class="stat-label" style="color:var(--success);font-size:11px;">Rend. neto</div>
                 <div style="font-size:15px;font-weight:800;color:var(--success);" id="sim-neto">$0</div>
               </div>
-              <div class="stat-card" style="background:#EFF4FF;border:1px solid #DBEAFE;">
-                <div class="stat-label" style="color:var(--accent);font-size:10px;">Total al vencer</div>
+              <div class="stat-card" style="background:var(--accent-bg);border:1px solid var(--accent-light);">
+                <div class="stat-label" style="color:var(--accent);font-size:11px;">Total al vencer</div>
                 <div style="font-size:15px;font-weight:800;color:var(--accent);" id="sim-total-val">$0</div>
               </div>
             </div>
@@ -1292,19 +1556,19 @@
           <div style="padding:0;overflow-x:auto;">
             <table style="width:100%;border-collapse:collapse;min-width:600px;">
               <thead><tr>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:36px;">#</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Entidad</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:65px;">Plazo</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:70px;">Tasa E.A.</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Mínimo</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Rend. neto</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Total vencer</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:36px;">#</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Entidad</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:65px;">Plazo</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:70px;">Tasa E.A.</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Mínimo</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Rend. neto</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Total vencer</th>
                 <th style="width:28px;border-bottom:2px solid var(--border);background:var(--surface2);"></th>
               </tr></thead>
               <tbody id="tasasBody"></tbody>
             </table>
           </div>
-          <div style="padding:8px 14px;font-size:10px;color:var(--text3);border-top:1px solid var(--border);">⚠ Confirme la tasa directamente con la entidad antes de abrir el CDT.</div>
+          <div style="padding:8px 14px;font-size:11px;color:var(--text3);border-top:1px solid var(--border);">⚠ Confirme la tasa directamente con la entidad antes de abrir el CDT.</div>
         </div>
       </div>
 
@@ -1317,15 +1581,15 @@
           </div>
           <div class="panel-body">
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:12px;">
-              <div class="stat-card" style="background:#FFFBEB;border:1px solid #FDE68A;">
-                <div class="stat-label" style="color:#B45309;">💰 Total COP</div>
-                <div style="font-size:18px;font-weight:800;color:#B45309;" id="div-total-cop">$0</div>
+              <div class="stat-card" style="background:var(--warning-bg);border:1px solid var(--warning-border);">
+                <div class="stat-label" style="color:var(--warning-strong);">💰 Total COP</div>
+                <div style="font-size:18px;font-weight:800;color:var(--warning-strong);" id="div-total-cop">$0</div>
               </div>
-              <div class="stat-card" style="background:#F0FDF4;border:1px solid #BBF7D0;">
+              <div class="stat-card" style="background:var(--success-bg);border:1px solid var(--success-border);">
                 <div class="stat-label" style="color:var(--success);">📈 Ganancia/Pérdida</div>
                 <div style="font-size:18px;font-weight:800;" id="div-total-gl">$0</div>
               </div>
-              <div class="stat-card" style="background:#EFF4FF;border:1px solid #DBEAFE;">
+              <div class="stat-card" style="background:var(--accent-bg);border:1px solid var(--accent-light);">
                 <div class="stat-label" style="color:var(--accent);">🔄 TRM actualizada</div>
                 <div style="font-size:11px;font-weight:600;color:var(--accent);" id="div-update">—</div>
               </div>
@@ -1334,13 +1598,13 @@
           <div style="padding:0;overflow-x:auto;">
             <table style="width:100%;border-collapse:collapse;min-width:520px;">
               <thead><tr>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Divisa</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Cantidad</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">TRM actual</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">TRM compra</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Valor COP</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:70px;">Variación</th>
-                <th style="font-size:10px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Ganó/Perdió</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:7px 14px;border-bottom:2px solid var(--border);background:var(--surface2);">Divisa</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:90px;">Cantidad</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">TRM actual</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">TRM compra</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:110px;">Valor COP</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:7px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:70px;">Variación</th>
+                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:right;padding:7px 10px;border-bottom:2px solid var(--border);background:var(--surface2);width:100px;">Ganó/Perdió</th>
                 <th style="width:28px;border-bottom:2px solid var(--border);background:var(--surface2);"></th>
               </tr></thead>
               <tbody id="divisasBody"></tbody>
@@ -1394,12 +1658,12 @@
             <table style="width:100%;border-collapse:collapse;min-width:600px;">
               <thead>
                 <tr style="background:var(--surface2);">
-                  <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Fecha / Hora</th>
-                  <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Empleado</th>
-                  <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Tipo</th>
-                  <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Sede</th>
-                  <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Método</th>
-                  <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Zona</th>
+                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Fecha / Hora</th>
+                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Empleado</th>
+                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Tipo</th>
+                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Sede</th>
+                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Método</th>
+                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Zona</th>
                 </tr>
               </thead>
               <tbody id="aa-hist-body"></tbody>
@@ -1439,7 +1703,7 @@
           </div>
         </div>
         <div class="panel-body">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 40px;">
+          <div class="params-grid">
 
             <!-- Col izquierda: Base + Deducciones -->
             <div>
@@ -1457,7 +1721,7 @@
                 <input class="param-input" id="p_dias" type="number" value="30">
               </div>
               <div class="param-row">
-                <span class="param-label">Horas ordinarias al día <span style="font-size:10px;color:var(--accent);">Reforma laboral</span></span>
+                <span class="param-label">Horas ordinarias al día <span style="font-size:11px;color:var(--accent);">Reforma laboral</span></span>
                 <input class="param-input" id="p_horas_dia" type="number" value="7">
               </div>
               <div class="section-label">Deducciones empleado</div>
@@ -1472,7 +1736,7 @@
                 <span class="param-pct">%</span>
               </div>
               <div style="margin-top:14px;padding:10px 12px;background:var(--accent-bg);border:1px solid var(--accent-light);border-radius:var(--radius);">
-                <div style="font-size:10px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Jornada legal vigente</div>
+                <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Jornada legal vigente</div>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
                   <div style="font-size:11px;color:var(--text2);">Por día</div>
                   <div style="font-size:11px;font-weight:600;color:var(--accent);" id="info_dia">7 h</div>
@@ -1575,14 +1839,13 @@
                 <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:9px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:56px;">Inicio</th>
                 <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:9px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:56px;">Fin</th>
                 <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:center;padding:9px 8px;border-bottom:2px solid var(--border);background:var(--surface2);width:60px;">Tipo</th>
-                <th style="font-size:11px;font-weight:600;color:var(--text3);text-align:left;padding:9px 8px;border-bottom:2px solid var(--border);background:var(--surface2);">Pacto colectivo</th>
                 <th style="border-bottom:2px solid var(--border);background:var(--surface2);width:64px;"></th>
               </tr>
             </thead>
             <tbody id="turnosTiposBody"></tbody>
             <tfoot>
               <tr>
-                <td colspan="8" style="padding:10px 14px;border-top:1px solid var(--border);">
+                <td colspan="7" style="padding:10px 14px;border-top:1px solid var(--border);">
                   <button class="btn btn-outline btn-sm" onclick="openTurnoTipoModal(null)">+ Agregar turno</button>
                 </td>
               </tr>
@@ -1598,7 +1861,7 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
             Pacto Colectivo
           </div>
-          <button class="btn btn-primary btn-sm" onclick="savePacto()">Guardar</button>
+          <button class="btn btn-primary btn-sm" onclick="savePacto(event)">Guardar</button>
         </div>
         <div class="panel-body" style="padding:0;">
           <table style="width:100%;border-collapse:collapse;">
@@ -1757,7 +2020,7 @@
         <div id="wa-status" style="font-size:11px;margin-top:8px;color:var(--text3);"></div>
       </div>
       <!-- Facial -->
-      <div style="background:var(--success-bg);border:1px solid #BBF7D0;border-radius:var(--radius-lg);padding:16px;">
+      <div style="background:var(--success-bg);border:1px solid var(--success-border);border-radius:var(--radius-lg);padding:16px;">
         <div style="font-size:13px;font-weight:700;color:var(--success);margin-bottom:6px;">📷 Reconocimiento facial</div>
         <div style="font-size:12px;color:var(--text2);margin-bottom:12px;">Captura tu rostro para verificación. Los datos se cifran y almacenan localmente. Umbral mínimo de coincidencia: 85%.</div>
         <button class="btn btn-sm" style="background:var(--success);color:white;width:100%;" onclick="abrirCamaraRegistro()">Registrar rostro</button>
@@ -1819,6 +2082,25 @@
 
 <!-- TURN PICKER OVERLAY -->
 <div id="overlay" style="display:none;position:fixed;inset:0;z-index:50;" onclick="closeAllPickers()"></div>
+
+<!-- BARRA INFERIOR: navegación persistente en pantallas internas -->
+<nav class="tabbar" id="tabbar" aria-label="Navegación principal">
+  <button class="tab-item tone-neutral" data-tab="home" onclick="switchTab('home')">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Inicio
+  </button>
+  <button class="tab-item tone-accent" data-tab="calendario" onclick="switchTab('calendario')">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Nómina
+  </button>
+  <button class="tab-item tone-success" data-tab="gastos" onclick="switchTab('gastos')">
+    <svg viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3A1 1 0 006 17h12M9 21a1 1 0 100-2 1 1 0 000 2zm10 0a1 1 0 100-2 1 1 0 000 2z"/></svg>Gastos
+  </button>
+  <button class="tab-item tone-warning" data-tab="inversiones" onclick="switchTab('inversiones')">
+    <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Inversión
+  </button>
+  <button class="tab-item tone-neutral" data-tab="mas" onclick="toggleDrawer()">
+    <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>Más
+  </button>
+</nav>
 
 <script>
 // ===== STATE =====
@@ -1937,15 +2219,13 @@ const festivos2027 = [
 const festivosAll = [...festivos2024, ...festivos2025, ...festivos2026, ...festivos2027];
 
 // Tipos de turno — base inmutable (restaurar)
-// auxilios: IDs de conceptos del Pacto Colectivo que aplican al trabajar este turno
-//   2 = Auxilio de cena  |  3 = Auxilio de almuerzo  |  4 = Aux. ext. transporte
 const TURNOS_DEFAULT = {
-  D:   { label: 'Diurno 8h',     cod: 'D',   horas: 8,  inicio: 6,  fin: 14, color: 'D',    descanso: false, auxilios: []    },
-  T:   { label: 'Tarde 8h',      cod: 'T',   horas: 8,  inicio: 14, fin: 22, color: 'T',    descanso: false, auxilios: []    },
-  N:   { label: 'Nocturno 8h',   cod: 'N',   horas: 8,  inicio: 22, fin: 6,  color: 'N',    descanso: false, auxilios: [2,4] },
-  T12: { label: 'Turno 12h día', cod: '12D', horas: 12, inicio: 6,  fin: 18, color: '12',   descanso: false, auxilios: [3]   },
-  N12: { label: 'Turno 12h noc', cod: '12N', horas: 12, inicio: 18, fin: 6,  color: '8',    descanso: false, auxilios: []    },
-  DSC: { label: 'Descanso 7h',   cod: 'X',   horas: 7,  inicio: 6,  fin: 13, color: 'desc', descanso: true,  auxilios: []    },
+  D:   { label: 'Diurno 8h',     cod: 'D',   horas: 8,  inicio: 6,  fin: 14, color: 'D',    descanso: false },
+  T:   { label: 'Tarde 8h',      cod: 'T',   horas: 8,  inicio: 14, fin: 22, color: 'T',    descanso: false },
+  N:   { label: 'Nocturno 8h',   cod: 'N',   horas: 8,  inicio: 22, fin: 6,  color: 'N',    descanso: false },
+  T12: { label: 'Turno 12h día', cod: '12D', horas: 12, inicio: 6,  fin: 18, color: '12',   descanso: false },
+  N12: { label: 'Turno 12h noc', cod: '12N', horas: 12, inicio: 18, fin: 6,  color: '8',    descanso: false },
+  DSC: { label: 'Descanso 7h',   cod: 'X',   horas: 7,  inicio: 6,  fin: 13, color: 'desc', descanso: true  },
 };
 // TURNOS dinámico: cargado de localStorage, editable por el usuario
 function loadTurnosTipos() {
@@ -1953,28 +2233,14 @@ function loadTurnosTipos() {
     const s = localStorage.getItem('turnos_tipos');
     if (!s) return JSON.parse(JSON.stringify(TURNOS_DEFAULT));
     const parsed = JSON.parse(s);
-    // Compatibilidad: completar campos que puedan faltar en versiones anteriores
+    // Compatibilidad: agregar campo cod si falta (datos guardados antes de esta versión)
     Object.entries(parsed).forEach(([k, v]) => {
-      if (!v.cod)      v.cod      = (k === 'T12' ? '12D' : k === 'N12' ? '12N' : k === 'DSC' ? 'X' : k).slice(0, 4);
-      if (!v.auxilios) v.auxilios = TURNOS_DEFAULT[k]?.auxilios ?? [];
+      if (!v.cod) v.cod = (k === 'T12' ? '12D' : k === 'N12' ? '12N' : k === 'DSC' ? 'X' : k).slice(0, 4);
     });
     return parsed;
   } catch { return JSON.parse(JSON.stringify(TURNOS_DEFAULT)); }
 }
 let TURNOS = loadTurnosTipos();
-
-// ── Helper global de auxilios ─────────────────────────────────────
-// Devuelve las cantidades de auxilios de pacto para un turno dado.
-// Los IDs fijos son: 2=cena, 3=almuerzo, 4=transporte extralegal.
-// Cualquier ID adicional se ignora en la tabla de turnos pero se suma en nómina.
-function getAuxiliosObj(turnoKey) {
-  const ids = TURNOS[turnoKey]?.auxilios || [];
-  return {
-    cena:       ids.includes(2) ? 1 : 0,
-    almuerzo:   ids.includes(3) ? 1 : 0,
-    transporte: ids.includes(4) ? 1 : 0,
-  };
-}
 
 const DIAS = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 // ===== INPUTS CON SEPARADOR DE MILES =====
@@ -2008,6 +2274,8 @@ function moneyInit(el, val) {
 
 const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
+function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function localKey(iso) { const d = new Date(iso); return dateKey(d.getFullYear(), d.getMonth(), d.getDate()); }
 function dateKey(y, m, d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
 function parseLocalDate(key) {
   const [y, m, d] = key.split('-').map(Number);
@@ -2093,7 +2361,7 @@ function openPicker(e, cell, key, isDom, isFest) {
   picker.innerHTML = `<div class="picker-title">${key.split('-').reverse().join('/')}</div><div class="picker-options">` +
     Object.entries(TURNOS).map(([k,v]) =>
       `<button class="picker-btn ${current===k?'selected':''}" onclick="setTurno('${key}','${k}',this)">`+
-      `<span class="tag tag-${v.color}" style="font-size:10px;">${v.cod||k.slice(0,4)}</span>${v.label}</button>`
+      `<span class="tag tag-${v.color}" style="font-size:11px;">${esc(v.cod||k.slice(0,4))}</span>${esc(v.label)}</button>`
     ).join('') +
     (current ? `<button class="picker-btn picker-remove" onclick="setTurno('${key}',null,this)">✕ Quitar turno</button>` : '') +
     `</div>`;
@@ -2350,7 +2618,7 @@ function renderTabla() {
   if (thTransp)   thTransp.textContent   = getNombre(4, 'Aux. ext. transp.');
 
   if (mt.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="16" style="text-align:center;padding:32px;color:var(--text3)">No hay turnos registrados en este mes</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="17" style="text-align:center;padding:32px;color:var(--text3)">No hay turnos registrados en este mes</td></tr>`;
     tfoot.innerHTML = '';
     return;
   }
@@ -2384,13 +2652,13 @@ function renderTabla() {
     const _vhBase = params.salario/(params.dias*params.horas_dia);
     const _fmtM = n => '$'+Math.round(n).toLocaleString('es-CO');
     const chips = [];
-    if (c.hNoct > 0) chips.push(`<span class="concept-chip" style="background:#F5F3FF;border-color:#DDD6FE;color:#5B21B6;">RN ${c.hNoct}h&nbsp;<span style="font-size:9px;opacity:.85;">${_fmtM(c.valor.hNoct)}</span></span>`);
-    if (c.hED   > 0) chips.push(`<span class="concept-chip" style="background:#F0FDF4;border-color:#BBF7D0;color:#15803D;">HED ${c.hED}h&nbsp;<span style="font-size:9px;opacity:.85;">${_fmtM(c.valor.hED)}</span></span>`);
-    if (c.hEN   > 0) chips.push(`<span class="concept-chip" style="background:#FFFBEB;border-color:#FDE68A;color:#92400E;">HEN ${c.hEN}h&nbsp;<span style="font-size:9px;opacity:.85;">${_fmtM(c.valor.hEN)}</span></span>`);
-    if (c.hRDD+c.hFest > 0) chips.push(`<span class="concept-chip" style="background:#FEF2F2;border-color:#FECACA;color:#B91C1C;">DOM/FEST ${c.hRDD+c.hFest}h&nbsp;<span style="font-size:9px;opacity:.85;">${_fmtM((c.valor.hRDD||0)+(c.valor.hFest||0))}</span></span>`);
-    if (c.hRDN+c.hFestN > 0) chips.push(`<span class="concept-chip" style="background:#FEF2F2;border-color:#FECACA;color:#991B1B;">DOM/N ${c.hRDN+c.hFestN}h&nbsp;<span style="font-size:9px;opacity:.85;">${_fmtM((c.valor.hRDN||0)+(c.valor.hFestN||0))}</span></span>`);
-    if (c.hHEDD > 0) chips.push(`<span class="concept-chip" style="background:#EFF4FF;border-color:#DBEAFE;color:#1D4ED8;">HEDD ${c.hHEDD}h&nbsp;<span style="font-size:9px;opacity:.85;">${_fmtM(c.valor.hHEDD)}</span></span>`);
-    if (c.hHEDN > 0) chips.push(`<span class="concept-chip" style="background:#EFF4FF;border-color:#DBEAFE;color:#1D4ED8;">HEDN ${c.hHEDN}h&nbsp;<span style="font-size:9px;opacity:.85;">${_fmtM(c.valor.hHEDN)}</span></span>`);
+    if (c.hNoct > 0) chips.push(`<span class="concept-chip" style="background:var(--purple-bg);border-color:var(--purple-border);color:var(--purple-strong);">RN ${c.hNoct}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hNoct)}</span></span>`);
+    if (c.hED   > 0) chips.push(`<span class="concept-chip" style="background:var(--success-bg);border-color:var(--success-border);color:var(--success-strong);">HED ${c.hED}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hED)}</span></span>`);
+    if (c.hEN   > 0) chips.push(`<span class="concept-chip" style="background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-strong);">HEN ${c.hEN}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hEN)}</span></span>`);
+    if (c.hRDD+c.hFest > 0) chips.push(`<span class="concept-chip" style="background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-strong);">DOM/FEST ${c.hRDD+c.hFest}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM((c.valor.hRDD||0)+(c.valor.hFest||0))}</span></span>`);
+    if (c.hRDN+c.hFestN > 0) chips.push(`<span class="concept-chip" style="background:var(--danger-bg);border-color:var(--danger-border);color:#991B1B;">DOM/N ${c.hRDN+c.hFestN}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM((c.valor.hRDN||0)+(c.valor.hFestN||0))}</span></span>`);
+    if (c.hHEDD > 0) chips.push(`<span class="concept-chip" style="background:var(--accent-bg);border-color:var(--accent-light);color:var(--accent-strong);">HEDD ${c.hHEDD}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hHEDD)}</span></span>`);
+    if (c.hHEDN > 0) chips.push(`<span class="concept-chip" style="background:var(--accent-bg);border-color:var(--accent-light);color:var(--accent-strong);">HEDN ${c.hHEDN}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hHEDN)}</span></span>`);
 
     // Mostrar cantidad: 1 con color verde, 0 normal
     const fmtQ = v => v === 1
@@ -2400,7 +2668,7 @@ function renderTabla() {
     return `<tr>
       <td><b>${d}/${m}</b></td>
       <td>${DIAS[dayOfWeek]}</td>
-      <td><span class="tag tag-${turno.color}">${t==='T12'?'12D':t==='N12'?'12N':t==='DSC'?'X':t}</span> ${turno.label}</td>
+      <td><span class="tag tag-${turno.color}">${t==='T12'?'12D':t==='N12'?'12N':t==='DSC'?'X':t}</span> ${esc(turno.label)}</td>
       <td class="num">${(c.hOrd  ||0)}</td>
       <td class="num">${(c.hNoct ||0)}</td>
       <td class="num">${(c.hED   ||0)}</td>
@@ -2545,16 +2813,16 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
 
       // Construir chips: [etiqueta, color, bg, horas, valor]
       const ci = [];
-      if (cd.hOrd>0)  ci.push(['ord',  'var(--accent)', '#EFF4FF', cd.hOrd,  cd.valor.hOrd]);
-      if (cd.hNoct>0) ci.push(['RN',   '#7C3AED',       '#F5F3FF', cd.hNoct, cd.valor.hNoct]);
-      if (cd.hED>0)   ci.push(['HED',  '#16A34A',       '#F0FDF4', cd.hED,   cd.valor.hED]);
-      if (cd.hEN>0)   ci.push(['HEN',  '#D97706',       '#FFFBEB', cd.hEN,   cd.valor.hEN]);
+      if (cd.hOrd>0)  ci.push(['ord',  'var(--accent)', 'var(--accent-bg)', cd.hOrd,  cd.valor.hOrd]);
+      if (cd.hNoct>0) ci.push(['RN',   'var(--purple)',       'var(--purple-soft)', cd.hNoct, cd.valor.hNoct]);
+      if (cd.hED>0)   ci.push(['HED',  'var(--success)',       'var(--success-soft)', cd.hED,   cd.valor.hED]);
+      if (cd.hEN>0)   ci.push(['HEN',  'var(--warning)',       'var(--warning-soft)', cd.hEN,   cd.valor.hEN]);
       const hDF=(cd.hRDD||0)+(cd.hFest||0),  vDF=(cd.valor.hRDD||0)+(cd.valor.hFest||0);
       const hDFN=(cd.hRDN||0)+(cd.hFestN||0),vDFN=(cd.valor.hRDN||0)+(cd.valor.hFestN||0);
-      if (hDF>0)       ci.push(['RD',   '#DC2626',       '#FEF2F2', hDF,      vDF]);
-      if (hDFN>0)      ci.push(['RDN',  '#991B1B',       '#FEF2F2', hDFN,     vDFN]);
-      if (cd.hHEDD>0)  ci.push(['HEDD', '#0891B2',       '#F0F9FF', cd.hHEDD, cd.valor.hHEDD]);
-      if (cd.hHEDN>0)  ci.push(['HEDN', '#7C3AED',       '#FAF5FF', cd.hHEDN, cd.valor.hHEDN]);
+      if (hDF>0)       ci.push(['RD',   'var(--danger)',       'var(--danger-soft)', hDF,      vDF]);
+      if (hDFN>0)      ci.push(['RDN',  'var(--danger-strong)',       'var(--danger-soft)', hDFN,     vDFN]);
+      if (cd.hHEDD>0)  ci.push(['HEDD', 'var(--accent-strong)',       'var(--accent-bg)', cd.hHEDD, cd.valor.hHEDD]);
+      if (cd.hHEDN>0)  ci.push(['HEDN', 'var(--purple)',       'var(--purple-soft)', cd.hHEDN, cd.valor.hHEDN]);
 
       const chips = ci.map(([lb,col,bg,h,v]) =>
         '<span style="display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;'
@@ -2565,10 +2833,10 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
 
       return '<tr style="border-bottom:1px solid var(--border);">'
         +'<td style="padding:5px 8px;font-weight:700;font-size:11px;color:var(--text);white-space:nowrap;">'+dd+'</td>'
-        +'<td style="padding:5px 4px;font-size:10px;color:var(--text3);white-space:nowrap;">'+dow+'</td>'
+        +'<td style="padding:5px 4px;font-size:11px;color:var(--text3);white-space:nowrap;">'+dow+'</td>'
         +'<td style="padding:5px 4px;text-align:center;">'
-          +'<span class="tag tag-'+tr.color+'" style="font-size:9px;padding:1px 5px;">'+vlbl+'</span></td>'
-        +'<td style="padding:5px 8px;font-size:10px;line-height:1.9;">'+chips+'</td>'
+          +'<span class="tag tag-'+tr.color+'" style="font-size:10px;padding:1px 5px;">'+vlbl+'</span></td>'
+        +'<td style="padding:5px 8px;font-size:11px;line-height:1.9;">'+chips+'</td>'
         +'<td style="padding:5px 8px;text-align:right;font-weight:700;font-size:11px;'
           +'color:var(--success);white-space:nowrap;">'+vF(vd)+'</td>'
         +'</tr>';
@@ -2576,7 +2844,7 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
   })();
 
   const despBtn = qnum
-    ? '<button onclick="generarDesprendible('+qnum+')" style="padding:5px 11px;border-radius:7px;border:1px solid #DBEAFE;background:rgba(255,255,255,0.15);color:white;font-size:11px;font-weight:600;cursor:pointer;backdrop-filter:blur(2px);transition:background .15s;" onmouseover="this.style.background=\'rgba(255,255,255,0.3)\'" onmouseout="this.style.background=\'rgba(255,255,255,0.15)\'">📄 Desprendible</button>'
+    ? '<button class="btn btn-sm btn-outline" onclick="generarDesprendible('+qnum+')">📄 Desprendible</button>'
     : '';
 
   return `
@@ -2593,54 +2861,15 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
     </div>
     <div class="quincena-body">
 
-      <!-- ── TARJETAS DE TARIFAS VIGENTES ── -->
-      ${(()=>{
-        const _v = params.salario/(params.dias*params.horas_dia);
-        const _tarifas = [
-          {label:'Ord. diurna (6am–7pm)',     factor:(1).toFixed(2),                                    val:_v*1                                   },
-          {label:'Ord. nocturna (7pm–6am)',   factor:(1+params.rn/100).toFixed(2),                      val:_v*(1+params.rn/100)                   },
-          {label:'Dom./fest. diurno',         factor:(1+params.rdd/100).toFixed(2),                     val:_v*(1+params.rdd/100)                  },
-          {label:'Dom./fest. nocturno',       factor:(1+(params.rdd+params.rn)/100).toFixed(2),         val:_v*(1+(params.rdd+params.rn)/100)      },
-          {label:'Extra diurna',              factor:(1+params.hed/100).toFixed(2),                     val:_v*(1+params.hed/100)                  },
-          {label:'Extra nocturna',            factor:(1+params.hen/100).toFixed(2),                     val:_v*(1+params.hen/100)                  },
-          {label:'Extra dom./fest. diurna',   factor:(1+params.hedd/100).toFixed(2),                    val:_v*(1+params.hedd/100)                 },
-          {label:'Extra dom./fest. noct.',    factor:(1+params.hedn/100).toFixed(2),                    val:_v*(1+params.hedn/100)                 },
-        ];
-        const fmtV = n => '$'+Math.round(n).toLocaleString('es-CO');
-        const vh = fmtV(_v);
-        const escala = [
-          {pct:'100%', col:'#2563EB'},{pct:'+35%', col:'#7C3AED'},
-          {pct:'+90%', col:'#DC2626'},{pct:'+125%',col:'#B91C1C'},
-          {pct:'+25%', col:'#16A34A'},{pct:'+75%', col:'#D97706'},
-          {pct:'+115%',col:'#0891B2'},{pct:'+165%',col:'#9D174D'},
-        ];
-        return `
-        <div style="margin-bottom:10px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:8px 10px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-            <span style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;">Tarifas vigentes — Ley 2466/2025 · SMLMV 2026</span>
-            <span style="font-size:10px;color:var(--text3);">VH base: <b style="color:var(--accent);">${vh}/h</b> · ${params.salario.toLocaleString('es-CO')} ÷ ${params.dias*params.horas_dia}h</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;">
-            ${_tarifas.map((t,i)=>`
-            <div style="background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:5px 7px;display:flex;flex-direction:column;gap:1px;">
-              <span style="font-size:9px;color:var(--text3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${t.label}</span>
-              <div style="display:flex;align-items:center;gap:4px;">
-                <span style="font-size:9px;font-weight:700;color:${escala[i].col};background:${escala[i].col}18;padding:1px 4px;border-radius:3px;">×${t.factor}</span>
-                <span style="font-size:11px;font-weight:700;color:var(--text);">${fmtV(t.val)}</span>
-              </div>
-            </div>`).join('')}
-          </div>
-        </div>`;
-      })()}
       <div class="section-label" style="margin-top:0;">Devengado salarial · ${totalH}h trabajadas</div>
       ${conceptDefs.length ? `
         <table style="width:100%;border-collapse:collapse;margin-bottom:2px;">
           <thead><tr>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:left;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);">Concepto</th>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:50px;">Factor h.</th>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:40px;">Horas</th>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:100px;">Valor/h §</th>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Total concepto</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);">Concepto</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:50px;">Factor h.</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:40px;">Horas</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:100px;">Valor/h §</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Total concepto</th>
           </tr></thead>
           <tbody>
             ${conceptDefs.map(c=>{
@@ -2662,18 +2891,18 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
             </tr>`;}).join('')}
           </tbody>
         </table>
-        <div style="font-size:10px;color:var(--text3);padding:3px 8px 8px;">§ Valor/h para <span style="color:#4338CA;font-weight:600;">adic.</span>: solo el recargo adicional (la hora base ya está en "Hora base ordinaria"). Para <span style="color:var(--success);font-weight:600;">extra</span>: valor total de la hora.</div>` :
+        <div style="font-size:11px;color:var(--text3);padding:3px 8px 8px;">§ Valor/h para <span style="color:#4338CA;font-weight:600;">adic.</span>: solo el recargo adicional (la hora base ya está en "Hora base ordinaria"). Para <span style="color:var(--success);font-weight:600;">extra</span>: valor total de la hora.</div>` :
         `<div style="color:var(--text3);font-size:12px;padding:8px 0;">Sin turnos registrados en esta quincena</div>`}
 
       <div class="section-label" style="margin-top:12px;margin-bottom:5px;">Desglose diario — horas · concepto · valor (Ley 2466/2025)</div>
       <div style="overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;">
         <table style="width:100%;border-collapse:collapse;min-width:340px;">
           <thead><tr style="background:var(--surface2);">
-            <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border);text-align:left;width:30px;">Día</th>
-            <th style="font-size:10px;color:var(--text3);padding:5px 4px;border-bottom:1px solid var(--border);width:26px;"></th>
-            <th style="font-size:10px;color:var(--text3);padding:5px 4px;border-bottom:1px solid var(--border);width:34px;text-align:center;">Turno</th>
-            <th style="font-size:10px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border);">Conceptos generados</th>
-            <th style="font-size:10px;color:var(--success);font-weight:700;padding:5px 8px;border-bottom:1px solid var(--border);text-align:right;width:80px;">Valor ($)</th>
+            <th style="font-size:11px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border);text-align:left;width:30px;">Día</th>
+            <th style="font-size:11px;color:var(--text3);padding:5px 4px;border-bottom:1px solid var(--border);width:26px;"></th>
+            <th style="font-size:11px;color:var(--text3);padding:5px 4px;border-bottom:1px solid var(--border);width:34px;text-align:center;">Turno</th>
+            <th style="font-size:11px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border);">Conceptos generados</th>
+            <th style="font-size:11px;color:var(--success);font-weight:700;padding:5px 8px;border-bottom:1px solid var(--border);text-align:right;width:80px;">Valor ($)</th>
           </tr></thead>
           <tbody>${detalleRows}</tbody>
         </table>
@@ -2689,7 +2918,7 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
         <span style="font-weight:600;font-size:12px;color:var(--success);">${fmt(auxT)}</span>
       </div>` : `
       <div class="nomina-row" style="padding:6px 0;">
-        <span style="font-size:12px;color:var(--text3);">Subsidio de transporte <span style="font-size:10px;">(salario > 2 SMMLV)</span></span>
+        <span style="font-size:12px;color:var(--text3);">Subsidio de transporte <span style="font-size:11px;">(salario > 2 SMMLV)</span></span>
         <span style="font-size:12px;color:var(--text3);">No aplica</span>
       </div>`}
 
@@ -2697,14 +2926,14 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
         <div class="section-label">Pacto colectivo</div>
         <table style="width:100%;border-collapse:collapse;margin-bottom:6px;">
           <thead><tr>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:left;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);">Concepto</th>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:70px;">Cantidad</th>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Valor unit.</th>
-            <th style="font-size:10px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Valor</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);">Concepto</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:70px;">Cantidad</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Valor unit.</th>
+            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Valor</th>
           </tr></thead>
           <tbody>
             ${getPactoVal(1) > 0 ? `<tr>
-              <td style="font-size:12px;color:var(--text2);padding:6px 8px;border-bottom:1px solid var(--border);">${pactoConceptos.find(p=>p.id===1)?.concepto||'Aux. alimentación'} <span style="font-size:10px;color:var(--text3);">(fijo quincena)</span></td>
+              <td style="font-size:12px;color:var(--text2);padding:6px 8px;border-bottom:1px solid var(--border);">${pactoConceptos.find(p=>p.id===1)?.concepto||'Aux. alimentación'} <span style="font-size:11px;color:var(--text3);">(fijo quincena)</span></td>
               <td style="font-size:12px;text-align:center;padding:6px;border-bottom:1px solid var(--border);font-weight:500;">1</td>
               <td style="font-size:11px;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text3);">${fmt(getPactoVal(1))}</td>
               <td style="font-size:12px;font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--success);">${fmt(getPactoVal(1))}</td>
@@ -2749,7 +2978,59 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
   </div>`;
 }
 
+// ===== TARIFAS VIGENTES (una sola vez, bajo el título de Liquidación) =====
+function renderTarifasVigentes() {
+  const el = document.getElementById('tarifasVigentes');
+  if (!el) return;
+  const _v = params.salario/(params.dias*params.horas_dia);
+  const _tarifas = [
+    {label:'Ord. diurna (6am–7pm)',   f:1},
+    {label:'Ord. nocturna (7pm–6am)', f:1+params.rn/100},
+    {label:'Dom./fest. diurno',       f:1+params.rdd/100},
+    {label:'Dom./fest. nocturno',     f:1+(params.rdd+params.rn)/100},
+    {label:'Extra diurna',            f:1+params.hed/100},
+    {label:'Extra nocturna',          f:1+params.hen/100},
+    {label:'Extra dom./fest. diurna', f:1+params.hedd/100},
+    {label:'Extra dom./fest. noct.',  f:1+params.hedn/100},
+  ];
+  const cols = ['var(--accent)','var(--purple)','var(--danger)','var(--danger-strong)','var(--success)','var(--warning)','var(--accent-strong)','var(--purple-strong)'];
+  const fmtV = n => '$'+Math.round(n).toLocaleString('es-CO');
+  el.innerHTML = `
+    <div class="tarifas-box">
+      <div class="tarifas-head">
+        <span class="tarifas-title">Tarifas vigentes — Ley 2466/2025 · SMLMV 2026</span>
+        <span class="tarifas-base">VH base: <b>${fmtV(_v)}/h</b> · ${Math.round(params.salario).toLocaleString('es-CO')} ÷ ${params.dias*params.horas_dia}h</span>
+      </div>
+      <div class="tarifas-grid">
+        ${_tarifas.map((t,i)=>`
+        <div class="tarifa-card">
+          <span class="tarifa-label">${esc(t.label)}</span>
+          <div class="tarifa-row">
+            <span class="tarifa-factor" style="color:${cols[i]};">×${t.f.toFixed(2)}</span>
+            <span class="tarifa-val">${fmtV(_v*t.f)}</span>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ===== Resumen de horas del mes: mostrar / ocultar =====
+function aplicarResumenOculto() {
+  let oculto = false;
+  try { oculto = localStorage.getItem('mfp_resumen_oculto') === '1'; } catch(e) {}
+  document.getElementById('horasResumen')?.classList.toggle('is-collapsed', oculto);
+  const b = document.getElementById('btnResumenToggle');
+  if (b) { b.textContent = oculto ? 'Mostrar' : 'Ocultar'; b.setAttribute('aria-expanded', String(!oculto)); }
+}
+function toggleResumenMes() {
+  let oculto = false;
+  try { oculto = localStorage.getItem('mfp_resumen_oculto') === '1'; localStorage.setItem('mfp_resumen_oculto', oculto ? '0' : '1'); } catch(e) {}
+  aplicarResumenOculto();
+}
+
 function renderNomina() {
+  renderTarifasVigentes();
+  aplicarResumenOculto();
   const mt = getMonthTurnos();
   const nominaBody = document.getElementById('nominaBody');
   const horasRes = document.getElementById('horasResumen');
@@ -2938,11 +3219,11 @@ function renderTablaValores() {
     return `<tr style="${bg}">
       <td style="padding:9px 18px;border-bottom:1px solid var(--border);">
         <div style="font-size:13px;font-weight:600;color:${col};">${c.label}</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:2px;">${c.turnos}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;">${c.turnos}</div>
       </td>
       <td style="padding:9px 14px;border-bottom:1px solid var(--border);text-align:center;">
         <div style="font-size:12px;font-weight:700;color:${col};">${c.comp}</div>
-        <div style="font-size:10px;color:var(--text3);margin-top:2px;">${c.ref}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px;">${c.ref}</div>
       </td>
       <td style="font-size:15px;font-weight:800;text-align:right;padding:9px 18px;border-bottom:1px solid var(--border);color:${col};">
         $${Math.round(valor).toLocaleString('es-CO')}
@@ -2952,11 +3233,11 @@ function renderTablaValores() {
     <tr style="background:var(--warning-bg);border-top:2px solid var(--border);">
       <td colspan="2" style="padding:10px 18px;">
         <div style="font-size:11px;font-weight:700;color:var(--warning);">⚠ Gradualidad recargo dom./festivo — Ley 2466/2025 Art. 14</div>
-        <div style="font-size:10px;color:var(--text2);margin-top:3px;">
+        <div style="font-size:11px;color:var(--text2);margin-top:3px;">
           Hasta jun-2025: 75% · jul-2025–jun-2026: 80% · <b>jul-2026–jun-2027: 90% (vigente)</b> · Desde jul-2027: 100%
         </div>
       </td>
-      <td style="padding:10px 18px;text-align:right;font-size:10px;color:var(--text3);">
+      <td style="padding:10px 18px;text-align:right;font-size:11px;color:var(--text3);">
         Jornada nocturna: 19:00–06:00<br>Ley 2466/2025 Art. 10
       </td>
     </tr>
@@ -2974,7 +3255,7 @@ function renderPacto() {
   tbody.innerHTML = pactoConceptos.map(c => `
     <tr id="pacto-row-${c.id}">
       <td style="padding:8px 18px;border-bottom:1px solid var(--border);">
-        <input type="text" value="${c.concepto}"
+        <input type="text" value="${esc(c.concepto)}"
           style="width:100%;border:none;border-bottom:1px solid transparent;background:transparent;font-size:13px;color:var(--text);font-family:inherit;padding:2px 0;outline:none;transition:border-color 0.15s;"
           onchange="updatePacto(${c.id},'concepto',this.value)"
           onfocus="this.style.borderBottomColor='var(--accent)'"
@@ -2998,9 +3279,8 @@ function renderPacto() {
 
 function updatePacto(id, field, value) {
   const c = pactoConceptos.find(c => c.id === id);
-  if (c) c[field] = value;
-  // re-renderizar solo el total
-  renderPacto();
+  if (c) c[field] = (field === 'valor' && !isFinite(value)) ? 0 : value;
+  // No se re-renderiza: se perdería el foco del campo que se está editando
 }
 
 function addPactoRow() {
@@ -3013,11 +3293,12 @@ function deletePactoRow(id) {
   renderPacto();
 }
 
-function savePacto() {
+function savePacto(ev) {
   localStorage.setItem('pacto_col', JSON.stringify(pactoConceptos));
   renderNomina();
   // feedback visual breve
-  const btn = event.target;
+  const btn = ev && (ev.currentTarget || ev.target);
+  if (!btn) return;
   const orig = btn.textContent;
   btn.textContent = '✓ Guardado';
   btn.style.background = 'var(--success)';
@@ -3074,27 +3355,15 @@ function renderTurnosTiposTable() {
   if (!tbody) return;
   const entries = Object.entries(TURNOS);
   if (!entries.length) {
-    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:24px;color:var(--text3);font-size:13px;">Sin turnos configurados</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:24px;color:var(--text3);font-size:13px;">Sin turnos configurados</td></tr>`;
     return;
   }
   const fmt = h => `${String(h).padStart(2,'0')}:00`;
-  // Etiquetas cortas para los conceptos de pacto (id→texto)
-  const LABELS_PACTO = { 2:'Cena', 3:'Almuerzo', 4:'Transp.' };
   tbody.innerHTML = entries.map(([k, v]) => {
-    const col    = COLORES_TURNO.find(c => c.id === v.color) || COLORES_TURNO[0];
+    const col = COLORES_TURNO.find(c => c.id === v.color) || COLORES_TURNO[0];
     const esBase = !!TURNOS_DEFAULT[k];
-    const aux    = v.auxilios || [];
-    // Chips de auxilios asignados al turno
-    const auxHtml = aux.length
-      ? aux.map(id => {
-          const nombre = pactoConceptos.find(p => p.id === id)?.concepto
-                         || LABELS_PACTO[id] || `Concepto ${id}`;
-          const nombreCorto = LABELS_PACTO[id] || nombre.split(' ').slice(-1)[0];
-          return `<span style="display:inline-block;padding:1px 6px;border-radius:10px;font-size:10px;font-weight:600;background:var(--success-bg);color:var(--success);margin-right:3px;">${nombreCorto}</span>`;
-        }).join('')
-      : `<span style="font-size:11px;color:var(--text3);">—</span>`;
     return `<tr style="border-bottom:1px solid var(--border);">
-      <td style="padding:9px 14px;font-size:13px;color:var(--text);">${v.label}</td>
+      <td style="padding:9px 14px;font-size:13px;color:var(--text);">${esc(v.label)}</td>
       <td style="padding:9px 8px;text-align:center;">
         <span style="display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;background:${col.bg};color:${col.tx};">${v.cod||k}</span>
       </td>
@@ -3102,7 +3371,6 @@ function renderTurnosTiposTable() {
       <td style="padding:9px 8px;text-align:center;font-size:12px;color:var(--text2);">${fmt(v.inicio)}</td>
       <td style="padding:9px 8px;text-align:center;font-size:12px;color:var(--text2);">${fmt(v.fin)}</td>
       <td style="padding:9px 8px;text-align:center;font-size:11px;color:${v.descanso?'var(--text3)':'var(--text2)'};">${v.descanso?'Descanso':'Trabajo'}</td>
-      <td style="padding:9px 8px;">${auxHtml}</td>
       <td style="padding:9px 8px;text-align:right;">
         <div style="display:flex;gap:6px;justify-content:flex-end;">
           <button onclick="openTurnoTipoModal('${k}')" title="Editar"
@@ -3140,13 +3408,13 @@ function openTurnoTipoModal(key) {
       <div style="display:flex;flex-direction:column;gap:12px;">
         <div>
           <label style="font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;">Nombre</label>
-          <input id="tt_label" type="text" placeholder="Ej: Nocturno 8h" value="${v.label}"
+          <input id="tt_label" type="text" placeholder="Ej: Nocturno 8h" value="${esc(v.label)}"
             style="width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--text);box-sizing:border-box;">
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
           <div>
             <label style="font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;">Código (calendar)</label>
-            <input id="tt_cod" type="text" maxlength="4" placeholder="Ej: NOC" value="${v.cod||''}"
+            <input id="tt_cod" type="text" maxlength="4" placeholder="Ej: NOC" value="${esc(v.cod||'')}"
               style="width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--text);box-sizing:border-box;text-transform:uppercase;">
           </div>
           <div>
@@ -3181,7 +3449,7 @@ function openTurnoTipoModal(key) {
           <label style="font-size:11px;color:var(--text3);font-weight:600;text-transform:uppercase;">Clave interna</label>
           <input id="tt_key" type="text" maxlength="6" placeholder="Ej: NOC8" value=""
             style="width:100%;margin-top:4px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;background:var(--surface);color:var(--text);box-sizing:border-box;text-transform:uppercase;">
-          <div style="font-size:10px;color:var(--text3);margin-top:3px;">Identificador único (sin espacios)</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:3px;">Identificador único (sin espacios)</div>
         </div>`:''}
         <div id="tt_error" style="color:var(--danger);font-size:12px;display:none;"></div>
         <div style="display:flex;gap:8px;margin-top:4px;">
@@ -3365,13 +3633,13 @@ function renderFestivos() {
     return `<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);">
       <div style="width:36px;height:36px;border-radius:8px;background:var(--danger-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;">
         <span style="font-size:15px;font-weight:800;color:var(--danger);line-height:1;">${d.getDate()}</span>
-        <span style="font-size:9px;font-weight:600;color:var(--danger);text-transform:uppercase;">${dow}</span>
+        <span style="font-size:10px;font-weight:600;color:var(--danger);text-transform:uppercase;">${dow}</span>
       </div>
       <div style="flex:1;min-width:0;">
         <div style="font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${nombre}</div>
         <div style="font-size:11px;color:var(--text3);text-transform:capitalize;">${fecha}</div>
       </div>
-      <span style="font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap;flex-shrink:0;${isFixed?'background:#FEE2E2;color:#B91C1C;':'background:#FEF3C7;color:#92400E;'}">${isFixed?'Fijo':'Traslado'}</span>
+      <span style="font-size:11px;padding:2px 6px;border-radius:4px;font-weight:600;white-space:nowrap;flex-shrink:0;${isFixed?'background:var(--danger-soft);color:var(--danger-strong);':'background:var(--warning-soft);color:var(--warning-strong);'}">${isFixed?'Fijo':'Traslado'}</span>
     </div>`;
   }).join('');
 }
@@ -3387,6 +3655,15 @@ function toggleDrawer() {
   drawer.classList.toggle('open', !isOpen);
   overlay.classList.toggle('open', !isOpen);
   btn.classList.toggle('open', !isOpen);
+}
+// Mapa vista → pestaña de la barra inferior
+const TAB_GROUP = { calendario:'calendario', tabla:'calendario', nomina:'calendario', historial:'calendario', parametros:'calendario', gastos:'gastos', inversiones:'inversiones' };
+function syncShell(tab) {
+  tab = tab || document.querySelector('.view.active')?.id.replace('view-','') || 'home';
+  const visible = sesionActiva && tab !== 'home';
+  document.body.classList.toggle('has-tabbar', !!visible);
+  const grp = TAB_GROUP[tab] || 'mas';
+  document.querySelectorAll('#tabbar .tab-item').forEach(b => b.classList.toggle('active', b.dataset.tab === grp));
 }
 function closeDrawer() {
   document.getElementById('drawer').classList.remove('open');
@@ -3426,6 +3703,7 @@ function switchTab(tab) {
   } else {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
+  syncShell(tab);
   if (tab === 'parametros') loadParamsAndPacto();
   if (tab === 'home') { homeYear = currentYear; homeMonth = currentMonth; renderHomeMini(); }
   if (tab === 'gastos') { gastosYear = new Date().getFullYear(); gastosMonth = new Date().getMonth(); renderGastos(); }
@@ -3607,7 +3885,7 @@ function renderHomeMini() {
     const badge = t ? `<span class="mini-badge badge-${TURNOS[t].color}">${t==='T12'?'12D':t==='N12'?'12N':t==='DSC'?'X':t}</span>` : '';
 
     // Puntos de asistencia registrada
-    const regsDay = sesionActiva ? getRegistros().filter(r => r.fecha && r.fecha.startsWith(key)) : [];
+    const regsDay = sesionActiva ? getRegistros().filter(r => r.fecha && localKey(r.fecha) === key) : [];
     const tieneIng = regsDay.some(r => r.tipo === 'ingreso');
     const tieneSal = regsDay.some(r => r.tipo === 'salida');
     const dots = (tieneIng || tieneSal)
@@ -3628,7 +3906,7 @@ function renderHomeMini() {
   // Leyenda dinámica desde TURNOS
   legend.innerHTML = Object.entries(TURNOS).map(([k, v]) =>
     `<div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--text2);">
-      <span class="mini-badge badge-${v.color}" style="font-size:10px;padding:2px 5px;">${v.cod||k.slice(0,4)}</span>${v.label.split(' ').slice(0,2).join(' ')}
+      <span class="mini-badge badge-${v.color}" style="font-size:11px;padding:2px 5px;">${esc(v.cod||k.slice(0,4))}</span>${esc(v.label.split(' ').slice(0,2).join(' '))}
     </div>`
   ).join('');
 }
@@ -3659,6 +3937,9 @@ function aplicarTema() {
   const label = document.getElementById('modoLabel');
   if (icon)  icon.textContent  = modoOscuro ? '☀️' : '🌙';
   if (label) label.textContent = modoOscuro ? 'Modo claro' : 'Modo oscuro';
+  const dl = document.getElementById('drawerModoLabel');
+  if (dl) dl.textContent = modoOscuro ? 'Modo claro' : 'Modo oscuro';
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', modoOscuro ? '#0F1117' : '#2563EB');
 }
 function toggleModoVista() {
   modoOscuro = !modoOscuro;
@@ -3716,7 +3997,7 @@ function abrirSincModal() {
       <div style="font-size:12px;color:var(--text3);margin-bottom:20px;">Exporta para hacer backup o importa para sincronizar con otro dispositivo.</div>
       <div style="display:flex;flex-direction:column;gap:10px;">
         <button onclick="document.getElementById('sincModal').remove();exportarDatos()"
-          style="width:100%;padding:13px;border-radius:10px;border:1px solid #BBF7D0;background:#F0FDF4;color:var(--success);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">
+          style="width:100%;padding:13px;border-radius:10px;border:1px solid var(--success-border);background:var(--success-bg);color:var(--success);font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">
           ⬇ Exportar datos (backup)
         </button>
         <button onclick="document.getElementById('sincModal').remove();document.getElementById('importFileInputGlobal').value='';document.getElementById('importFileInputGlobal').click()"
@@ -3787,8 +4068,8 @@ function renderPerfilForm(u) {
         { id:'pf-confirm',   label:'Confirmar contraseña', val: '',          type:'password' },
       ].map(f => `
         <div ${f.id === 'pf-direccion' ? 'style="grid-column:span 2"' : ''}>
-          <label style="font-size:10px;font-weight:600;color:var(--text3);display:block;margin-bottom:3px;">${f.label}</label>
-          <input type="${f.type}" id="${f.id}" value="${f.val}" placeholder="${f.id.includes('password')||f.id.includes('confirm') ? '••••••' : ''}"
+          <label style="font-size:11px;font-weight:600;color:var(--text3);display:block;margin-bottom:3px;">${f.label}</label>
+          <input type="${f.type}" id="${f.id}" value="${esc(f.val)}" placeholder="${f.id.includes('password')||f.id.includes('confirm') ? '••••••' : ''}"
             style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;"
             onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
         </div>`).join('')}
@@ -3805,8 +4086,8 @@ function renderListaUsuarios() {
     <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:6px;background:var(--surface2);">
       <div style="width:34px;height:34px;border-radius:50%;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent);font-size:14px;">${(u.nombre||'?')[0].toUpperCase()}</div>
       <div style="flex:1;min-width:0;">
-        <div style="font-size:13px;font-weight:600;color:var(--text);">${u.nombre}</div>
-        <div style="font-size:11px;color:var(--text3);">@${u.usuario} · ${u.rol === 'admin' ? '⭐ Admin' : 'Usuario'}</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);">${esc(u.nombre)}</div>
+        <div style="font-size:11px;color:var(--text3);">@${esc(u.usuario)} · ${u.rol === 'admin' ? '⭐ Admin' : 'Usuario'}</div>
       </div>
       <div style="display:flex;gap:5px;">
         <button onclick="editarUsuario(${u.id})" style="padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer;font-size:11px;color:var(--text2);">✏</button>
@@ -3901,6 +4182,7 @@ function setSession(activa) {
   if (mh) mh.style.display = (activa && !enHome) ? '' : 'none';
   if (hb) hb.style.display  = (activa && !enHome) ? '' : 'none';
 
+  syncShell();
   // Menú 3 puntos: solo habilitado con sesión activa
   const dotsBtn = document.querySelector('.dots-btn');
   if (dotsBtn) {
@@ -3918,8 +4200,7 @@ function setSession(activa) {
     // Habilitar los tres botones
     ['dock-nomina','dock-gastos','dock-inversiones'].forEach(id => {
       const btn = document.getElementById(id);
-      btn.style.opacity = '1';
-      btn.style.cursor  = 'pointer';
+      btn.classList.remove('is-locked');
     });
     const adminAsiBtn = document.getElementById('ditem-admin-asistencia');
     if (adminAsiBtn) adminAsiBtn.style.display = '';
@@ -3930,8 +4211,7 @@ function setSession(activa) {
     // Deshabilitar los tres botones
     ['dock-nomina','dock-gastos','dock-inversiones'].forEach(id => {
       const btn = document.getElementById(id);
-      btn.style.opacity = '0.35';
-      btn.style.cursor  = 'not-allowed';
+      btn.classList.add('is-locked');
     });
     const adminAsiBtn2 = document.getElementById('ditem-admin-asistencia');
     if (adminAsiBtn2) adminAsiBtn2.style.display = 'none';
@@ -3939,7 +4219,7 @@ function setSession(activa) {
 }
 
 function requireLogin(destino) {
-  if (!sesionActiva) { setSession(false); return; }
+  if (!sesionActiva) { showLoginModal(); return; }
   if (destino) switchTab(destino);
 }
 
@@ -3981,7 +4261,6 @@ function showLoginModal() {
 }
 
 function checkPin() {
-  // Usar la contraseña del usuario admin si existe
   // Acepta la clave de cualquier usuario registrado (admin o no)
   const val = document.getElementById('pinInput')?.value;
   const coincide = val ? usuarios.find(u => (u.password || PIN) === val) : null;
@@ -4105,13 +4384,13 @@ function renderIngresosTable(mes) {
         onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
     </td>
     <td style="padding:6px 12px;border-bottom:1px solid var(--border);">
-      <input type="text" value="${r.concepto||''}" onchange="updateGasto('ingreso',${i},'concepto',this.value)"
+      <input type="text" value="${esc(r.concepto||'')}" onchange="updateGasto('ingreso',${i},'concepto',this.value)"
         style="width:100%;border:none;border-bottom:1px solid transparent;background:transparent;font-size:12px;color:var(--text);font-family:inherit;outline:none;"
         onfocus="this.style.borderBottomColor='var(--accent)'" onblur="this.style.borderBottomColor='transparent'">
     </td>
     <td style="padding:6px;border-bottom:1px solid var(--border);text-align:center;">
       <select onchange="updateGasto('ingreso',${i},'tipo',this.value)"
-        style="border:1px solid var(--border);border-radius:5px;font-size:10px;padding:2px 3px;background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;max-width:72px;">
+        style="border:1px solid var(--border);border-radius:5px;font-size:11px;padding:2px 3px;background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;max-width:72px;">
         ${TIPOS_INGRESO.map(t=>`<option ${r.tipo===t?'selected':''}>${t}</option>`).join('')}
       </select>
     </td>
@@ -4154,19 +4433,19 @@ function renderEgresosTable(mes) {
           onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
       </td>
       <td style="padding:6px 12px;border-bottom:1px solid var(--border);">
-        <input type="text" value="${r.concepto||''}" onchange="updateGasto('egreso',${i},'concepto',this.value)"
+        <input type="text" value="${esc(r.concepto||'')}" onchange="updateGasto('egreso',${i},'concepto',this.value)"
           style="width:100%;border:none;border-bottom:1px solid transparent;background:transparent;font-size:12px;color:var(--text);font-family:inherit;outline:none;"
           onfocus="this.style.borderBottomColor='var(--accent)'" onblur="this.style.borderBottomColor='transparent'">
       </td>
       <td style="padding:6px;border-bottom:1px solid var(--border);text-align:center;">
         <select onchange="updateGasto('egreso',${i},'categoria',this.value)"
-          style="border:1px solid var(--border);border-radius:5px;font-size:10px;padding:2px 3px;background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;max-width:82px;">
+          style="border:1px solid var(--border);border-radius:5px;font-size:11px;padding:2px 3px;background:var(--surface);color:var(--text);font-family:inherit;cursor:pointer;max-width:82px;">
           ${CATEGORIAS_GASTO.map(c=>`<option ${r.categoria===c?'selected':''}>${c}</option>`).join('')}
         </select>
       </td>
       <td style="padding:6px;border-bottom:1px solid var(--border);text-align:center;">
         <select onchange="updateGasto('egreso',${i},'medio',this.value)"
-          style="border:1px solid var(--border);border-radius:5px;font-size:10px;padding:2px 3px;background:var(--surface);color:${mColor};font-family:inherit;cursor:pointer;font-weight:600;max-width:88px;">
+          style="border:1px solid var(--border);border-radius:5px;font-size:11px;padding:2px 3px;background:var(--surface);color:${mColor};font-family:inherit;cursor:pointer;font-weight:600;max-width:88px;">
           ${MEDIOS_PAGO.map(m=>`<option ${medio===m?'selected':''}>${m}</option>`).join('')}
         </select>
       </td>
@@ -4264,7 +4543,7 @@ function renderTCPanel(mes, tc) {
       ? new Date(m.fecha + 'T12:00:00').toLocaleDateString('es-CO', { day:'2-digit', month:'short', year:'2-digit' })
       : '—';
     return `<tr>
-      <td style="padding:7px 14px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">${m.concepto || '—'}</td>
+      <td style="padding:7px 14px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">${esc(m.concepto) || '—'}</td>
       <td style="padding:7px 8px;border-bottom:1px solid var(--border);font-size:11px;color:var(--text3);white-space:nowrap;">${fechaFmt}</td>
       <td style="padding:7px 8px;border-bottom:1px solid var(--border);text-align:center;">
         <span style="font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;
@@ -4396,13 +4675,13 @@ function abrirFormGasto(tipo) {
           <div style="flex:1;">
             <label style="font-size:12px;font-weight:600;color:var(--purple);display:block;margin-bottom:5px;">Cuotas</label>
             <input type="number" id="fg-cuotas" value="1" min="1" max="60"
-              style="width:100%;padding:10px 12px;border:1.5px solid #DDD6FE;border-radius:10px;font-size:14px;font-family:inherit;background:var(--surface);color:var(--purple);text-align:center;outline:none;"
+              style="width:100%;padding:10px 12px;border:1.5px solid var(--purple-border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--surface);color:var(--purple);text-align:center;outline:none;"
               onfocus="this.style.borderColor='var(--purple)'" onblur="this.style.borderColor='#DDD6FE'">
           </div>
           <div style="flex:1;">
             <label style="font-size:12px;font-weight:600;color:var(--purple);display:block;margin-bottom:5px;">Tasa mensual (%)</label>
             <input type="number" id="fg-tasa" value="0" min="0" max="100" step="0.1"
-              style="width:100%;padding:10px 12px;border:1.5px solid #DDD6FE;border-radius:10px;font-size:14px;font-family:inherit;background:var(--surface);color:var(--purple);text-align:center;outline:none;"
+              style="width:100%;padding:10px 12px;border:1.5px solid var(--purple-border);border-radius:10px;font-size:14px;font-family:inherit;background:var(--surface);color:var(--purple);text-align:center;outline:none;"
               onfocus="this.style.borderColor='var(--purple)'" onblur="this.style.borderColor='#DDD6FE'">
           </div>
         </div>`}
@@ -4502,7 +4781,7 @@ function showTCConfig() {
       <div style="font-size:12px;color:var(--text3);margin-bottom:18px;">Solo ingresa el cupo y el saldo actual. Los movimientos se gestionan desde Egresos.</div>
       <div class="param-row">
         <span class="param-label">Nombre de la tarjeta</span>
-        <input id="tcNombre" type="text" value="${tcConfig.nombre}"
+        <input id="tcNombre" type="text" value="${esc(tcConfig.nombre)}"
           style="width:150px;border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;outline:none;"
           onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
       </div>
@@ -4513,7 +4792,7 @@ function showTCConfig() {
           onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
       </div>
       <div class="param-row" style="border-bottom:none;">
-        <span class="param-label">Saldo inicial ($) <span style="font-size:10px;color:var(--text3);">Deuda actual antes de usar esta app</span></span>
+        <span class="param-label">Saldo inicial ($) <span style="font-size:11px;color:var(--text3);">Deuda actual antes de usar esta app</span></span>
         <input id="tcSaldoInicial" type="number" value="${tcConfig.saldoInicial||0}"
           style="width:150px;border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;text-align:right;outline:none;"
           onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
@@ -4798,7 +5077,7 @@ function renderPortafolio() {
       <td style="padding:8px 14px;border-bottom:1px solid var(--border);">
         <span style="font-size:11px;padding:2px 7px;border-radius:8px;font-weight:700;background:${col}18;color:${col};border:1px solid ${col}30;">${inv.tipo||'—'}</span>
       </td>
-      <td style="padding:8px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">${inv.entidad||'—'}</td>
+      <td style="padding:8px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">${esc(inv.entidad)||'—'}</td>
       <td style="padding:8px 12px;border-bottom:1px solid var(--border);text-align:right;font-size:12px;font-weight:700;">${fmt(inv.capital||0)}</td>
       <td style="padding:8px;border-bottom:1px solid var(--border);text-align:center;font-size:12px;color:var(--purple);font-weight:600;">${inv.tasa ? (inv.tasa < 1 ? (inv.tasa*100).toFixed(2) : inv.tasa.toFixed(2))+'%' : '—'}</td>
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;font-size:12px;color:var(--success);font-weight:600;">${fmt(Math.round(r.bruto))}</td>
@@ -4806,7 +5085,7 @@ function renderPortafolio() {
       <td style="padding:8px;border-bottom:1px solid var(--border);text-align:center;font-size:11px;color:var(--text3);">${fmtFecha(inv.fechaInicio)}</td>
       <td style="padding:8px;border-bottom:1px solid var(--border);text-align:center;font-size:11px;color:var(--text3);">${fmtFecha(inv.fechaVence)}</td>
       <td style="padding:8px;border-bottom:1px solid var(--border);text-align:center;">
-        <span style="font-size:10px;padding:2px 7px;border-radius:8px;font-weight:700;color:${alertaColor};background:${alertaColor}18;">${alertaLabel}</span>
+        <span style="font-size:11px;padding:2px 7px;border-radius:8px;font-weight:700;color:${alertaColor};background:${alertaColor}18;">${alertaLabel}</span>
       </td>
       <td style="padding:8px 6px;border-bottom:1px solid var(--border);text-align:center;">
         <button onclick="abrirFormInversion(${inv.id})" style="width:22px;height:22px;border-radius:4px;border:1px solid var(--border);background:none;cursor:pointer;font-size:12px;color:var(--accent);">✏</button>
@@ -4818,7 +5097,7 @@ function renderPortafolio() {
   const divFilt = lista.reduce((s,i)=>s+calcRendimientoCDT(i).bruto,0);
   tfoot.innerHTML = `<tr style="background:var(--surface2);">
     <td colspan="2" style="padding:8px 14px;font-size:11px;font-weight:700;color:var(--text2);">Total (${lista.length} item${lista.length!==1?'s':''})</td>
-    <td style="padding:8px 12px;text-align:right;font-size:12px;font-weight:800;color:#B45309;">${fmt(capFilt)}</td>
+    <td style="padding:8px 12px;text-align:right;font-size:12px;font-weight:800;color:var(--warning-strong);">${fmt(capFilt)}</td>
     <td></td>
     <td style="padding:8px 10px;text-align:right;font-size:12px;font-weight:800;color:var(--success);">${fmt(Math.round(divFilt))}</td>
     <td colspan="5"></td>
@@ -4849,7 +5128,7 @@ function calcSimulador() {
 function renderTasas() {
   const filtro = document.getElementById('tasas-filtro-plazo')?.value || '';
   const lista  = filtro ? tasasData.filter(t=>String(t.plazo)===filtro) : tasasData;
-  const valor  = +(document.getElementById('sim-valor')?.value) || 5000000;
+  const valor  = moneyVal(document.getElementById('sim-valor')) || 5000000;
   const tbody  = document.getElementById('tasasBody');
   if (!tbody) return;
 
@@ -4862,8 +5141,8 @@ function renderTasas() {
     const neto   = bruto - ret;
     const total  = valor + neto;
     return `<tr>
-      <td style="padding:7px 8px;border-bottom:1px solid var(--border);text-align:center;font-size:12px;font-weight:700;color:${i===0?'#B45309':'var(--text3)'};">${i+1}</td>
-      <td style="padding:7px 14px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text);">${t.entidad}</td>
+      <td style="padding:7px 8px;border-bottom:1px solid var(--border);text-align:center;font-size:12px;font-weight:700;color:${i===0?'var(--warning-strong)':'var(--text3)'};">${i+1}</td>
+      <td style="padding:7px 14px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--text);">${esc(t.entidad)}</td>
       <td style="padding:7px 8px;border-bottom:1px solid var(--border);text-align:center;font-size:12px;color:var(--text2);">${t.plazo} días</td>
       <td style="padding:7px 8px;border-bottom:1px solid var(--border);text-align:center;font-size:13px;font-weight:800;color:var(--success);">${(t.tasa*100).toFixed(2)}%</td>
       <td style="padding:7px 10px;border-bottom:1px solid var(--border);text-align:right;font-size:12px;color:var(--text2);">${fmt(t.minimo||0)}</td>
@@ -4938,7 +5217,7 @@ function renderDivisas() {
       </td>
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;font-size:12px;font-weight:700;color:var(--text);">${fmt(Math.round(valorActual))}</td>
       <td style="padding:8px 8px;border-bottom:1px solid var(--border);text-align:center;">
-        <span style="font-size:10px;padding:2px 6px;border-radius:8px;font-weight:700;color:${varColor};background:${varColor}15;">${variacion}</span>
+        <span style="font-size:11px;padding:2px 6px;border-radius:8px;font-weight:700;color:${varColor};background:${varColor}15;">${variacion}</span>
       </td>
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);text-align:right;font-size:12px;font-weight:700;color:${gl>=0?'var(--success)':'var(--danger)'};">${gl>=0?'+':''}${fmt(Math.round(gl))}</td>
       <td style="padding:8px 6px;border-bottom:1px solid var(--border);text-align:center;">
@@ -4973,7 +5252,7 @@ function abrirFormInversion(id) {
   modal.innerHTML = `
     <div style="background:var(--surface);border-radius:16px 16px 0 0;padding:24px 20px 32px;width:100%;max-width:560px;box-shadow:var(--shadow-md);animation:slideUp .25s ease;max-height:90vh;overflow-y:auto;">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
-        <div style="font-size:17px;font-weight:700;color:#B45309;">${esE?'✏ Editar':'📈 Nueva'} inversión</div>
+        <div style="font-size:17px;font-weight:700;color:var(--warning-strong);">${esE?'✏ Editar':'📈 Nueva'} inversión</div>
         <button onclick="document.getElementById('invModal').remove()" style="width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:none;cursor:pointer;font-size:16px;">✕</button>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -4985,7 +5264,7 @@ function abrirFormInversion(id) {
         </div>
         <div>
           <label style="font-size:11px;font-weight:600;color:var(--text2);display:block;margin-bottom:3px;">Entidad</label>
-          <input type="text" id="if-entidad" value="${inv?.entidad||''}" placeholder="Ej: BAN100, BOLD..."
+          <input type="text" id="if-entidad" value="${esc(inv?.entidad||'')}" placeholder="Ej: BAN100, BOLD..."
             style="width:100%;padding:9px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;background:var(--surface);color:var(--text);outline:none;"
             onfocus="this.style.borderColor='#B45309'" onblur="this.style.borderColor='var(--border)'">
         </div>
@@ -5039,7 +5318,7 @@ function abrirFormInversion(id) {
       <div style="display:flex;gap:8px;margin-top:16px;">
         ${esE?`<button onclick="borrarInversion(${id})" style="padding:12px 16px;border-radius:12px;border:1px solid var(--danger);background:var(--danger-bg);color:var(--danger);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Eliminar</button>`:''}
         <button onclick="guardarInversion(${id||'null'})"
-          style="flex:1;padding:13px;border-radius:12px;border:none;background:#B45309;color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">
+          style="flex:1;padding:13px;border-radius:12px;border:none;background:var(--warning-strong);color:white;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;">
           ${esE?'Guardar cambios':'Agregar'}
         </button>
       </div>
@@ -5152,7 +5431,7 @@ function renderTDPanel(mes, mesKey) {
       ? new Date(m.fecha + 'T12:00:00').toLocaleDateString('es-CO', { day:'2-digit', month:'short', year:'2-digit' })
       : '—';
     return `<tr>
-      <td style="padding:7px 14px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">${m.concepto || '—'}</td>
+      <td style="padding:7px 14px;border-bottom:1px solid var(--border);font-size:12px;color:var(--text2);">${esc(m.concepto) || '—'}</td>
       <td style="padding:7px 8px;border-bottom:1px solid var(--border);font-size:11px;color:var(--text3);white-space:nowrap;">${fechaFmt}</td>
       <td style="padding:7px 8px;border-bottom:1px solid var(--border);text-align:center;">
         <span style="font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;
@@ -5224,8 +5503,8 @@ function mostrarTrazabilidadTD() {
         : '—';
       rows.push(`
         <tr style="border-bottom:1px solid var(--border);">
-          <td style="padding:6px 14px 6px 20px;font-size:11px;color:var(--text);max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${v.concepto}">
-            <span style="color:var(--text3);margin-right:4px;">${esIng ? '📥' : '💳'}</span>${v.concepto}
+          <td style="padding:6px 14px 6px 20px;font-size:11px;color:var(--text);max-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(v.concepto)}">
+            <span style="color:var(--text3);margin-right:4px;">${esIng ? '📥' : '💳'}</span>${esc(v.concepto)}
           </td>
           <td style="padding:6px 6px;font-size:11px;color:var(--text3);white-space:nowrap;text-align:center;width:60px;">${fechaFmt}</td>
           <td style="padding:6px 8px;font-size:12px;font-weight:700;text-align:right;white-space:nowrap;
@@ -5239,7 +5518,7 @@ function mostrarTrazabilidadTD() {
     // Subtotal del mes
     rows.push(`
       <tr style="background:var(--surface2);">
-        <td style="padding:5px 14px 5px 20px;font-size:10px;font-weight:600;color:var(--text3);">Subtotal ${label}</td>
+        <td style="padding:5px 14px 5px 20px;font-size:11px;font-weight:600;color:var(--text3);">Subtotal ${label}</td>
         <td style="padding:5px 6px;font-size:11px;font-weight:700;color:var(--text3);text-align:center;">—</td>
         <td style="padding:5px 8px;font-size:11px;font-weight:700;text-align:right;line-height:1.4;">
           <div style="color:var(--success);">${mesIng>0?'+'+fmt(mesIng):'$0'}</div>
@@ -5280,10 +5559,10 @@ function mostrarTrazabilidadTD() {
           </colgroup>
           <thead style="position:sticky;top:0;z-index:1;">
             <tr style="background:var(--surface2);border-bottom:2px solid var(--border);">
-              <th style="padding:8px 14px;font-size:10px;font-weight:600;color:var(--text3);text-align:left;">Concepto</th>
-              <th style="padding:8px 6px;font-size:10px;font-weight:600;color:var(--text3);text-align:center;">Fecha</th>
-              <th style="padding:8px 8px;font-size:10px;font-weight:600;color:var(--accent);text-align:right;">Entrada/Salida</th>
-              <th style="padding:8px 10px;font-size:10px;font-weight:600;color:var(--accent);text-align:right;">Saldo acum.</th>
+              <th style="padding:8px 14px;font-size:11px;font-weight:600;color:var(--text3);text-align:left;">Concepto</th>
+              <th style="padding:8px 6px;font-size:11px;font-weight:600;color:var(--text3);text-align:center;">Fecha</th>
+              <th style="padding:8px 8px;font-size:11px;font-weight:600;color:var(--accent);text-align:right;">Entrada/Salida</th>
+              <th style="padding:8px 10px;font-size:11px;font-weight:600;color:var(--accent);text-align:right;">Saldo acum.</th>
             </tr>
           </thead>
           <tbody>${filas.join('') || sinMovimientos}</tbody>
@@ -5502,7 +5781,7 @@ function showTDConfig() {
       <div style="font-size:16px;font-weight:700;color:var(--accent);margin-bottom:16px;">💳 Configurar Tarjeta Débito</div>
       <div class="param-row" style="border-bottom:none;">
         <span class="param-label">Nombre de la tarjeta</span>
-        <input id="tdNombre" type="text" value="${tdConfig.nombre}"
+        <input id="tdNombre" type="text" value="${esc(tdConfig.nombre)}"
           style="width:150px;border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:12px;font-family:inherit;outline:none;"
           onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
       </div>
@@ -5552,7 +5831,7 @@ function gestionarNominasTD() {
           : '—';
         return `<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border);${i%2===0?'background:var(--surface2);':''}">
           <div style="flex:1;min-width:0;">
-            <div style="font-size:13px;font-weight:600;color:var(--text);">${n.concepto}</div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);">${esc(n.concepto)}</div>
             <div style="font-size:11px;color:var(--text3);">Pago: ${fechaFmt}</div>
           </div>
           <div style="font-size:13px;font-weight:700;color:var(--success);white-space:nowrap;">${fmt(n.valor || 0)}</div>
@@ -5714,7 +5993,7 @@ function renderHistorial() {
     <td colspan="6"></td>
     <td style="padding:8px 10px;text-align:right;font-size:13px;font-weight:800;color:var(--success);">${fmt(fB)}</td>
     <td style="padding:8px 10px;text-align:right;font-size:13px;font-weight:800;color:var(--accent);">${fmt(fN)}</td>
-    <td style="padding:8px 10px;text-align:right;font-size:13px;font-weight:800;color:#B45309;">${fmt(fP)}</td>
+    <td style="padding:8px 10px;text-align:right;font-size:13px;font-weight:800;color:var(--warning-strong);">${fmt(fP)}</td>
     <td></td>
   </tr>`;
 }
@@ -5780,7 +6059,7 @@ function verificarVencimientosCDT() {
     return `
       <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--surface2);border-radius:10px;margin-bottom:8px;border-left:4px solid ${color};">
         <div>
-          <div style="font-size:13px;font-weight:700;color:var(--text);">${inv.tipo} · ${inv.entidad||'—'}</div>
+          <div style="font-size:13px;font-weight:700;color:var(--text);">${esc(inv.tipo)} · ${esc(inv.entidad)||'—'}</div>
           <div style="font-size:12px;color:var(--text2);">Capital: ${fmt(inv.capital||0)}</div>
         </div>
         <div style="text-align:right;">
@@ -5805,8 +6084,8 @@ function verificarVencimientosCDT() {
           style="flex:1;padding:11px;border-radius:10px;border:1px solid var(--border);background:none;font-size:13px;cursor:pointer;color:var(--text2);font-family:inherit;">
           Recordar luego
         </button>
-        <button onclick="document.getElementById('cdtAlertaModal').remove();setSession(true)||true;switchTab('inversiones')"
-          style="flex:1;padding:11px;border-radius:10px;border:none;background:#B45309;color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">
+        <button onclick="document.getElementById('cdtAlertaModal').remove();(sesionActiva ? switchTab('inversiones') : showLoginModal())"
+          style="flex:1;padding:11px;border-radius:10px;border:none;background:var(--warning-strong);color:white;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;">
           Ver inversiones
         </button>
       </div>
@@ -5974,11 +6253,12 @@ function generarDesprendible(qnum) {
     { lbl: `Recargo nocturno (${params.rn}%)`,             h: tots.hNoct||0,                             vu: vh*params.rn/100,             vt: valorTots.hNoct||0 },
     { lbl: `H. extra diurna (+${params.hed}%)`,            h: tots.hED||0,                               vu: vh*(1+params.hed/100),        vt: valorTots.hED||0 },
     { lbl: `H. extra nocturna (+${params.hen}%)`,          h: tots.hEN||0,                               vu: vh*(1+params.hen/100),        vt: valorTots.hEN||0 },
-    { lbl: `Rec. dom./fest. diurno (+${params.rdd}%)`,     h: (tots.hRDD||0)+(tots.hFest||0),            vu: vh*(1+params.rdd/100),        vt: (valorTots.hRDD||0)+(valorTots.hFest||0) },
-    { lbl: `Rec. dom./fest. nocturno (+${params.rdn}%)`,   h: (tots.hRDN||0)+(tots.hFestN||0),           vu: vh*(1+params.rdn/100),        vt: (valorTots.hRDN||0)+(valorTots.hFestN||0) },
+    { lbl: `Rec. dom./fest. diurno (+${params.rdd}% adic.)`, h: (tots.hRDD||0)+(tots.hFest||0),            vu: vh*(1+params.rdd/100),        vt: (valorTots.hRDD||0)+(valorTots.hFest||0) },
+    { lbl: `Rec. dom./fest. nocturno (+${params.rdn}% adic.)`, h: (tots.hRDN||0)+(tots.hFestN||0),           vu: vh*(1+params.rdn/100),        vt: (valorTots.hRDN||0)+(valorTots.hFestN||0) },
     { lbl: `H. ext. dom./fest. diurna (+${params.hedd}%)`, h: tots.hHEDD||0,                             vu: vh*(1+params.hedd/100),       vt: valorTots.hHEDD||0 },
     { lbl: `H. ext. dom./fest. noct. (+${params.hedn}%)`,  h: tots.hHEDN||0,                             vu: vh*(1+params.hedn/100),       vt: valorTots.hHEDN||0 },
-  ].filter(c => c.h > 0);
+  ].filter(c => c.h > 0)
+   .map(c => ({ ...c, vu: c.vt / c.h }));   // Val/h siempre = total ÷ horas (evita inconsistencias en recargos)
 
   const trConceptos = conceptosDefs.map(c =>
     `<tr><td>${c.lbl}</td><td class="r">${c.h}</td><td class="r">${fP(c.vu)}</td><td class="r">${fP(c.vt)}</td></tr>`
@@ -6151,7 +6431,7 @@ const A = {
   lng:        null,
   gpsAcc:     null,    // precisión de la mejor lectura (metros)
   _gpsBuf:    [],      // ventana deslizante de últimas lecturas
-  _gpsBest:   null,    // mejor lectura de la sesión (menor acc)
+  _gpsBuf:    [],      // ventana de últimas lecturas GPS
   sedeCercana:null,
   dentroZona: false,
   modoMarcacion: null, // 'ingreso' | 'salida'
@@ -6182,19 +6462,56 @@ function saveRegistro(r) {
   localStorage.setItem(AS_REGISTROS, JSON.stringify(arr.slice(0, 500)));
 }
 
-// ── XOR cipher simple para descriptor facial ────────────────────
-function xorEnc(arr, key = 'MFP_FACE_2026') {
-  const ka = key.split('').map(c => c.charCodeAt(0));
-  return arr.map((v, i) => v ^ ka[i % ka.length]);
+// ── Cifrado AES-GCM del descriptor facial ───────────────────────
+// La clave se genera en el dispositivo como NO extraíble y vive en IndexedDB,
+// por lo que no puede leerse desde localStorage ni exportarse.
+function _faceDB() {
+  return new Promise((res, rej) => {
+    const rq = indexedDB.open('mfp_secure', 1);
+    rq.onupgradeneeded = () => rq.result.createObjectStore('keys');
+    rq.onsuccess = () => res(rq.result);
+    rq.onerror = () => rej(rq.error);
+  });
 }
-function saveFaceDescriptor(descriptor) {
-  const enc = xorEnc(Array.from(descriptor).map(v => Math.round(v * 10000)));
-  localStorage.setItem(AS_FACE_ENC, JSON.stringify(enc));
+async function _faceKey(crear) {
+  const db = await _faceDB();
+  const get = () => new Promise((res, rej) => {
+    const r = db.transaction('keys').objectStore('keys').get('face');
+    r.onsuccess = () => res(r.result || null); r.onerror = () => rej(r.error);
+  });
+  let key = await get();
+  if (!key && crear) {
+    key = await crypto.subtle.generateKey({ name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    await new Promise((res, rej) => {
+      const t = db.transaction('keys', 'readwrite');
+      t.objectStore('keys').put(key, 'face');
+      t.oncomplete = res; t.onerror = () => rej(t.error);
+    });
+  }
+  db.close();
+  return key;
 }
-function loadFaceDescriptor() {
-  const enc = JSON.parse(localStorage.getItem(AS_FACE_ENC) || 'null');
-  if (!enc) return null;
-  return new Float32Array(xorEnc(enc).map(v => v / 10000));
+const _b64 = u8 => btoa(String.fromCharCode(...u8));
+const _unb64 = b => Uint8Array.from(atob(b), c => c.charCodeAt(0));
+
+async function saveFaceDescriptor(descriptor) {
+  const key = await _faceKey(true);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const data = new Float32Array(descriptor);
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, data.buffer));
+  localStorage.setItem(AS_FACE_ENC, JSON.stringify({ v: 2, iv: _b64(iv), ct: _b64(ct) }));
+}
+async function loadFaceDescriptor() {
+  const raw = JSON.parse(localStorage.getItem(AS_FACE_ENC) || 'null');
+  if (!raw) return null;
+  // Formato antiguo (XOR con clave fija): se descarta, hay que registrar el rostro de nuevo
+  if (Array.isArray(raw) || raw.v !== 2) { localStorage.removeItem(AS_FACE_ENC); return null; }
+  try {
+    const key = await _faceKey(false);
+    if (!key) return null;
+    const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: _unb64(raw.iv) }, key, _unb64(raw.ct));
+    return new Float32Array(pt);
+  } catch (e) { return null; }
 }
 
 // ── Haversine ────────────────────────────────────────────────────
@@ -6270,7 +6587,7 @@ function dibujarSedes() {
       radius: s.radio, color: '#2563EB', fillColor: '#2563EB', fillOpacity: .1, weight: 2
     }).addTo(A.map);
     const marker = L.marker([s.lat, s.lng], {
-      icon: L.divIcon({ html: `<div style="background:#2563EB;color:white;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;white-space:nowrap;">${s.nombre}</div>`, className: '' })
+      icon: L.divIcon({ html: `<div style="background:var(--accent);color:white;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700;white-space:nowrap;">${esc(s.nombre)}</div>`, className: '' })
     }).addTo(A.map);
     A.sedeCircles.push(circle, marker);
   });
@@ -6298,7 +6615,7 @@ function startGPS() {
   setGPSCard('warn', 'Solicitando…', 'Permite el acceso a ubicación');
   // Reiniciar buffers al arrancar
   A._gpsBuf  = [];
-  A._gpsBest = null;
+  A._gpsBuf = [];
   A.gpsAcc   = null;
   A.watchId = navigator.geolocation.watchPosition(onGPSSuccess, onGPSError,
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 3000 });
@@ -6317,16 +6634,12 @@ function onGPSSuccess(pos) {
     return; // no actualizar posición ni sede
   }
 
+  A.gpsError = null;
   // Ventana deslizante: guardar últimas 6 lecturas
   A._gpsBuf = [...(A._gpsBuf || []), { lat, lng, acc }].slice(-6);
 
-  // Registrar la mejor lectura de la sesión (menor valor de acc)
-  if (!A._gpsBest || acc < A._gpsBest.acc) {
-    A._gpsBest = { lat, lng, acc };
-  }
-
-  // Usar siempre la mejor lectura para la posición reportada
-  const best = A._gpsBest;
+  // Mejor lectura dentro de la ventana reciente (evita posición obsoleta de la sesión)
+  const best = A._gpsBuf.reduce((m, x) => x.acc < m.acc ? x : m);
   A.lat    = best.lat;
   A.lng    = best.lng;
   A.gpsAcc = Math.round(best.acc);
@@ -6350,6 +6663,7 @@ function onGPSSuccess(pos) {
 }
 
 function onGPSError(err) {
+  A.gpsError = err.code;
   const msgs = {
     1: 'Permiso denegado',
     2: 'Posición no disponible',
@@ -6366,6 +6680,7 @@ function onGPSError(err) {
   const bs = document.getElementById('btn-salida');
   if (bi) bi.disabled = true;
   if (bs) bs.disabled = true;
+  actualizarZonaDiaAsis();
 }
 
 function setGPSCard(tipo, val, sub) {
@@ -6428,6 +6743,7 @@ function validarSede() {
   const btnS = document.getElementById('btn-salida');
   if (btnI) btnI.disabled = !puedeMarcar;
   if (btnS) btnS.disabled = !puedeMarcar;
+  actualizarZonaDiaAsis();
 }
 
 // ── Render log de hoy ────────────────────────────────────────────
@@ -6458,7 +6774,7 @@ function renderLogHoy() {
           <span style="font-size:12px;font-weight:600;color:var(--text);text-transform:capitalize;">${r.tipo}</span>
           <span class="mchip ${mchip}">${mlbl}</span>
         </div>
-        <div class="log-place">${r.sede || ''}${r.distancia ? ` · ${r.distancia}m` : ''}${r.direccion ? ` · ${r.direccion}` : ''}</div>
+        <div class="log-place">${esc(r.sede || '')}${r.distancia ? ` · ${r.distancia}m` : ''}${r.direccion ? ` · ${esc(r.direccion)}` : ''}</div>
       </div>
     </div>`;
   }).join('');
@@ -6493,7 +6809,95 @@ function updateBioStatus() {
     : '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3"/></svg>';
 }
 
+// ── Validación de horario según turno programado ─────────────────
+// Ingreso: solo con turno programado ese día, desde 30 min antes del inicio
+//          y hasta que termine el turno.
+// Salida : no antes de la hora de fin del turno, ni más de 30 min después.
+const MARC_TOL_MIN = 30;
+function validarHorarioMarcacion(tipo, ahora = new Date()) {
+  const fmt = d => d.toLocaleTimeString('es-CO', { hour:'2-digit', minute:'2-digit' });
+  const ventanas = [];
+  // Ayer (turno nocturno que termina hoy), hoy y mañana (turno que inicia justo pasada la medianoche)
+  for (const off of [-1, 0, 1]) {
+    const base = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate() + off);
+    const t = TURNOS[turnos[dateKey(base.getFullYear(), base.getMonth(), base.getDate())]];
+    if (!t || t.descanso) continue;
+    const y = base.getFullYear(), m = base.getMonth(), d = base.getDate();
+    const ini = new Date(y, m, d, 0, Math.round(t.inicio * 60));
+    const fin = new Date(y, m, d + (t.fin <= t.inicio ? 1 : 0), 0, Math.round(t.fin * 60));
+    ventanas.push({ off, t, ini, fin });
+  }
+
+  if (tipo === 'ingreso') {
+    // Solo turnos que empiezan hoy (o mañana si faltan ≤ 30 min)
+    const cand = ventanas.filter(v => v.off >= 0);
+    if (!cand.some(v => v.off === 0))
+      return { ok:false, msg:'No tienes un turno programado para hoy.\nPrográmalo en el calendario para poder registrar tu ingreso.' };
+    for (const v of cand) {
+      const desde = new Date(v.ini.getTime() - MARC_TOL_MIN * 60000);
+      if (ahora >= desde && ahora <= v.fin) return { ok:true };
+    }
+    const v = cand.find(v => v.off === 0);
+    const desde = new Date(v.ini.getTime() - MARC_TOL_MIN * 60000);
+    if (ahora < desde)
+      return { ok:false, msg:`Aún no puedes registrar ingreso.\nTu turno «${v.t.label}» inicia a las ${fmt(v.ini)}; puedes marcar desde las ${fmt(desde)}.` };
+    return { ok:false, msg:`Tu turno «${v.t.label}» ya terminó a las ${fmt(v.fin)}.\nYa no puedes registrar el ingreso.` };
+  }
+
+  // Salida: turnos de ayer (nocturnos) y de hoy
+  const cand = ventanas.filter(v => v.off <= 0);
+  if (!cand.length)
+    return { ok:false, msg:'No tienes un turno programado para hoy.\nNo es posible registrar la salida.' };
+  for (const v of cand) {
+    const hasta = new Date(v.fin.getTime() + MARC_TOL_MIN * 60000);
+    if (ahora >= v.fin && ahora <= hasta) return { ok:true };
+  }
+  // Mensaje según el turno más cercano a la hora actual
+  const v = cand.reduce((a, b) => Math.abs(ahora - a.fin) <= Math.abs(ahora - b.fin) ? a : b);
+  const hasta = new Date(v.fin.getTime() + MARC_TOL_MIN * 60000);
+  if (ahora < v.fin)
+    return { ok:false, msg:`Aún no puedes registrar salida.\nTu turno «${v.t.label}» termina a las ${fmt(v.fin)}.` };
+  return { ok:false, msg:`El tiempo para registrar la salida terminó a las ${fmt(hasta)} (30 min después de las ${fmt(v.fin)}).\nHabla con tu administrador para corregirlo.` };
+}
+
 // ── Marcación ────────────────────────────────────────────────────
+// ── Estado de zona para marcar desde el calendario de Home ───────
+// Devuelve { ok, tipo, titulo, detalle } según ubicación, precisión y sedes.
+function estadoZonaAsistencia() {
+  const sedes = getSedes();
+  if (!sedes.length)
+    return { ok:false, tipo:'warn', titulo:'Sin sedes autorizadas', detalle:'Un administrador debe configurar al menos una sede para poder marcar.' };
+  if (A.gpsError === 1)
+    return { ok:false, tipo:'err', titulo:'Ubicación bloqueada', detalle:'Permite el acceso a la ubicación en el navegador para registrar tu asistencia.' };
+  if (!A.lat)
+    return { ok:false, tipo:'warn', titulo:'Obteniendo tu ubicación…', detalle: A.gpsError ? 'No se pudo obtener la posición. Ve a un espacio abierto e intenta de nuevo.' : 'Espera unos segundos mientras se fija la señal GPS.' };
+  let mejor = null, menor = Infinity;
+  sedes.forEach(sd => { const d = Math.round(haversineM(A.lat, A.lng, sd.lat, sd.lng)); if (d < menor) { menor = d; mejor = sd; } });
+  if (A.gpsAcc && A.gpsAcc > 200)
+    return { ok:false, tipo:'warn', titulo:'Señal GPS muy imprecisa', detalle:`Precisión actual ±${A.gpsAcc} m (se requiere ≤ 200 m). Sal a un espacio abierto.` };
+  if (menor > mejor.radio)
+    return { ok:false, tipo:'err', titulo:'No estás cerca de una sede autorizada',
+             detalle:`La sede más cercana es «${mejor.nombre}», a ${menor >= 1000 ? (menor/1000).toFixed(1)+' km' : menor+' m'} (radio permitido: ${mejor.radio} m). Acércate para marcar.` };
+  return { ok:true, tipo:'ok', titulo:'Dentro de zona autorizada', detalle:`${mejor.nombre} · a ${menor} m (radio ${mejor.radio} m)` };
+}
+
+// Refresca banner y botones del modal del día (si está abierto)
+function actualizarZonaDiaAsis() {
+  const box = document.getElementById('diaAsisZona');
+  if (!box) return;
+  const e = estadoZonaAsistencia();
+  const col = { ok:'success', warn:'warning', err:'danger' }[e.tipo];
+  const ico = { ok:'✅', warn:'⏳', err:'⛔' }[e.tipo];
+  box.style.cssText = `margin-top:14px;padding:10px 12px;border-radius:10px;border:1px solid var(--${col}-border);background:var(--${col}-${col==='warning'?'soft':'bg'});color:var(--${col}${col==='success'||col==='warning'?'-strong':'-strong'});font-size:12px;line-height:1.45;`;
+  box.innerHTML = `<div style="font-weight:700;">${ico} ${esc(e.titulo)}</div><div style="margin-top:2px;opacity:.9;">${esc(e.detalle)}</div>`;
+  document.querySelectorAll('#diaAsisModal .dia-marc-btn').forEach(b => {
+    const hecho = b.dataset.hecho === '1';
+    b.disabled = hecho || !e.ok;
+    b.style.opacity = b.disabled ? '.5' : '1';
+    b.style.cursor  = b.disabled ? 'not-allowed' : 'pointer';
+  });
+}
+
 async function iniciarMarcacion(tipo) {
   if (A.isMarcando) return;
   A.modoMarcacion = tipo;
@@ -6506,8 +6910,15 @@ async function iniciarMarcacion(tipo) {
     abrirBioSetup(); return;
   }
 
-  if (!A.dentroZona) {
-    alert(`⛔ Estás fuera de la zona autorizada.\nDistancia: ${A.sedeCercana?.distancia || '?'}m · Radio: ${A.sedeCercana?.radio || '?'}m`);
+  const horario = validarHorarioMarcacion(tipo);
+  if (!horario.ok) {
+    alert(`⏰ ${horario.msg}`);
+    return;
+  }
+
+  const zona = estadoZonaAsistencia();
+  if (!zona.ok) {
+    alert(`⛔ ${zona.titulo}\n${zona.detalle}`);
     return;
   }
 
@@ -6578,7 +6989,7 @@ function mostrarExito(tipo, metodo, hora) {
       <div style="font-size:56px;margin-bottom:12px;">${emoji}</div>
       <div style="font-size:20px;font-weight:800;color:${color};text-transform:capitalize;">${tipo} registrado</div>
       <div style="font-size:28px;font-weight:900;color:var(--text);margin:8px 0;">${hora}</div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:6px;">${A.sedeCercana?.nombre || ''}</div>
+      <div style="font-size:13px;color:var(--text3);margin-bottom:6px;">${esc(A.sedeCercana?.nombre || '')}</div>
       <div style="font-size:12px;padding:4px 12px;border-radius:20px;display:inline-block;background:var(--surface2);color:var(--text2);">${mLabel}</div>
       <button onclick="this.closest('div[style*=fixed]').remove()" style="display:block;width:100%;margin-top:20px;padding:12px;border-radius:10px;border:none;background:${color};color:white;font-size:14px;font-weight:700;cursor:pointer;">Cerrar</button>
     </div>`;
@@ -6754,7 +7165,7 @@ async function capturarRostro() {
     }
 
     if (A.camModo === 'registro') {
-      saveFaceDescriptor(det.descriptor);
+      await saveFaceDescriptor(det.descriptor);
       oval.className = 'face-oval success';
       status.textContent = '✅ Rostro registrado correctamente';
       document.getElementById('face-status').style.color = 'var(--success)';
@@ -6764,8 +7175,8 @@ async function capturarRostro() {
       setTimeout(() => cerrarCamara(), 1500);
 
     } else { // verificacion
-      const stored = loadFaceDescriptor();
-      if (!stored) { status.textContent = '❌ No hay rostro registrado'; return; }
+      const stored = await loadFaceDescriptor();
+      if (!stored) { status.textContent = '❌ No hay rostro registrado — regístralo de nuevo'; return; }
       const dist = faceapi.euclideanDistance(det.descriptor, stored);
       const pct  = Math.max(0, Math.round((1 - dist) * 100));
       pctEl.style.display = '';
@@ -6774,11 +7185,11 @@ async function capturarRostro() {
       if (pct >= 85) {
         oval.className = 'face-oval success';
         status.textContent = `✅ Verificado · ${pct}% coincidencia`;
-        setTimeout(() => { cerrarCamara(); A._faceVerifyResolve && A._faceVerifyResolve(pct); }, 1200);
+        setTimeout(() => { const r = A._faceVerifyResolve; A._faceVerifyResolve = null; cerrarCamara(); r && r(pct); }, 1200);
       } else {
         oval.className = 'face-oval fail';
         status.textContent = `❌ ${pct}% coincidencia (mínimo 85%)`;
-        setTimeout(() => { cerrarCamara(); A._faceVerifyResolve && A._faceVerifyResolve(pct); }, 2000);
+        setTimeout(() => { const r = A._faceVerifyResolve; A._faceVerifyResolve = null; cerrarCamara(); r && r(pct); }, 2000);
       }
     }
   } catch(e) {
@@ -6788,6 +7199,7 @@ async function capturarRostro() {
 
 function cerrarCamara() {
   clearInterval(A.camLoop);
+  if (A._faceVerifyResolve) { const r = A._faceVerifyResolve; A._faceVerifyResolve = null; r(0); }
   if (A.camStream) { A.camStream.getTracks().forEach(t => t.stop()); A.camStream = null; }
   document.getElementById('camaraModal').style.display = 'none';
   document.getElementById('cam-video').srcObject = null;
@@ -6834,7 +7246,7 @@ function renderSedesList() {
   list.innerHTML = sedes.map(s => `
     <div class="sede-row">
       <div style="flex:1;min-width:0;">
-        <div style="font-size:13px;font-weight:600;color:var(--text);">${s.nombre}</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);">${esc(s.nombre)}</div>
         <div style="font-size:11px;color:var(--text3);">${s.lat.toFixed(5)}, ${s.lng.toFixed(5)} · Radio: ${s.radio}m</div>
       </div>
       <button onclick="eliminarSede('${s.id}')" style="width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:none;cursor:pointer;color:var(--danger);font-size:13px;" onmouseover="this.style.background='var(--danger-bg)'" onmouseout="this.style.background='none'">✕</button>
@@ -6847,7 +7259,7 @@ function renderSedesPreview() {
   const sedes = getSedes();
   el.innerHTML = sedes.map(s =>
     `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;">
-      <span style="font-weight:600;">${s.nombre}</span>
+      <span style="font-weight:600;">${esc(s.nombre)}</span>
       <span style="color:var(--text3);">Radio: ${s.radio}m</span>
     </div>`).join('') || '<p style="font-size:12px;color:var(--text3);">Sin sedes</p>';
 }
@@ -6886,29 +7298,20 @@ function eliminarSede(id) {
 }
 
 // ── Exportar asistencia CSV ───────────────────────────────────────
-async function exportarAsistencia() {
+function exportarAsistencia() {
   const regs = getRegistros();
   if (!regs.length) { alert('Sin registros para exportar'); return; }
-  if (!window.XLSX) {
-    try {
-      await new Promise((res, rej) => { const s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js'; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
-    } catch (_) { alert('Necesitas conexión a internet para exportar a Excel la primera vez.'); return; }
-  }
-  const ws = XLSX.utils.json_to_sheet(regs.map(r => ({
-    'Fecha':    new Date(r.fecha).toLocaleDateString('es-CO'),
-    'Hora':     new Date(r.fecha).toLocaleTimeString('es-CO'),
-    'Tipo':     r.tipo,
-    'Método':   r.metodo,
-    'Sede':     r.sede,
-    'Distancia (m)': r.distancia,
-    'Dirección': r.direccion,
-    'Lat':      r.lat,
-    'Lng':      r.lng,
-  })));
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, 'Asistencia');
-  XLSX.writeFile(wb, `Asistencia_${new Date().toLocaleDateString('es-CO').replace(/\//g,'-')}.xlsx`);
+  const q = v => `"${String(v ?? '').replace(/"/g,'""')}"`;
+  const head = ['Fecha','Hora','Tipo','Método','Sede','Distancia (m)','Dirección','Lat','Lng'];
+  const rows = regs.map(r => [
+    new Date(r.fecha).toLocaleDateString('es-CO'), new Date(r.fecha).toLocaleTimeString('es-CO'),
+    r.tipo, r.metodo, r.sede, r.distancia, r.direccion, r.lat, r.lng ].map(q).join(';'));
+  const blob = new Blob(['\ufeff' + [head.map(q).join(';'), ...rows].join('\n')], { type:'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `Asistencia_${new Date().toLocaleDateString('es-CO').replace(/\//g,'-')}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
 
@@ -6931,8 +7334,8 @@ function renderAdminHistorial() {
   const hasta = document.getElementById('aa-hasta')?.value;
   let regs = getRegistros();
   // r.fecha es ISO completo ej "2026-09-01T14:30:00.000Z"
-  if (desde) regs = regs.filter(r => r.fecha.slice(0,10) >= desde);
-  if (hasta) regs = regs.filter(r => r.fecha.slice(0,10) <= hasta);
+  if (desde) regs = regs.filter(r => localKey(r.fecha) >= desde);
+  if (hasta) regs = regs.filter(r => localKey(r.fecha) <= hasta);
   regs = regs.slice().sort((a,b) => new Date(b.fecha) - new Date(a.fecha));
 
   const g = id => document.getElementById(id);
@@ -6953,12 +7356,12 @@ function renderAdminHistorial() {
     const hora  = dt.toLocaleTimeString('es-CO', {hour:'2-digit',minute:'2-digit'});
     return `<tr style="border-bottom:1px solid var(--border);">
       <td style="padding:7px 10px;font-size:11px;white-space:nowrap;"><b>${fecha}</b> ${hora}</td>
-      <td style="padding:7px 10px;font-size:11px;color:var(--text3);">${usuarioActual?.nombre||'Usuario'}</td>
+      <td style="padding:7px 10px;font-size:11px;color:var(--text3);">${esc(usuarioActual?.nombre||'Usuario')}</td>
       <td style="padding:7px 6px;text-align:center;">
         <span style="font-size:9px;padding:2px 8px;border-radius:8px;font-weight:700;
           ${r.tipo==='ingreso'?'background:var(--success-bg);color:var(--success);':'background:var(--danger-bg);color:var(--danger);'}">
           ${r.tipo}</span></td>
-      <td style="padding:7px 10px;font-size:11px;color:var(--text3);">${r.sede||'—'} ${r.distancia?'· '+r.distancia+'m':''}</td>
+      <td style="padding:7px 10px;font-size:11px;color:var(--text3);">${esc(r.sede)||'—'} ${r.distancia?'· '+r.distancia+'m':''}</td>
       <td style="padding:7px 6px;text-align:center;font-size:13px;">
         ${r.metodo==='webauthn'?'🔐':r.metodo==='facial'?'📷':'📍'}</td>
       <td style="padding:7px 6px;text-align:center;">
@@ -6989,7 +7392,7 @@ function abrirDiaAsistencia(key) {
   const fechaFmt = fecha.toLocaleDateString('es-CO', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 
   // Registros existentes para ese día
-  const regs = getRegistros().filter(r => r.fecha && r.fecha.startsWith(key));
+  const regs = getRegistros().filter(r => r.fecha && localKey(r.fecha) === key);
   const ingreso = regs.find(r => r.tipo === 'ingreso');
   const salida  = regs.find(r => r.tipo === 'salida');
 
@@ -7006,36 +7409,34 @@ function abrirDiaAsistencia(key) {
       </div>
       <div style="flex:1;">
         <div style="font-size:13px;font-weight:600;color:var(--text);text-transform:capitalize;">${r.tipo}</div>
-        <div style="font-size:11px;color:var(--text3);">${r.sede||'Sin sede'} · ${r.metodo==='webauthn'?'🔐 Biometría':r.metodo==='facial'?'📷 Facial':'📍 GPS'}</div>
+        <div style="font-size:11px;color:var(--text3);">${esc(r.sede||'Sin sede')} · ${r.metodo==='webauthn'?'🔐 Biometría':r.metodo==='facial'?'📷 Facial':'📍 GPS'}</div>
       </div>
       <div style="font-size:15px;font-weight:700;color:var(--text2);">${hora||'—'}</div>
     </div>`;
   }).join('') : `<div style="text-align:center;padding:16px 0;color:var(--text3);font-size:13px;">Sin registros para este día</div>`;
 
   // Botones de acción (solo si es hoy)
-  const botonesHoy = esHoy ? `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px;">
-      <button onclick="document.getElementById('diaAsisModal').remove(); iniciarMarcacion('ingreso');"
-        ${ingreso ? 'disabled style="opacity:.45;cursor:not-allowed;"' : ''}
-        style="padding:13px 8px;border-radius:12px;border:2px solid ${ingreso?'var(--border)':'#BBF7D0'};
-               background:${ingreso?'var(--surface2)':'var(--success-bg)'};
-               color:${ingreso?'var(--text3)':'var(--success)'};
+  const btnStyle = (done, tone) => `padding:13px 8px;border-radius:12px;border:2px solid ${done?'var(--border)':`var(--${tone}-border)`};
+               background:${done?'var(--surface2)':`var(--${tone}-bg)`};
+               color:${done?'var(--text3)':`var(--${tone})`};
                font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;
-               display:flex;align-items:center;justify-content:center;gap:6px;">
+               display:flex;align-items:center;justify-content:center;gap:6px;`;
+  const botonesHoy = esHoy ? `
+    <div id="diaAsisZona"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+      <button class="dia-marc-btn" data-hecho="${ingreso?1:0}" disabled
+        onclick="document.getElementById('diaAsisModal').remove(); iniciarMarcacion('ingreso');"
+        style="${btnStyle(!!ingreso,'success')}">
         ✅ ${ingreso ? 'Ya registrado' : 'Registrar ingreso'}
       </button>
-      <button onclick="document.getElementById('diaAsisModal').remove(); iniciarMarcacion('salida');"
-        ${salida ? 'disabled style="opacity:.45;cursor:not-allowed;"' : ''}
-        style="padding:13px 8px;border-radius:12px;border:2px solid ${salida?'var(--border)':'#FECACA'};
-               background:${salida?'var(--surface2)':'var(--danger-bg)'};
-               color:${salida?'var(--text3)':'var(--danger)'};
-               font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;
-               display:flex;align-items:center;justify-content:center;gap:6px;">
+      <button class="dia-marc-btn" data-hecho="${salida?1:0}" disabled
+        onclick="document.getElementById('diaAsisModal').remove(); iniciarMarcacion('salida');"
+        style="${btnStyle(!!salida,'danger')}">
         🚪 ${salida ? 'Ya registrado' : 'Registrar salida'}
       </button>
     </div>
     <div style="margin-top:10px;padding:8px 12px;border-radius:8px;background:var(--accent-bg);font-size:11px;color:var(--accent);">
-      🔐 Se pedirá verificación biométrica y GPS al registrar
+      🔐 Se pedirá verificación biométrica al registrar
     </div>` : `
     <div style="margin-top:14px;padding:10px 12px;border-radius:8px;background:var(--surface2);font-size:12px;color:var(--text3);text-align:center;">
       📅 Solo puedes registrar asistencia del día de hoy
@@ -7045,7 +7446,7 @@ function abrirDiaAsistencia(key) {
   const resumen = ingreso && salida
     ? `<div style="padding:6px 12px;border-radius:8px;background:var(--success-bg);font-size:11px;font-weight:700;color:var(--success);">✅ Día completo — Ingreso y salida registrados</div>`
     : ingreso
-    ? `<div style="padding:6px 12px;border-radius:8px;background:#FEF9C3;font-size:11px;font-weight:700;color:#B45309;">⏳ Solo ingreso — Falta registrar salida</div>`
+    ? `<div style="padding:6px 12px;border-radius:8px;background:var(--warning-soft);font-size:11px;font-weight:700;color:var(--warning-strong);">⏳ Solo ingreso — Falta registrar salida</div>`
     : salida
     ? `<div style="padding:6px 12px;border-radius:8px;background:var(--danger-bg);font-size:11px;font-weight:700;color:var(--danger);">⚠ Solo salida — Falta el ingreso</div>`
     : '';
@@ -7064,7 +7465,7 @@ function abrirDiaAsistencia(key) {
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;">
         <div>
           <div style="font-size:16px;font-weight:800;color:var(--text);text-transform:capitalize;">${fechaFmt}</div>
-          ${esHoy ? '<span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;background:var(--accent);color:white;margin-top:4px;display:inline-block;">HOY</span>' : ''}
+          ${esHoy ? '<span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:8px;background:var(--accent);color:white;margin-top:4px;display:inline-block;">HOY</span>' : ''}
         </div>
         <button onclick="document.getElementById('diaAsisModal').remove()"
           style="width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:none;cursor:pointer;font-size:16px;color:var(--text2);flex-shrink:0;">✕</button>
@@ -7085,6 +7486,7 @@ function abrirDiaAsistencia(key) {
 
   modal.addEventListener('click', e => { if (e.target === modal) modal.remove(); });
   document.body.appendChild(modal);
+  actualizarZonaDiaAsis();
 }
 
 // ===== INIT =====
