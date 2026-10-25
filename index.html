@@ -3982,12 +3982,12 @@ function showLoginModal() {
 
 function checkPin() {
   // Usar la contraseña del usuario admin si existe
-  const adminUser = usuarios.find(u => u.rol === 'admin');
-  const pinActual = (adminUser && adminUser.password) ? adminUser.password : PIN;
+  // Acepta la clave de cualquier usuario registrado (admin o no)
   const val = document.getElementById('pinInput')?.value;
-  if (val === pinActual) {
+  const coincide = val ? usuarios.find(u => (u.password || PIN) === val) : null;
+  if (coincide) {
     document.getElementById('loginModal').remove();
-    usuarioActual = adminUser ? { ...adminUser } : null;
+    usuarioActual = { ...coincide };
     saveUsuarioActual();
     setSession(true);
   } else {
