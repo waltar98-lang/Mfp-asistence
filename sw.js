@@ -1,6 +1,6 @@
 /* MFP · Service Worker
    Sube VERSION cada vez que publiques cambios para que los usuarios reciban la actualización. */
-const VERSION = 'mfp-v1.0.1';
+const VERSION = 'mfp-v1.0.2';
 const SHELL = `shell-${VERSION}`;
 const RUNTIME = `runtime-${VERSION}`;
 
