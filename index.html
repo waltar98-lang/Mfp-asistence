@@ -221,6 +221,24 @@
   td { padding: 7px 10px; border-bottom: 1px solid var(--border); color: var(--text); white-space: nowrap; }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: var(--surface2); }
+  /* Tablas de liquidación: caben siempre en el contenedor y los valores quedan alineados */
+  .liq-table { width:100%; table-layout:fixed; border-collapse:collapse; font-variant-numeric:tabular-nums; }
+  .liq-table th { font-size:11px; font-weight:600; color:var(--text3); background:var(--surface2); padding:5px 6px; border-bottom:1px solid var(--border); white-space:nowrap; }
+  .liq-table td { font-size:12px; padding:6px; border-bottom:1px solid var(--border); overflow-wrap:anywhere; }
+  .liq-table .l { text-align:left; } .liq-table .r { text-align:right; white-space:nowrap; }
+  .liq-table td.l { white-space:normal; }
+  .liq-table th:first-child, .liq-table td:first-child { padding-left:8px; }
+  .liq-table th:last-child,  .liq-table td:last-child  { padding-right:8px; }
+  .liq-table tr.liq-adic td:first-child { box-shadow:inset 3px 0 0 var(--accent); }
+  .liq-table tr.liq-total td { background:var(--success-bg); border-bottom:none; }
+  .liq-table tr.liq-total:hover td { background:var(--success-bg); }
+  .liq-tag { font-size:9px; padding:1px 4px; border-radius:3px; margin-left:4px; white-space:nowrap; vertical-align:middle; }
+  .liq-tag.base  { background:var(--accent-bg);  color:var(--accent); }
+  .liq-tag.adic  { background:var(--accent-bg);  color:var(--accent-strong); }
+  .liq-tag.extra { background:var(--success-bg); color:var(--success-strong); }
+  /* Filas de totales de la liquidación: mismo margen lateral que las tablas */
+  .quincena-body .nomina-row { padding-left:8px !important; padding-right:8px !important; }
+  @media (max-width:420px) { .liq-table td { font-size:11px; padding:6px 4px; } .liq-table th { font-size:10px; padding:5px 4px; } }
   .num { text-align: right; font-variant-numeric: tabular-nums; }
   .tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 4px; font-size: 11px; font-weight: 600; }
   .tag-D    { background: var(--danger-soft); color: var(--danger-strong); }
@@ -528,6 +546,12 @@
     background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
   }
   #miniHeader .hamburger-btn:hover { background: rgba(255,255,255,.28); }
+  #miniHeader .back-btn {
+    width: var(--tap); height: var(--tap); border-radius: 12px; flex-shrink: 0; cursor: pointer; color: #fff;
+    background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.28);
+    display: flex; align-items: center; justify-content: center; padding: 0;
+  }
+  #miniHeader .back-btn:hover { background: rgba(255,255,255,.28); }
   #miniHeader .hamburger-btn span { background: #fff; }
   .modo-asistencia-header { padding-top: calc(10px + var(--safe-t)) !important; }
 
@@ -761,10 +785,6 @@
         <span class="di-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
         Inversiones
       </button>
-      <button class="drawer-item" id="ditem-admin-asistencia" onclick="switchTab('admin-asistencia')" style="display:none;">
-        <span class="di-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="23" y1="11" x2="17" y2="11"/><line x1="20" y1="8" x2="20" y2="14"/></svg></span>
-        Admin Asistencia
-      </button>
       <button class="drawer-item" id="ditem-parametros" onclick="switchTab('parametros')">
         <span class="di-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></span>
         Parámetros
@@ -787,12 +807,15 @@
         Sincronización
       </button>
     </nav>
-    <div class="drawer-foot">MFP · Mis Finanzas Personales · v1.0.7</div>
+    <div class="drawer-foot">MFP · Mis Finanzas Personales · v1.0.9</div>
   </div>
 
   <!-- MINI-HEADER: visible solo fuera del Home -->
   <div id="miniHeader" class="header" style="display:none;">
     <div class="header-title">
+      <button class="back-btn" id="backBtn" onclick="goBack()" aria-label="Regresar" title="Regresar" style="display:none;">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      </button>
       <div class="appbar-mark">
         <svg viewBox="0 0 200 200" width="28" height="28" role="img" aria-hidden="true">
           <path d="M100 18 A82 82 0 1 1 51 37" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="9" stroke-linecap="round"/>
@@ -1013,7 +1036,6 @@
       <div class="panel-header">
         <div class="panel-title">Tabla detallada de turnos</div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-          <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="switchTab('calendario')">← Regresar al calendario</button>
           <span style="font-size:12px;color:var(--text3)" id="tablaMonth"></span>
           <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="exportarTablaCSV()" title="Exportar tabla a CSV">⬇ Exportar CSV</button>
           <button class="btn btn-sm btn-primary" style="font-size:11px;" onclick="switchTab('nomina')">Ver liquidación →</button>
@@ -1060,7 +1082,6 @@
         <div class="panel-header">
           <div class="panel-title">Liquidación de nómina</div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-            <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="switchTab('tabla')">← Regresar a la tabla de turnos</button>
             <span style="font-size:12px;color:var(--text3)" id="nominaMonth"></span>
             <button class="btn btn-sm" style="background:var(--success);color:white;font-size:11px;" onclick="guardarMesHistorial()" title="Guardar este mes en el historial">
               💾 Guardar historial
@@ -1075,7 +1096,6 @@
           <div class="empty-state"><p>Ingresa turnos en el calendario para calcular la liquidación</p></div>
         </div>
       </div>
-      <button class="btn btn-outline" style="width:100%;padding:11px;" onclick="switchTab('tabla')">← Regresar a la tabla de turnos</button>
     </div>
   </div>
 
@@ -1583,74 +1603,6 @@
 
 
   <!-- ADMIN ASISTENCIA -->
-  <div id="view-admin-asistencia" class="view">
-    <div style="display:flex;flex-direction:column;gap:14px;">
-
-      <!-- Tabs -->
-      <div style="display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:10px;">
-        <button id="aatab-historial" onclick="switchAdminAsiTab('historial')"
-          style="flex:1;padding:8px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;background:var(--accent);color:white;transition:all .2s;">
-          📋 Historial
-        </button>
-        <button id="aatab-sedes" onclick="switchAdminAsiTab('sedes')"
-          style="flex:1;padding:8px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;background:none;color:var(--text2);transition:all .2s;">
-          📍 Sedes
-        </button>
-      </div>
-
-      <!-- Panel Historial -->
-      <div id="aapanel-historial">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Historial de asistencia</div>
-            <button class="btn btn-sm" style="background:var(--success);color:white;font-size:11px;" onclick="exportarAsistencia()">⬇ Excel</button>
-          </div>
-          <!-- Filtros -->
-          <div style="padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);">
-            <input type="date" id="aa-desde" style="padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;background:var(--surface);color:var(--text);">
-            <input type="date" id="aa-hasta" style="padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;background:var(--surface);color:var(--text);">
-            <button class="btn btn-sm btn-primary" style="font-size:11px;" onclick="renderAdminHistorial()">Filtrar</button>
-            <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="document.getElementById('aa-desde').value='';document.getElementById('aa-hasta').value='';renderAdminHistorial();">Limpiar</button>
-          </div>
-          <!-- Stats -->
-          <div style="padding:10px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;border-bottom:1px solid var(--border);">
-            <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value accent" id="aa-stat-total">0</div></div>
-            <div class="stat-card" style="background:var(--success-bg);"><div class="stat-label">Ingresos</div><div class="stat-value" style="color:var(--success);" id="aa-stat-ing">0</div></div>
-            <div class="stat-card" style="background:var(--danger-bg);"><div class="stat-label">Salidas</div><div class="stat-value" style="color:var(--danger);" id="aa-stat-sal">0</div></div>
-            <div class="stat-card" style="background:var(--warning-bg);"><div class="stat-label">Fuera zona</div><div class="stat-value" style="color:var(--warning);" id="aa-stat-fuera">0</div></div>
-          </div>
-          <div style="overflow-x:auto;">
-            <table style="width:100%;border-collapse:collapse;min-width:600px;">
-              <thead>
-                <tr style="background:var(--surface2);">
-                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Fecha / Hora</th>
-                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Empleado</th>
-                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Tipo</th>
-                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Sede</th>
-                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Método</th>
-                  <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Zona</th>
-                </tr>
-              </thead>
-              <tbody id="aa-hist-body"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Panel Sedes -->
-      <div id="aapanel-sedes" style="display:none;">
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">📍 Sedes autorizadas</div>
-            <button class="btn btn-sm btn-primary" onclick="abrirSedesModal()">+ Nueva sede</button>
-          </div>
-          <div class="panel-body" id="aa-sedes-lista"></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
   <!-- PARÁMETROS -->
   <div id="view-parametros" class="view">
     <div style="display:flex;flex-direction:column;gap:16px;">
@@ -1955,15 +1907,70 @@
         </div>
       </details>
 
-      <!-- Historial + Sedes admin (solo con sesión) -->
-      <div class="panel" id="asist-admin-panel" style="display:none;">
-        <div class="panel-header">
-          <div class="panel-title">Sedes autorizadas</div>
-          <button class="btn btn-sm btn-primary" onclick="abrirSedesModal()">+ Gestionar</button>
+      <!-- Administración de asistencia (historial + sedes) — solo con sesión -->
+      <div id="asist-admin-section" style="display:none;flex-direction:column;gap:14px;">
+      <!-- Tabs -->
+        <div style="display:flex;gap:6px;background:var(--surface2);padding:4px;border-radius:10px;">
+          <button id="aatab-historial" onclick="switchAdminAsiTab('historial')"
+            style="flex:1;padding:8px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;background:var(--accent);color:white;transition:all .2s;">
+            📋 Historial
+          </button>
+          <button id="aatab-sedes" onclick="switchAdminAsiTab('sedes')"
+            style="flex:1;padding:8px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;background:none;color:var(--text2);transition:all .2s;">
+            📍 Sedes
+          </button>
         </div>
-        <div class="panel-body" id="sedes-preview"></div>
-      </div>
 
+        <!-- Panel Historial -->
+        <div id="aapanel-historial">
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">Historial de asistencia</div>
+              <button class="btn btn-sm" style="background:var(--success);color:white;font-size:11px;" onclick="exportarAsistencia()">⬇ CSV</button>
+            </div>
+            <!-- Filtros -->
+            <div style="padding:10px 14px;display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--border);">
+              <input type="date" id="aa-desde" style="padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;background:var(--surface);color:var(--text);">
+              <input type="date" id="aa-hasta" style="padding:5px 8px;border:1px solid var(--border);border-radius:6px;font-size:11px;background:var(--surface);color:var(--text);">
+              <button class="btn btn-sm btn-primary" style="font-size:11px;" onclick="renderAdminHistorial()">Filtrar</button>
+              <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="document.getElementById('aa-desde').value='';document.getElementById('aa-hasta').value='';renderAdminHistorial();">Limpiar</button>
+            </div>
+            <!-- Stats -->
+            <div style="padding:10px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;border-bottom:1px solid var(--border);">
+              <div class="stat-card"><div class="stat-label">Total</div><div class="stat-value accent" id="aa-stat-total">0</div></div>
+              <div class="stat-card" style="background:var(--success-bg);"><div class="stat-label">Ingresos</div><div class="stat-value" style="color:var(--success);" id="aa-stat-ing">0</div></div>
+              <div class="stat-card" style="background:var(--danger-bg);"><div class="stat-label">Salidas</div><div class="stat-value" style="color:var(--danger);" id="aa-stat-sal">0</div></div>
+              <div class="stat-card" style="background:var(--warning-bg);"><div class="stat-label">Fuera zona</div><div class="stat-value" style="color:var(--warning);" id="aa-stat-fuera">0</div></div>
+            </div>
+            <div style="overflow-x:auto;">
+              <table style="width:100%;border-collapse:collapse;min-width:600px;">
+                <thead>
+                  <tr style="background:var(--surface2);">
+                    <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Fecha / Hora</th>
+                    <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Empleado</th>
+                    <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Tipo</th>
+                    <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:8px 10px;border-bottom:2px solid var(--border);">Sede</th>
+                    <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Método</th>
+                    <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:8px 6px;border-bottom:2px solid var(--border);">Zona</th>
+                  </tr>
+                </thead>
+                <tbody id="aa-hist-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Sedes -->
+        <div id="aapanel-sedes" style="display:none;">
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-title">📍 Sedes autorizadas</div>
+              <button class="btn btn-sm btn-primary" onclick="abrirSedesModal()">+ Gestionar</button>
+            </div>
+            <div class="panel-body" id="sedes-preview"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -2822,35 +2829,31 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
 
       <div class="section-label" style="margin-top:0;">Devengado salarial · ${totalH}h trabajadas</div>
       ${conceptDefs.length ? `
-        <table style="width:100%;border-collapse:collapse;margin-bottom:2px;">
+        <table class="liq-table" style="margin-bottom:2px;">
+          <colgroup><col style="width:36%"><col style="width:13%"><col style="width:11%"><col style="width:18%"><col style="width:22%"></colgroup>
           <thead><tr>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);">Concepto</th>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:50px;">Factor h.</th>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:40px;">Horas</th>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:100px;">Valor/h §</th>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Total concepto</th>
+            <th class="l">Concepto</th>
+            <th class="r">Factor</th>
+            <th class="r">Horas</th>
+            <th class="r">Valor/h §</th>
+            <th class="r">Total</th>
           </tr></thead>
           <tbody>
             ${conceptDefs.map(c=>{
               const isAdic = !c.isExtra && c.key !== 'hOrd';
-              const rowBg  = isAdic ? 'background:#FAFBFD;' : '';
-              const tagStyle = c.isExtra
-                ? 'font-size:9px;background:#DCFCE7;color:#15803D;padding:1px 4px;border-radius:3px;margin-left:4px;'
-                : isAdic
-                  ? 'font-size:9px;background:#EEF2FF;color:#4338CA;padding:1px 4px;border-radius:3px;margin-left:4px;'
-                  : 'font-size:9px;background:var(--accent-bg);color:var(--accent);padding:1px 4px;border-radius:3px;margin-left:4px;';
+              const tagCls  = c.isExtra ? 'extra' : isAdic ? 'adic' : 'base';
               const tagText = c.isExtra ? 'extra' : isAdic ? 'adic.' : 'base';
-              const factorColor = c.isExtra ? 'var(--success)' : isAdic ? '#4338CA' : 'var(--accent)';
-              return `<tr style="${rowBg}">
-              <td style="font-size:11px;color:var(--text2);padding:6px 8px;border-bottom:1px solid var(--border);">${c.label}<span style="${tagStyle}">${tagText}</span></td>
-              <td style="font-size:11px;font-weight:700;color:${factorColor};text-align:center;padding:6px;border-bottom:1px solid var(--border);">${c.factor}</td>
-              <td style="font-size:12px;text-align:center;padding:6px;border-bottom:1px solid var(--border);font-weight:600;">${c.h}</td>
-              <td style="font-size:11px;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text3);">$${Math.round(c.vUnit).toLocaleString('es-CO')}</td>
-              <td style="font-size:12px;font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--success);">${fmt(valorTots[c.key])}</td>
+              const factorColor = c.isExtra ? 'var(--success)' : isAdic ? 'var(--accent-strong)' : 'var(--accent)';
+              return `<tr class="${isAdic ? 'liq-adic' : ''}">
+              <td class="l" style="color:var(--text2);">${c.label}<span class="liq-tag ${tagCls}">${tagText}</span></td>
+              <td class="r" style="font-weight:700;color:${factorColor};">${c.factor}</td>
+              <td class="r" style="font-weight:600;color:var(--text);">${c.h}</td>
+              <td class="r" style="color:var(--text3);">$${Math.round(c.vUnit).toLocaleString('es-CO')}</td>
+              <td class="r" style="font-weight:600;color:var(--success);">${fmt(valorTots[c.key])}</td>
             </tr>`;}).join('')}
           </tbody>
         </table>
-        <div style="font-size:11px;color:var(--text3);padding:3px 8px 8px;">§ Valor/h para <span style="color:#4338CA;font-weight:600;">adic.</span>: solo el recargo adicional (la hora base ya está en "Hora base ordinaria"). Para <span style="color:var(--success);font-weight:600;">extra</span>: valor total de la hora.</div>` :
+        <div style="font-size:11px;color:var(--text3);padding:3px 8px 8px;">§ Valor/h para <span style="color:var(--accent-strong);font-weight:600;">adic.</span>: solo el recargo adicional (la hora base ya está en "Hora base ordinaria"). Para <span style="color:var(--success);font-weight:600;">extra</span>: valor total de la hora.</div>` :
         `<div style="color:var(--text3);font-size:12px;padding:8px 0;">Sin turnos registrados en esta quincena</div>`}
 
       <div class="nomina-row" style="padding:7px 0;border-top:2px solid var(--border);">
@@ -2870,29 +2873,30 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
 
       ${pactoDev > 0 ? `
         <div class="section-label">Pacto colectivo</div>
-        <table style="width:100%;border-collapse:collapse;margin-bottom:6px;">
+        <table class="liq-table" style="margin-bottom:6px;">
+          <colgroup><col style="width:40%"><col style="width:16%"><col style="width:20%"><col style="width:24%"></colgroup>
           <thead><tr>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:left;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);">Concepto</th>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:center;padding:5px 6px;border-bottom:1px solid var(--border);background:var(--surface2);width:70px;">Cantidad</th>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Valor unit.</th>
-            <th style="font-size:11px;color:var(--text3);font-weight:600;text-align:right;padding:5px 8px;border-bottom:1px solid var(--border);background:var(--surface2);width:110px;">Valor</th>
+            <th class="l">Concepto</th>
+            <th class="r">Cant.</th>
+            <th class="r">Valor unit.</th>
+            <th class="r">Valor</th>
           </tr></thead>
           <tbody>
             ${getPactoVal(1) > 0 ? `<tr>
-              <td style="font-size:12px;color:var(--text2);padding:6px 8px;border-bottom:1px solid var(--border);">${pactoConceptos.find(p=>p.id===1)?.concepto||'Aux. alimentación'} <span style="font-size:11px;color:var(--text3);">(fijo quincena)</span></td>
-              <td style="font-size:12px;text-align:center;padding:6px;border-bottom:1px solid var(--border);font-weight:500;">1</td>
-              <td style="font-size:11px;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text3);">${fmt(getPactoVal(1))}</td>
-              <td style="font-size:12px;font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--success);">${fmt(getPactoVal(1))}</td>
+              <td class="l" style="color:var(--text2);">${pactoConceptos.find(p=>p.id===1)?.concepto||'Aux. alimentación'} <span style="font-size:10px;color:var(--text3);">(fijo quincena)</span></td>
+              <td class="r" style="font-weight:500;">1</td>
+              <td class="r" style="color:var(--text3);">${fmt(getPactoVal(1))}</td>
+              <td class="r" style="font-weight:600;color:var(--success);">${fmt(getPactoVal(1))}</td>
             </tr>` : ''}
             ${pactoItems.map(p => `<tr>
-              <td style="font-size:12px;color:var(--text2);padding:6px 8px;border-bottom:1px solid var(--border);">${p.label}</td>
-              <td style="font-size:12px;text-align:center;padding:6px;border-bottom:1px solid var(--border);font-weight:600;color:var(--accent);">${p.cant}</td>
-              <td style="font-size:11px;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text3);">${fmt(getPactoVal(p.id))}</td>
-              <td style="font-size:12px;font-weight:600;text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--success);">${fmt(p.cant * getPactoVal(p.id))}</td>
+              <td class="l" style="color:var(--text2);">${p.label}</td>
+              <td class="r" style="font-weight:600;color:var(--accent);">${p.cant}</td>
+              <td class="r" style="color:var(--text3);">${fmt(getPactoVal(p.id))}</td>
+              <td class="r" style="font-weight:600;color:var(--success);">${fmt(p.cant * getPactoVal(p.id))}</td>
             </tr>`).join('')}
-            <tr style="background:var(--success-bg);">
-              <td colspan="3" style="font-size:12px;font-weight:700;padding:6px 8px;color:var(--text);">Total pacto colectivo</td>
-              <td style="font-size:13px;font-weight:700;text-align:right;padding:6px 8px;color:var(--success);">${fmt(pactoDev)}</td>
+            <tr class="liq-total">
+              <td class="l" colspan="3" style="font-weight:700;color:var(--text);">Total pacto colectivo</td>
+              <td class="r" style="font-size:13px;font-weight:700;color:var(--success);">${fmt(pactoDev)}</td>
             </tr>
           </tbody>
         </table>` : ''}
@@ -3533,6 +3537,12 @@ function renderFestivos() {
 
 // ===== DRAWER =====
 // ===== HOME =====
+// Pantalla anterior para la flecha de regreso del encabezado
+const BACK_MAP = { tabla:'calendario', nomina:'tabla' };
+function goBack() {
+  const cur = document.querySelector('.view.active')?.id.replace('view-','');
+  if (BACK_MAP[cur]) switchTab(BACK_MAP[cur]);
+}
 const TAB_LABELS = { home:'Home', asistencia:'Control de Asistencia', calendario:'Calendario', tabla:'Tabla de turnos', nomina:'Liquidación', historial:'Historial', gastos:'Gastos', inversiones:'Inversiones', parametros:'Parámetros' };
 function toggleDrawer() {
   const drawer = document.getElementById('drawer');
@@ -3571,13 +3581,14 @@ function switchTab(tab) {
   const hb = document.getElementById('hamburgerBtn');
   if (mh) mh.style.display = (!enHome && sesionActiva) ? '' : 'none';
   if (hb) hb.style.display  = (!enHome && sesionActiva) ? '' : 'none';
+  const bb = document.getElementById('backBtn');
+  if (bb) bb.style.display = BACK_MAP[tab] ? '' : 'none';
   // Modo asistencia: sin padding en .app
   // Limpiar modo asistencia en header y vistas anteriores
   document.getElementById('miniHeader')?.classList.remove('modo-asistencia-header');
   document.getElementById('view-asistencia')?.classList.remove('modo-asistencia-view');
-  document.getElementById('view-admin-asistencia')?.classList.remove('modo-asistencia-view');
 
-  if (tab === 'asistencia' || tab === 'admin-asistencia') {
+  if (tab === 'asistencia') {
     // Header fijo en pantalla completa
     document.getElementById('miniHeader')?.classList.add('modo-asistencia-header');
     // Vista de pantalla completa
@@ -3597,7 +3608,6 @@ function switchTab(tab) {
   if (tab === 'inversiones') renderInversiones();
   if (tab === 'historial') renderHistorial();
   if (tab === 'asistencia') initAsistencia();
-  if (tab === 'admin-asistencia') { switchAdminAsiTab('historial'); }
   closeDrawer();
 }
 
@@ -4062,6 +4072,7 @@ function setSession(activa) {
   if (hb) hb.style.display  = (activa && !enHome) ? '' : 'none';
 
   syncShell();
+  mostrarAdminAsistencia();
   // Menú 3 puntos: solo habilitado con sesión activa
   const dotsBtn = document.querySelector('.dots-btn');
   if (dotsBtn) {
@@ -4081,8 +4092,6 @@ function setSession(activa) {
       const btn = document.getElementById(id);
       btn.classList.remove('is-locked');
     });
-    const adminAsiBtn = document.getElementById('ditem-admin-asistencia');
-    if (adminAsiBtn) adminAsiBtn.style.display = '';
   } else {
     // Ícono cerrado
     lockIcon.innerHTML = '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>';
@@ -4092,8 +4101,6 @@ function setSession(activa) {
       const btn = document.getElementById(id);
       btn.classList.add('is-locked');
     });
-    const adminAsiBtn2 = document.getElementById('ditem-admin-asistencia');
-    if (adminAsiBtn2) adminAsiBtn2.style.display = 'none';
   }
 }
 
@@ -6395,10 +6402,15 @@ function initAsistencia() {
   initMapa();
   startGPS();
   renderLogHoy();
-  if (sesionActiva) {
-    document.getElementById('asist-admin-panel').style.display = '';
-    renderSedesPreview();
-  }
+  mostrarAdminAsistencia();
+}
+
+// Sección de administración (historial y sedes) dentro de Asistencia: solo con sesión
+function mostrarAdminAsistencia() {
+  const sec = document.getElementById('asist-admin-section');
+  if (!sec) return;
+  sec.style.display = sesionActiva ? 'flex' : 'none';
+  if (sesionActiva && document.getElementById('view-asistencia')?.classList.contains('active')) switchAdminAsiTab('historial');
 }
 
 // ── MAPA Leaflet ─────────────────────────────────────────────────
@@ -7191,7 +7203,7 @@ function switchAdminAsiTab(tab) {
     if (pan) pan.style.display = on ? 'block' : 'none';
   });
   if (tab === 'historial') renderAdminHistorial();
-  if (tab === 'sedes')     renderAdminSedes();
+  if (tab === 'sedes')     renderSedesPreview();
 }
 
 function renderAdminHistorial() {
@@ -7236,12 +7248,6 @@ function renderAdminHistorial() {
     </tr>`;
   }).join('');
 }
-
-function renderAdminSedes() {
-  // Reusar abrirSedesModal que ya tiene toda la lógica de gestión
-  abrirSedesModal();
-}
-
 
 // ── Registro de asistencia desde el calendario Home ─────────────
 function abrirDiaAsistencia(key) {
