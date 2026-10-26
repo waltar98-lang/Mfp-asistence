@@ -18,6 +18,16 @@
   html { -webkit-text-size-adjust: 100%; }
   body { overscroll-behavior-y: none; }
   button { touch-action: manipulation; }
+  .copy-hint { margin-top:10px; font-size:11px; color:var(--text3); line-height:1.45; text-align:center; }
+  .cal-day[data-turno] { -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; }
+  #calGrid.copy-mode { cursor:copy; }
+  #calGrid.copy-mode .cal-day:hover { background:none; }
+  .cal-day.copy-src { border-color:var(--accent) !important; background:var(--accent-bg); transform:scale(.94); }
+  .cal-day.copy-target { border:1.5px dashed var(--accent) !important; background:var(--accent-bg); }
+  #copyToast { position:fixed; left:50%; bottom:calc(84px + env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:9100;
+    background:var(--text); color:var(--surface); border-radius:12px; padding:10px 14px; font-size:13px; display:none; align-items:center; gap:12px;
+    box-shadow:var(--shadow-md); max-width:92vw; }
+  #copyToast button { background:none; border:none; color:inherit; font-weight:800; text-decoration:underline; cursor:pointer; font-size:13px; font-family:inherit; padding:0; }
   #pwaToast { position:fixed; left:50%; bottom:calc(20px + env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:9000;
     background:var(--surface); color:var(--text); border:1px solid var(--border); border-radius:12px; padding:10px 14px;
     box-shadow:var(--shadow-md); display:none; align-items:center; gap:10px; font-size:13px; max-width:92vw; }
@@ -290,26 +300,27 @@
   .home-card-label { font-size:10px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:.6px; margin-bottom:8px; display:flex; align-items:center; gap:6px; }
   .home-card-value { font-size:26px; font-weight:700; color:var(--text); line-height:1.1; font-variant-numeric:tabular-nums; }
   .home-card-sub { font-size:12px; color:var(--text3); margin-top:4px; }
-  .home-cal-mini { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px 18px; box-shadow:var(--shadow); }
+  .home-cal-mini { min-width:0; overflow:hidden; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:16px 18px; box-shadow:var(--shadow); }
   .home-cal-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; }
   .home-cal-title { font-size:14px; font-weight:700; color:var(--text); }
   .home-cal-sub { font-size:11px; color:var(--text3); }
-  .mini-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+  .mini-grid { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; }
   .mini-day-name { text-align:center; font-size:13px; font-weight:700; color:var(--text3); padding:5px 0; }
-  .mini-day { border-radius:6px; aspect-ratio:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; font-size:15px; font-weight:600; color:var(--text2); }
+  .mini-day { border-radius:6px; aspect-ratio:1; min-width:0; min-height:0; overflow:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px; line-height:1.1; font-size:clamp(12px,3.9vw,15px); font-weight:600; color:var(--text2); }
   .mini-day.today { background:var(--accent); color:white !important; font-weight:700; }
   .mini-day.other-month { opacity:.25; }
   .mini-day.sunday { color:var(--danger); }
   .mini-day.holiday { color:var(--danger); }
   .mini-day.clickable { cursor:pointer; transition:transform .1s, box-shadow .1s; }
-  .mini-day.clickable:hover { transform:scale(1.12); box-shadow:0 2px 8px rgba(37,99,235,.25); }
+  @media (hover:hover) { .mini-day.clickable:hover { transform:scale(1.12); box-shadow:0 2px 8px rgba(37,99,235,.25); } }
   .mini-day.clickable:active { transform:scale(.96); }
-  .asis-dots { display:flex; gap:2px; justify-content:center; margin-top:1px; }
-  .asis-dot { width:5px; height:5px; border-radius:50%; }
+  .asis-dots { display:flex; gap:2px; justify-content:center; margin-top:0; }
+  .asis-dot { width:4px; height:4px; border-radius:50%; }
   .asis-dot.ing { background:var(--success); }
   .asis-dot.sal { background:var(--danger); }
 
   .mini-badge { font-size:7px; font-weight:700; padding:1px 3px; border-radius:2px; line-height:1.2; }
+  .mini-day .mini-badge { font-size:clamp(7px,2.4vw,9px); padding:0 2px; line-height:1.25; max-width:100%; white-space:nowrap; }
   .home-dock { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow); padding:16px 24px; display:flex; align-items:center; justify-content:space-around; }
   .dock-btn { display:flex; flex-direction:column; align-items:center; gap:7px; background:none; border:none; cursor:pointer; padding:8px 16px; border-radius:var(--radius-lg); transition:background .15s; }
   .dock-btn:hover { background:var(--surface2); }
@@ -647,7 +658,6 @@
   td[colspan] { white-space: normal; }
   .modo-asistencia-view { padding-bottom: calc(var(--tabbar-h) + var(--safe-b) + 16px); }
   .home-cal-header .cal-nav { gap: 8px; }
-  #home-legend { grid-template-columns: repeat(auto-fit, minmax(104px, 1fr)) !important; }
 
   @media (max-width: 759px) { .params-grid > div + div { margin-top: var(--sp-4); } }
   /* Botones sólidos con texto blanco: tonos más profundos en modo oscuro para mantener contraste AA */
@@ -676,7 +686,6 @@
   .tarifa-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
   .tarifa-factor { font-size: var(--fs-xs); font-weight: 700; }
   .tarifa-val { font-size: var(--fs-md); font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
-  #horasResumen.is-collapsed { display: none; }
   .quincena-body { overflow-x: auto; }
   @media (max-width: 420px) {
     .app { padding: 12px; padding-top: calc(12px + var(--safe-t)); gap: 12px; }
@@ -778,7 +787,7 @@
         Sincronización
       </button>
     </nav>
-    <div class="drawer-foot">MFP · Mis Finanzas Personales</div>
+    <div class="drawer-foot">MFP · Mis Finanzas Personales · v1.0.7</div>
   </div>
 
   <!-- MINI-HEADER: visible solo fuera del Home -->
@@ -914,8 +923,6 @@
         </div>
         <div class="mini-grid" id="homeMiniDayNames"></div>
         <div class="mini-grid" style="margin-top:3px;" id="homeMiniGrid"></div>
-        <!-- Leyenda 2 filas -->
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px 10px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);" id="home-legend"></div>
       </div>
 
       <!-- INFERIOR: Dock de accesos -->
@@ -959,7 +966,7 @@
 
   <!-- VIEWS -->
   <div id="view-calendario" class="view">
-    <div class="main-grid">
+    <div class="main-grid" style="grid-template-columns:1fr;max-width:760px;margin:0 auto;">
       <!-- Calendario -->
       <div class="panel" style="min-width:0;">
         <div class="panel-header">
@@ -992,47 +999,11 @@
             <div class="legend-item"><span class="tag tag-8">12N</span> 12h noche</div>
             <div class="legend-item"><span class="tag tag-desc">X</span> Descanso 7h</div>
           </div>
+          <div class="copy-hint">💡 Para copiar un turno: mantén presionado un día con turno y arrástralo sobre los demás días; al soltar se copia. En computador: clic y arrastrar.</div>
+          <button class="btn btn-primary" style="width:100%;margin-top:12px;padding:11px;" onclick="switchTab('tabla')">Ver tabla de turnos →</button>
         </div>
       </div>
 
-      <!-- Panel derecho -->
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <!-- Resumen mes -->
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Resumen del mes</div>
-          </div>
-          <div class="panel-body">
-            <div class="summary-grid" id="summaryGrid">
-              <div class="stat-card"><div class="stat-label">Turnos registrados</div><div class="stat-value accent" id="statTurnos">0</div></div>
-              <div class="stat-card"><div class="stat-label">Horas totales</div><div class="stat-value" id="statHoras">0</div></div>
-              <div class="stat-card"><div class="stat-label">Horas nocturnas</div><div class="stat-value" style="color:var(--purple)" id="statNocturnas">0</div></div>
-              <div class="stat-card"><div class="stat-label">Dom + Festivos</div><div class="stat-value" style="color:var(--danger)" id="statDomFest">0</div></div>
-              <div class="stat-card"><div class="stat-label">Descansos</div><div class="stat-value" style="color:var(--success)" id="statDescansos">0</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Conceptos generados -->
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title" style="cursor:pointer;user-select:none;" onclick="toggleConceptos()" title="Mostrar/ocultar">
-              Conceptos generados
-              <span id="conceptosToggleIcon" style="font-size:11px;color:var(--text3);margin-left:4px;">▾</span>
-            </div>
-            <div style="display:flex;gap:6px;">
-              <button class="btn btn-sm btn-outline" onclick="toggleConceptos()" id="conceptosToggleBtn" style="font-size:11px;">Ocultar</button>
-              <button class="btn btn-sm btn-primary" onclick="switchTab('tabla')">Ver tabla de turnos →</button>
-            </div>
-          </div>
-          <div class="panel-body" id="conceptosPanel" style="transition:max-height .25s ease,opacity .2s;">
-            <div class="empty-state">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto;color:var(--text3)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              <p>Ingresa turnos en el calendario para ver los conceptos generados</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -1040,8 +1011,9 @@
   <div id="view-tabla" class="view">
     <div class="panel">
       <div class="panel-header">
-        <div class="panel-title">Tabla detallada de turnos y conceptos</div>
-        <div style="display:flex;align-items:center;gap:8px;">
+        <div class="panel-title">Tabla detallada de turnos</div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="switchTab('calendario')">← Regresar al calendario</button>
           <span style="font-size:12px;color:var(--text3)" id="tablaMonth"></span>
           <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="exportarTablaCSV()" title="Exportar tabla a CSV">⬇ Exportar CSV</button>
           <button class="btn btn-sm btn-primary" style="font-size:11px;" onclick="switchTab('nomina')">Ver liquidación →</button>
@@ -1064,8 +1036,6 @@
                 <th rowspan="2" class="num">H. ext. dom./fest.</th>
                 <th rowspan="2" class="num">H. ext. dom./fest. noct.</th>
                 <th colspan="3" style="text-align:center;background:var(--success-bg);color:var(--success);border-bottom:1px solid var(--border);">Pacto Colectivo</th>
-              <th rowspan="2">Conceptos</th>
-                <th rowspan="2" class="num" style="background:var(--accent-bg);color:var(--accent);border-left:2px solid var(--accent-light);white-space:nowrap;">Devengado ($)</th>
               </tr>
               <tr>
                 <th class="num" style="background:var(--success-bg);color:var(--success);font-size:11px;" id="th-cena">Aux. cena</th>
@@ -1074,7 +1044,7 @@
               </tr>
             </thead>
             <tbody id="turnosBody">
-              <tr><td colspan="17" style="text-align:center;padding:32px;color:var(--text3)">No hay turnos registrados en este mes</td></tr>
+              <tr><td colspan="14" style="text-align:center;padding:32px;color:var(--text3)">No hay turnos registrados en este mes</td></tr>
             </tbody>
             <tfoot id="turnosFoot"></tfoot>
           </table>
@@ -1090,6 +1060,7 @@
         <div class="panel-header">
           <div class="panel-title">Liquidación de nómina</div>
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-sm btn-outline" style="font-size:11px;" onclick="switchTab('tabla')">← Regresar a la tabla de turnos</button>
             <span style="font-size:12px;color:var(--text3)" id="nominaMonth"></span>
             <button class="btn btn-sm" style="background:var(--success);color:white;font-size:11px;" onclick="guardarMesHistorial()" title="Guardar este mes en el historial">
               💾 Guardar historial
@@ -1104,13 +1075,7 @@
           <div class="empty-state"><p>Ingresa turnos en el calendario para calcular la liquidación</p></div>
         </div>
       </div>
-      <div class="panel" id="horasResumenPanel" style="display:none;">
-        <div class="panel-header">
-          <div class="panel-title">Resumen de horas del mes</div>
-          <button class="btn btn-sm btn-outline" id="btnResumenToggle" onclick="toggleResumenMes()" aria-expanded="true">Ocultar</button>
-        </div>
-        <div class="panel-body" id="horasResumen"></div>
-      </div>
+      <button class="btn btn-outline" style="width:100%;padding:11px;" onclick="switchTab('tabla')">← Regresar a la tabla de turnos</button>
     </div>
   </div>
 
@@ -2080,6 +2045,8 @@
   </div>
 
 
+<div id="copyToast" role="status" aria-live="polite"></div>
+
 <!-- TURN PICKER OVERLAY -->
 <div id="overlay" style="display:none;position:fixed;inset:0;z-index:50;" onclick="closeAllPickers()"></div>
 
@@ -2328,6 +2295,8 @@ function renderCalendar() {
 
     cell.innerHTML = inner;
     cell.style.position = 'relative';
+    cell.dataset.key = key;
+    if (turno && TURNOS[turno]) cell.dataset.turno = turno;
     cell.addEventListener('click', (e) => openPicker(e, cell, key, dom, fest));
     grid.appendChild(cell);
   }
@@ -2342,7 +2311,6 @@ function renderCalendar() {
     grid.appendChild(cell);
   }
 
-  updateSummary();
   renderTabla();
   renderNomina();
 }
@@ -2414,6 +2382,109 @@ function setTurno(key, tipo, btn) {
   closeAllPickers();
   renderCalendar();
 }
+
+
+// ===== COPIAR TURNO ARRASTRANDO =====
+// Mantén presionado un día con turno (táctil) o arrastra con el mouse y suelta
+// sobre otros días: el turno se copia a cada día por el que pasaste.
+(function () {
+  const grid = document.getElementById('calGrid');
+  const toast = document.getElementById('copyToast');
+  if (!grid || !toast) return;
+  const HOLD_MS = 350, MOVE_PX = 8;
+  let st = null, suppressClick = false, toastTimer = null;
+
+  const cellAt = (x, y) => {
+    const el = document.elementFromPoint(x, y);
+    return el && el.closest ? el.closest('#calGrid .cal-day[data-key]') : null;
+  };
+  const reset = () => {
+    if (st && st.timer) clearTimeout(st.timer);
+    grid.classList.remove('copy-mode');
+    grid.querySelectorAll('.copy-src,.copy-target').forEach(c => c.classList.remove('copy-src', 'copy-target'));
+    st = null;
+  };
+  const arm = () => {
+    if (!st || st.armed) return;
+    st.armed = true;
+    grid.classList.add('copy-mode');
+    st.cell.classList.add('copy-src');
+    if (navigator.vibrate) try { navigator.vibrate(15); } catch (_) {}
+  };
+
+  grid.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    const cell = e.target.closest('.cal-day[data-turno]');
+    if (!cell) return;
+    closeAllPickers();
+    st = { cell, key: cell.dataset.key, tipo: cell.dataset.turno, x: e.clientX, y: e.clientY,
+           touch: e.pointerType !== 'mouse', armed: false, targets: new Set(), timer: null };
+    if (st.touch) st.timer = setTimeout(arm, HOLD_MS);
+  });
+
+  grid.addEventListener('pointermove', e => {
+    if (!st) return;
+    if (!st.armed) {
+      if (Math.hypot(e.clientX - st.x, e.clientY - st.y) > MOVE_PX) {
+        if (st.touch) reset();      // el dedo se movió antes del tiempo: es un scroll
+        else arm();                 // mouse: arrastre inmediato
+      }
+      return;
+    }
+    const c = cellAt(e.clientX, e.clientY);
+    if (c && c.dataset.key !== st.key && !st.targets.has(c.dataset.key)) {
+      st.targets.add(c.dataset.key);
+      c.classList.add('copy-target');
+    }
+  });
+
+  // Con el turno "agarrado" evitar que la pantalla se desplace
+  grid.addEventListener('touchmove', e => { if (st && st.armed) e.preventDefault(); }, { passive: false });
+  grid.addEventListener('contextmenu', e => { if (e.target.closest('.cal-day[data-turno]')) e.preventDefault(); });
+
+  // Evitar que el clic posterior al arrastre abra el selector de turnos
+  grid.addEventListener('click', e => {
+    if (suppressClick) { e.stopPropagation(); e.preventDefault(); suppressClick = false; }
+  }, true);
+
+  const finish = e => {
+    if (!st) return;
+    const armed = st.armed, tipo = st.tipo, keys = [...st.targets];
+    if (armed) {
+      suppressClick = true; setTimeout(() => { suppressClick = false; }, 80);
+      const c = cellAt(e.clientX, e.clientY);
+      if (c && c.dataset.key !== st.key) keys.push(c.dataset.key);
+    }
+    reset();
+    if (!armed) return;
+    const dest = [...new Set(keys)];
+    if (!dest.length) return;
+    const previo = {};
+    dest.forEach(k => { previo[k] = turnos[k]; turnos[k] = tipo; });
+    localStorage.setItem('turnos_col', JSON.stringify(turnos));
+    renderCalendar();
+    avisar(`Turno ${TURNOS[tipo]?.cod || tipo} copiado a ${dest.length} día${dest.length > 1 ? 's' : ''}`, () => {
+      dest.forEach(k => { if (previo[k] === undefined) delete turnos[k]; else turnos[k] = previo[k]; });
+      localStorage.setItem('turnos_col', JSON.stringify(turnos));
+      renderCalendar();
+    });
+  };
+  grid.addEventListener('pointerup', finish);
+  grid.addEventListener('pointercancel', reset);
+  // Si se suelta fuera del calendario
+  document.addEventListener('pointerup', e => { if (st && !grid.contains(e.target)) finish(e); });
+
+  function avisar(texto, deshacer) {
+    toast.innerHTML = '';
+    const s = document.createElement('span'); s.textContent = texto;
+    const b = document.createElement('button'); b.textContent = 'Deshacer';
+    b.onclick = () => { clearTimeout(toastTimer); toast.style.display = 'none'; deshacer(); };
+    toast.append(s, b);
+    toast.style.display = 'flex';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toast.style.display = 'none'; }, 7000);
+  }
+})();
 
 // ===== LÓGICA CONCEPTOS =====
 // Principio: TODOS los turnos generan 7h ordinarias (hOrd = maxOrd siempre).
@@ -2526,60 +2597,6 @@ function getMonthTurnos() {
     .sort(([a],[b]) => a.localeCompare(b));
 }
 
-// ===== SUMMARY =====
-function updateSummary() {
-  const mt = getMonthTurnos();
-  let totalH = 0, noct = 0, domFest = 0, descansos = 0;
-
-  mt.forEach(([k, t]) => {
-    const c = calcConceptos(k, t);
-    totalH += c.horas;
-    noct   += c.horasNoct;
-    if (c.dom || c.fest) domFest++;
-    if (c.descanso) descansos++;
-  });
-
-  document.getElementById('statTurnos').textContent   = mt.length;
-  document.getElementById('statHoras').textContent    = totalH;
-  document.getElementById('statNocturnas').textContent = noct;
-  document.getElementById('statDomFest').textContent   = domFest;
-  document.getElementById('statDescansos').textContent = descansos;
-
-  // Conceptos panel
-  const panel = document.getElementById('conceptosPanel');
-  if (mt.length === 0) {
-    panel.innerHTML = `<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto;color:var(--text3)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><p>Ingresa turnos en el calendario para ver los conceptos generados</p></div>`;
-    return;
-  }
-
-  let totales = { hOrd:0, hNoct:0, hED:0, hEN:0, hRDD:0, hRDN:0, hFest:0, hFestN:0, hHEDD:0, hHEDN:0 };
-  mt.forEach(([k, t]) => {
-    const c = calcConceptos(k, t);
-    Object.keys(totales).forEach(key => totales[key] += (c[key] || 0));
-  });
-
-  const conceptDefs = [
-    { key: 'hOrd',   label: 'Horas ordinarias diurnas (6am–7pm)',                          color: 'var(--accent)'  },
-    { key: 'hNoct',  label: `Rec. nocturno +${params.rn}% (7pm–6am · Ley 2466/2025)`,     color: 'var(--purple)'  },
-    { key: 'hED',    label: `H. extra diurna +${params.hed}% (6am–7pm)`,                   color: 'var(--success)' },
-    { key: 'hEN',    label: `H. extra nocturna +${params.hen}% (7pm–6am)`,                 color: 'var(--warning)' },
-    { key: 'hRDD',   label: `Rec. dom./fest. diurno +${params.rdd}% (Ley 2466/2025)`,      color: 'var(--danger)'  },
-    { key: 'hRDN',   label: `Rec. dom./fest. noct. +${params.rdn}% (+${params.rdd}+${params.rn})`, color: '#B91C1C' },
-    { key: 'hFest',  label: `Festivo diurno +${params.fest}% (Ley 2466/2025)`,             color: 'var(--danger)'  },
-    { key: 'hFestN', label: `Festivo noct. +${params.festn}% (+${params.fest}+${params.rn})`,      color: '#B91C1C' },
-  ];
-
-  panel.innerHTML = conceptDefs.filter(c => totales[c.key] > 0).map(c =>
-    `<div class="nomina-row">
-      <span class="nomina-label" style="display:flex;align-items:center;gap:6px;">
-        <span style="width:8px;height:8px;border-radius:50%;background:${c.color};flex-shrink:0;"></span>
-        ${c.label}
-      </span>
-      <span class="nomina-val">${totales[c.key].toFixed(1)}h</span>
-    </div>`
-  ).join('') || '<p style="color:var(--text3);font-size:12px;">No hay conceptos especiales este mes</p>';
-}
-
 // ===== TABLA =====
 function renderTabla() {
   const mt = getMonthTurnos();
@@ -2618,7 +2635,7 @@ function renderTabla() {
   if (thTransp)   thTransp.textContent   = getNombre(4, 'Aux. ext. transp.');
 
   if (mt.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="17" style="text-align:center;padding:32px;color:var(--text3)">No hay turnos registrados en este mes</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="14" style="text-align:center;padding:32px;color:var(--text3)">No hay turnos registrados en este mes</td></tr>`;
     tfoot.innerHTML = '';
     return;
   }
@@ -2649,17 +2666,6 @@ function renderTabla() {
     tots.transporte+= aux.transporte;
     tots.valorTotal += Object.values(c.valor).reduce((a,b) => a+b, 0);
 
-    const _vhBase = params.salario/(params.dias*params.horas_dia);
-    const _fmtM = n => '$'+Math.round(n).toLocaleString('es-CO');
-    const chips = [];
-    if (c.hNoct > 0) chips.push(`<span class="concept-chip" style="background:var(--purple-bg);border-color:var(--purple-border);color:var(--purple-strong);">RN ${c.hNoct}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hNoct)}</span></span>`);
-    if (c.hED   > 0) chips.push(`<span class="concept-chip" style="background:var(--success-bg);border-color:var(--success-border);color:var(--success-strong);">HED ${c.hED}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hED)}</span></span>`);
-    if (c.hEN   > 0) chips.push(`<span class="concept-chip" style="background:var(--warning-bg);border-color:var(--warning-border);color:var(--warning-strong);">HEN ${c.hEN}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hEN)}</span></span>`);
-    if (c.hRDD+c.hFest > 0) chips.push(`<span class="concept-chip" style="background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger-strong);">DOM/FEST ${c.hRDD+c.hFest}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM((c.valor.hRDD||0)+(c.valor.hFest||0))}</span></span>`);
-    if (c.hRDN+c.hFestN > 0) chips.push(`<span class="concept-chip" style="background:var(--danger-bg);border-color:var(--danger-border);color:#991B1B;">DOM/N ${c.hRDN+c.hFestN}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM((c.valor.hRDN||0)+(c.valor.hFestN||0))}</span></span>`);
-    if (c.hHEDD > 0) chips.push(`<span class="concept-chip" style="background:var(--accent-bg);border-color:var(--accent-light);color:var(--accent-strong);">HEDD ${c.hHEDD}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hHEDD)}</span></span>`);
-    if (c.hHEDN > 0) chips.push(`<span class="concept-chip" style="background:var(--accent-bg);border-color:var(--accent-light);color:var(--accent-strong);">HEDN ${c.hHEDN}h&nbsp;<span style="font-size:10px;opacity:.85;">${_fmtM(c.valor.hHEDN)}</span></span>`);
-
     // Mostrar cantidad: 1 con color verde, 0 normal
     const fmtQ = v => v === 1
       ? `<span style="color:var(--success);font-weight:700;">1</span>`
@@ -2680,8 +2686,6 @@ function renderTabla() {
       <td class="num" style="background:var(--success-bg);">${fmtQ(aux.cena)}</td>
       <td class="num" style="background:var(--success-bg);">${fmtQ(aux.almuerzo)}</td>
       <td class="num" style="background:var(--success-bg);">${fmtQ(aux.transporte)}</td>
-      <td>${chips.join('')}</td>
-      <td class="num" style="background:var(--accent-bg);font-weight:700;color:var(--accent);border-left:2px solid var(--accent-light);">${fmt(Object.values(c.valor).reduce((a,b)=>a+b,0))}</td>
     </tr>`;
   }).join('');
 
@@ -2700,8 +2704,6 @@ function renderTabla() {
     <td class="num" style="background:var(--success-bg);">${fmtTot(tots.cena)}</td>
     <td class="num" style="background:var(--success-bg);">${fmtTot(tots.almuerzo)}</td>
     <td class="num" style="background:var(--success-bg);">${fmtTot(tots.transporte)}</td>
-    <td></td>
-    <td class="num" style="background:var(--accent-bg);font-weight:800;color:var(--accent);border-left:2px solid var(--accent-light);">${fmt(tots.valorTotal)}</td>
   </tr>`;
 }
 
@@ -2799,49 +2801,6 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
   // Horas reales = ordinarias (base de todas, incl. dom/noct) + extras de todo tipo
   const totalH = (tots.hOrd||0)+(tots.hED||0)+(tots.hEN||0)+(tots.hHEDD||0)+(tots.hHEDN||0);
 
-  // ── Desglose diario por concepto y valor ──
-  const detalleRows = (() => {
-    if (!turnos_q.length) return '<tr><td colspan="5" style="text-align:center;padding:8px;color:var(--text3);font-size:11px;">Sin turnos en esta quincena</td></tr>';
-    const vF = n => '$'+Math.round(n).toLocaleString('es-CO');
-    return turnos_q.map(([k, t]) => {
-      const cd  = calcConceptos(k, t);
-      const [,, dd] = k.split('-');
-      const dow = DIAS[parseLocalDate(k).getDay()];
-      const tr  = TURNOS[t];
-      const vlbl = t==='T12'?'12D':t==='N12'?'12N':t==='DSC'?'X':t;
-      const vd  = Object.values(cd.valor).reduce((a,b)=>a+b, 0);
-
-      // Construir chips: [etiqueta, color, bg, horas, valor]
-      const ci = [];
-      if (cd.hOrd>0)  ci.push(['ord',  'var(--accent)', 'var(--accent-bg)', cd.hOrd,  cd.valor.hOrd]);
-      if (cd.hNoct>0) ci.push(['RN',   'var(--purple)',       'var(--purple-soft)', cd.hNoct, cd.valor.hNoct]);
-      if (cd.hED>0)   ci.push(['HED',  'var(--success)',       'var(--success-soft)', cd.hED,   cd.valor.hED]);
-      if (cd.hEN>0)   ci.push(['HEN',  'var(--warning)',       'var(--warning-soft)', cd.hEN,   cd.valor.hEN]);
-      const hDF=(cd.hRDD||0)+(cd.hFest||0),  vDF=(cd.valor.hRDD||0)+(cd.valor.hFest||0);
-      const hDFN=(cd.hRDN||0)+(cd.hFestN||0),vDFN=(cd.valor.hRDN||0)+(cd.valor.hFestN||0);
-      if (hDF>0)       ci.push(['RD',   'var(--danger)',       'var(--danger-soft)', hDF,      vDF]);
-      if (hDFN>0)      ci.push(['RDN',  'var(--danger-strong)',       'var(--danger-soft)', hDFN,     vDFN]);
-      if (cd.hHEDD>0)  ci.push(['HEDD', 'var(--accent-strong)',       'var(--accent-bg)', cd.hHEDD, cd.valor.hHEDD]);
-      if (cd.hHEDN>0)  ci.push(['HEDN', 'var(--purple)',       'var(--purple-soft)', cd.hHEDN, cd.valor.hHEDN]);
-
-      const chips = ci.map(([lb,col,bg,h,v]) =>
-        '<span style="display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;'
-        +'padding:1px 5px;border-radius:3px;white-space:nowrap;background:'+bg+';color:'+col+';">'
-        +lb+'\u00a0'+h+'h\u00a0'
-        +'<span style="font-weight:400;opacity:.8;">'+vF(v)+'</span></span>'
-      ).join('\u00a0 ');
-
-      return '<tr style="border-bottom:1px solid var(--border);">'
-        +'<td style="padding:5px 8px;font-weight:700;font-size:11px;color:var(--text);white-space:nowrap;">'+dd+'</td>'
-        +'<td style="padding:5px 4px;font-size:11px;color:var(--text3);white-space:nowrap;">'+dow+'</td>'
-        +'<td style="padding:5px 4px;text-align:center;">'
-          +'<span class="tag tag-'+tr.color+'" style="font-size:10px;padding:1px 5px;">'+vlbl+'</span></td>'
-        +'<td style="padding:5px 8px;font-size:11px;line-height:1.9;">'+chips+'</td>'
-        +'<td style="padding:5px 8px;text-align:right;font-weight:700;font-size:11px;'
-          +'color:var(--success);white-space:nowrap;">'+vF(vd)+'</td>'
-        +'</tr>';
-    }).join('');
-  })();
 
   const despBtn = qnum
     ? '<button class="btn btn-sm btn-outline" onclick="generarDesprendible('+qnum+')">📄 Desprendible</button>'
@@ -2894,19 +2853,6 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
         <div style="font-size:11px;color:var(--text3);padding:3px 8px 8px;">§ Valor/h para <span style="color:#4338CA;font-weight:600;">adic.</span>: solo el recargo adicional (la hora base ya está en "Hora base ordinaria"). Para <span style="color:var(--success);font-weight:600;">extra</span>: valor total de la hora.</div>` :
         `<div style="color:var(--text3);font-size:12px;padding:8px 0;">Sin turnos registrados en esta quincena</div>`}
 
-      <div class="section-label" style="margin-top:12px;margin-bottom:5px;">Desglose diario — horas · concepto · valor (Ley 2466/2025)</div>
-      <div style="overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;">
-        <table style="width:100%;border-collapse:collapse;min-width:340px;">
-          <thead><tr style="background:var(--surface2);">
-            <th style="font-size:11px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border);text-align:left;width:30px;">Día</th>
-            <th style="font-size:11px;color:var(--text3);padding:5px 4px;border-bottom:1px solid var(--border);width:26px;"></th>
-            <th style="font-size:11px;color:var(--text3);padding:5px 4px;border-bottom:1px solid var(--border);width:34px;text-align:center;">Turno</th>
-            <th style="font-size:11px;color:var(--text3);padding:5px 8px;border-bottom:1px solid var(--border);">Conceptos generados</th>
-            <th style="font-size:11px;color:var(--success);font-weight:700;padding:5px 8px;border-bottom:1px solid var(--border);text-align:right;width:80px;">Valor ($)</th>
-          </tr></thead>
-          <tbody>${detalleRows}</tbody>
-        </table>
-      </div>
       <div class="nomina-row" style="padding:7px 0;border-top:2px solid var(--border);">
         <span style="font-size:13px;font-weight:700;">Salario bruto</span>
         <span style="font-weight:700;font-size:13px;color:var(--success);">${fmt(devTurnos)}</span>
@@ -3014,34 +2960,15 @@ function renderTarifasVigentes() {
     </div>`;
 }
 
-// ===== Resumen de horas del mes: mostrar / ocultar =====
-function aplicarResumenOculto() {
-  let oculto = false;
-  try { oculto = localStorage.getItem('mfp_resumen_oculto') === '1'; } catch(e) {}
-  document.getElementById('horasResumen')?.classList.toggle('is-collapsed', oculto);
-  const b = document.getElementById('btnResumenToggle');
-  if (b) { b.textContent = oculto ? 'Mostrar' : 'Ocultar'; b.setAttribute('aria-expanded', String(!oculto)); }
-}
-function toggleResumenMes() {
-  let oculto = false;
-  try { oculto = localStorage.getItem('mfp_resumen_oculto') === '1'; localStorage.setItem('mfp_resumen_oculto', oculto ? '0' : '1'); } catch(e) {}
-  aplicarResumenOculto();
-}
-
 function renderNomina() {
   renderTarifasVigentes();
-  aplicarResumenOculto();
   const mt = getMonthTurnos();
   const nominaBody = document.getElementById('nominaBody');
-  const horasRes = document.getElementById('horasResumen');
 
   if (mt.length === 0) {
     nominaBody.innerHTML = `<div class="empty-state"><p>Ingresa turnos en el calendario para calcular la liquidación</p></div>`;
-    horasRes.innerHTML = '';
-    document.getElementById('horasResumenPanel').style.display = 'none';
     return;
   }
-  document.getElementById('horasResumenPanel').style.display = '';
 
   const lastDay = new Date(currentYear, currentMonth + 1, 0).getDate();
   const q1 = mt.filter(([k]) => { const d = parseInt(k.split('-')[2]); return d >= 1 && d <= 15; });
@@ -3074,44 +3001,6 @@ function renderNomina() {
         </div>
         <div class="nomina-total-val">${fmt(netoMes)}</div>
       </div>
-    </div>`;
-
-  // Resumen de horas (mes completo)
-  let tots = { hOrd:0, hNoct:0, hED:0, hEN:0, hRDD:0, hRDN:0, hFest:0, hFestN:0, hHEDD:0, hHEDN:0 };
-  mt.forEach(([k, t]) => {
-    const c = calcConceptos(k, t);
-    Object.keys(tots).forEach(key => tots[key] += (c[key]||0));
-  });
-
-  horasRes.innerHTML = `
-    <div class="section-label">Distribución de horas — mes completo</div>
-    ${[
-      { label: 'Ordinarias diurnas', val: tots.hOrd, color: 'var(--accent)' },
-      { label: 'Recargo nocturno', val: tots.hNoct, color: 'var(--purple)' },
-      { label: 'Extra diurna', val: tots.hED, color: 'var(--success)' },
-      { label: 'Extra nocturna', val: tots.hEN, color: 'var(--warning)' },
-      { label: 'Dom. diurno', val: tots.hRDD, color: 'var(--danger)' },
-      { label: 'Dom. nocturno', val: tots.hRDN, color: '#B91C1C' },
-      { label: 'Festivo diurno', val: tots.hFest, color: 'var(--danger)' },
-      { label: 'Festivo nocturno', val: tots.hFestN, color: '#B91C1C' },
-    ].filter(r => r.val > 0).map(r => {
-      // Total real de horas trabajadas: hOrd (incluye dom/fest) + horas extras
-      // hNoct/hRDD/hRDN/hFest/hFestN son subconjuntos de hOrd → no sumar para evitar doble conteo
-      const total = (tots.hOrd||0) + (tots.hED||0) + (tots.hEN||0) + (tots.hHEDD||0) + (tots.hHEDN||0);
-      const pct = total > 0 ? (r.val/total*100).toFixed(0) : 0;
-      return `<div style="margin-bottom:10px;">
-        <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;">
-          <span style="color:var(--text2)">${r.label}</span>
-          <span style="font-weight:600;">${r.val.toFixed(0)}h (${pct}%)</span>
-        </div>
-        <div style="background:var(--surface2);border-radius:4px;height:6px;overflow:hidden;">
-          <div style="width:${pct}%;height:100%;background:${r.color};border-radius:4px;transition:width 0.3s;"></div>
-        </div>
-      </div>`;
-    }).join('')}
-    <div style="border-top:1px solid var(--border);padding-top:10px;margin-top:4px;">
-      <div class="nomina-row"><span style="font-size:12px;color:var(--text2);">1ª Quincena (1–15)</span><span style="font-weight:600;font-size:12px;">${fmt(rq1.neto)}</span></div>
-      <div class="nomina-row"><span style="font-size:12px;color:var(--text2);">2ª Quincena (16–${lastDay})</span><span style="font-weight:600;font-size:12px;">${fmt(rq2.neto)}</span></div>
     </div>`;
 }
 
@@ -3554,7 +3443,6 @@ function saveParams() {
   };
   localStorage.setItem('params_col', JSON.stringify(params));
   renderNomina();
-  updateSummary();
   const btn = document.getElementById('btnGuardarParams');
   const orig = btn.textContent;
   btn.textContent = '✓ Guardado';
@@ -3579,7 +3467,6 @@ function resetParams() {
   localStorage.setItem('params_col', JSON.stringify(params));
   loadParamsUI();
   renderNomina();
-  updateSummary();
   const btn = document.getElementById('btnGuardarParams');
   btn.textContent = '✓ Actualizados';
   btn.style.background = 'var(--success)';
@@ -3840,7 +3727,6 @@ function renderHomeMini() {
   const sub   = document.getElementById('home-cal-sub');
   const names = document.getElementById('homeMiniDayNames');
   const grid  = document.getElementById('homeMiniGrid');
-  const legend= document.getElementById('home-legend');
   if (!grid) return;
 
   title.textContent = `${MESES[homeMonth]} ${homeYear}`;
@@ -3880,19 +3766,19 @@ function renderHomeMini() {
     if (isToday)          cls += ' today';
     else if (isSun||isFest) cls += ' sunday';
     // clickable solo si hay sesion activa y no es día futuro
-    if (sesionActiva && !esFuturo) cls += ' clickable';
+    if (!esFuturo) cls += ' clickable';
 
     const badge = t ? `<span class="mini-badge badge-${TURNOS[t].color}">${t==='T12'?'12D':t==='N12'?'12N':t==='DSC'?'X':t}</span>` : '';
 
     // Puntos de asistencia registrada
-    const regsDay = sesionActiva ? getRegistros().filter(r => r.fecha && localKey(r.fecha) === key) : [];
+    const regsDay = getRegistros().filter(r => r.fecha && localKey(r.fecha) === key);
     const tieneIng = regsDay.some(r => r.tipo === 'ingreso');
     const tieneSal = regsDay.some(r => r.tipo === 'salida');
     const dots = (tieneIng || tieneSal)
       ? `<div class="asis-dots">${tieneIng?'<span class="asis-dot ing"></span>':''}${tieneSal?'<span class="asis-dot sal"></span>':''}</div>`
       : '';
 
-    const click = (sesionActiva && !esFuturo) ? `onclick="abrirDiaAsistencia('${key}')"` : '';
+    const click = !esFuturo ? `onclick="abrirDiaAsistencia('${key}')"` : '';
     cells += `<div class="${cls}" ${click}>${d}${badge}${dots}</div>`;
   }
   // Fill
@@ -3902,13 +3788,6 @@ function renderHomeMini() {
     cells += `<div class="mini-day other-month">${i}</div>`;
   }
   grid.innerHTML = cells;
-
-  // Leyenda dinámica desde TURNOS
-  legend.innerHTML = Object.entries(TURNOS).map(([k, v]) =>
-    `<div style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--text2);">
-      <span class="mini-badge badge-${v.color}" style="font-size:11px;padding:2px 5px;">${esc(v.cod||k.slice(0,4))}</span>${esc(v.label.split(' ').slice(0,2).join(' '))}
-    </div>`
-  ).join('');
 }
 
 function homeChangeMonth(dir) {
@@ -6096,20 +5975,6 @@ function verificarVencimientosCDT() {
 }
 
 
-// ══ Toggle panel conceptos generados ══
-let _conceptosVisible = true;
-function toggleConceptos() {
-  _conceptosVisible = !_conceptosVisible;
-  const panel = document.getElementById('conceptosPanel');
-  const icon  = document.getElementById('conceptosToggleIcon');
-  const btn   = document.getElementById('conceptosToggleBtn');
-  if (panel) {
-    panel.style.display = _conceptosVisible ? '' : 'none';
-  }
-  if (icon)  icon.textContent  = _conceptosVisible ? '▾' : '▸';
-  if (btn)   btn.textContent   = _conceptosVisible ? 'Ocultar' : 'Mostrar';
-}
-
 // ══ Exportar tabla de turnos a CSV ══
 function exportarTablaCSV() {
   const mt = getMonthTurnos();
@@ -7380,7 +7245,6 @@ function renderAdminSedes() {
 
 // ── Registro de asistencia desde el calendario Home ─────────────
 function abrirDiaAsistencia(key) {
-  if (!sesionActiva) return;
 
   // Si GPS no ha arrancado aún (no se ha visitado la pestaña Asistencia),
   // iniciarlo en segundo plano para que esté listo cuando el usuario pulse Registrar
