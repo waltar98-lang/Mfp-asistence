@@ -297,7 +297,13 @@
   .btn-outline:hover { background: var(--surface2); }
 
   /* LEGEND */
-  .legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--border); position: relative; z-index: 0; }
+  #calGrid { padding-bottom: 4px; }
+  @media (orientation:landscape) and (max-height:520px) {
+    .cal-day { aspect-ratio: auto; min-height: 46px; }
+    .mini-day { aspect-ratio: auto; min-height: 34px; }
+    #view-calendario .main-grid { max-width: 100% !important; }
+  }
   .legend-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text2); }
 
   /* VIEW SWITCH */
@@ -807,7 +813,7 @@
         Sincronización
       </button>
     </nav>
-    <div class="drawer-foot">MFP · Mis Finanzas Personales · v1.0.9</div>
+    <div class="drawer-foot">MFP · Mis Finanzas Personales · v1.1.0</div>
   </div>
 
   <!-- MINI-HEADER: visible solo fuera del Home -->
@@ -2632,7 +2638,7 @@ function renderTabla() {
   // Actualizar encabezados con nombre real del pacto
   const getNombre = (id, def) => {
     const c = pactoConceptos.find(p => p.id === id);
-    return c ? c.concepto : def;
+    return c ? abrevPacto(c.concepto) : def;
   };
   const thCena = document.getElementById('th-cena');
   const thAlmuerzo = document.getElementById('th-almuerzo');
@@ -2800,9 +2806,9 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
   const getPactoVal    = (id) => { const c = pactoConceptos.find(p=>p.id===id); return c ? c.valor : 0; };
 
   const pactoItems = [
-    { id:2, cant:cantCena,       label: pactoConceptos.find(p=>p.id===2)?.concepto || 'Aux. cena'            },
-    { id:3, cant:cantAlmuerzo,   label: pactoConceptos.find(p=>p.id===3)?.concepto || 'Aux. almuerzo'        },
-    { id:4, cant:cantTransporte, label: pactoConceptos.find(p=>p.id===4)?.concepto || 'Aux. ext. transporte' },
+    { id:2, cant:cantCena,       label: abrevPacto(pactoConceptos.find(p=>p.id===2)?.concepto) || 'Aux. cena' },
+    { id:3, cant:cantAlmuerzo,   label: abrevPacto(pactoConceptos.find(p=>p.id===3)?.concepto) || 'Aux. almuerzo' },
+    { id:4, cant:cantTransporte, label: abrevPacto(pactoConceptos.find(p=>p.id===4)?.concepto) || 'Aux. ext. transporte' },
   ].filter(p => p.cant > 0);
 
   // Horas reales = ordinarias (base de todas, incl. dom/noct) + extras de todo tipo
@@ -2883,7 +2889,7 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
           </tr></thead>
           <tbody>
             ${getPactoVal(1) > 0 ? `<tr>
-              <td class="l" style="color:var(--text2);">${pactoConceptos.find(p=>p.id===1)?.concepto||'Aux. alimentación'} <span style="font-size:10px;color:var(--text3);">(fijo quincena)</span></td>
+              <td class="l" style="color:var(--text2);">${abrevPacto(pactoConceptos.find(p=>p.id===1)?.concepto)||'Aux. alimentación'} <span style="font-size:10px;color:var(--text3);">(quinc.)</span></td>
               <td class="r" style="font-weight:500;">1</td>
               <td class="r" style="color:var(--text3);">${fmt(getPactoVal(1))}</td>
               <td class="r" style="font-weight:600;color:var(--success);">${fmt(getPactoVal(1))}</td>
@@ -2926,6 +2932,12 @@ function buildQuincenaHTML(q, label, dateRange, turnos_q, qnum = 0) {
       </div>
     </div>
   </div>`;
+}
+
+// Abrevia nombres del pacto colectivo para que las tablas no se extiendan
+function abrevPacto(t) {
+  return String(t||'').replace(/Auxilio extralegal de transporte/i,'Aux. transp. extralegal')
+    .replace(/Auxilio de alimentaci[oó]n/i,'Aux. alimentación').replace(/Auxilio de /i,'Aux. ').replace(/Auxilio /i,'Aux. ');
 }
 
 // ===== TARIFAS VIGENTES (una sola vez, bajo el título de Liquidación) =====
@@ -3636,18 +3648,44 @@ updateClock();
 // --- Clima ---
 // Estrategia: 1) detectar ubicación vía ipwho.is (CORS libre), 2) consultar open-meteo
 // Fallback: Bogotá si geolocalización falla
+function _posGPS() {
+  return new Promise(res => {
+    if (!navigator.geolocation) return res(null);
+    navigator.geolocation.getCurrentPosition(
+      p => res({ lat:p.coords.latitude, lon:p.coords.longitude }),
+      () => res(null),
+      { enableHighAccuracy:false, timeout:8000, maximumAge:10*60*1000 });
+  });
+}
 async function loadClima() {
-  let lat = 4.711, lon = -74.0721, ciudad = 'Bogotá';
-  try {
-    const locRes = await fetch('https://ipwho.is/');
-    if (locRes.ok) {
-      const loc = await locRes.json();
-      if (loc.success && loc.latitude) {
-        lat = loc.latitude; lon = loc.longitude;
-        ciudad = loc.city || loc.region || 'Colombia';
-      }
+  let lat = 4.711, lon = -74.0721, ciudad = 'Bogotá', origen = 'defecto';
+  // 1) GPS del dispositivo (preciso)
+  let g = null;
+  try { if (A && A.lat) g = { lat:A.lat, lon:A.lng }; } catch(_) {}
+  if (!g) g = await _posGPS();
+  if (g) {
+    lat = g.lat; lon = g.lon; origen = 'gps';
+    try { localStorage.setItem('mfp_ult_pos', JSON.stringify({ lat, lon })); } catch(_) {}
+    try {
+      const r = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=10&accept-language=es`);
+      const d = await r.json(); const a = d.address || {};
+      ciudad = a.city || a.town || a.village || a.municipality || a.county || a.state || 'Mi ubicación';
+    } catch(_) { ciudad = 'Mi ubicación'; }
+  } else {
+    // 2) Última posición GPS conocida
+    try { const u = JSON.parse(localStorage.getItem('mfp_ult_pos') || 'null');
+      if (u && u.lat) { lat = u.lat; lon = u.lon; origen = 'guardada'; ciudad = 'Última ubicación'; } } catch(_) {}
+    // 3) Aproximada por IP (menos precisa)
+    if (origen === 'defecto') {
+      try {
+        const locRes = await fetch('https://ipwho.is/');
+        if (locRes.ok) {
+          const loc = await locRes.json();
+          if (loc.success && loc.latitude) { lat = loc.latitude; lon = loc.longitude; ciudad = (loc.city || loc.region || 'Colombia') + ' (aprox.)'; origen = 'ip'; }
+        }
+      } catch(_) {}
     }
-  } catch(_) {}
+  }
   const el = document.getElementById('home-ciudad');
   if (el) el.textContent = ciudad;
 
